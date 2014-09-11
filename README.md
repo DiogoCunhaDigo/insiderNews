@@ -45,7 +45,7 @@ Post global notifications  | 50.000
  - [ ] Per news chat
  - [ ] Rankings of users, threads and messages
 
-## Infrastructure
+## Infrastructure + Development
 
 Layer                        | Solution
 :--------------------------- | :------------------
@@ -54,5 +54,7 @@ Realtime transport           | **Socket.io**
 Client side framework        | **AngularJS**
 Client side router           | **ui-router**
 Server side template engine  | **Swig**
+Model                        | **model-structure**
 ORM                          | **Sequelize**
 Default database             | **SQLite**
+Build process                | **Gulp**

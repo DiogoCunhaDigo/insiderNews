@@ -1,0 +1,34 @@
+{
+  "name": "insiderNews",
+  "version": "0.0.1",
+  "description": "Realtime news engine ( +gamification )",
+  "main": "index.js",
+  "dependencies": {
+    "express": "4.10.1"
+  },
+  "devDependencies": {
+    "gulp": "3.8.8",
+    "gulp-watch": "1.0.3",
+    "gulp-webserver": "0.8.0"
+  },
+  "scripts": {
+    "start": "gulp develop & node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/filipedeschamps/insiderNews.git"
+  },
+  "keywords": [
+    "news",
+    "realtime",
+    "gamification",
+    "chat"
+  ],
+  "author": "Filipe Deschamps",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/filipedeschamps/insiderNews/issues"
+  },
+  "homepage": "https://github.com/filipedeschamps/insiderNews"
+}

@@ -1,11 +1,29 @@
+var configurations = require('./core/configurations/index.js');
 var gulp = require('gulp');
-var livereload = require('gulp-livereload');
-var watch = require('gulp-watch');
+var mocha = require('gulp-mocha');
+var gulpUtil = require('gulp-util');
+var liveReload = require('gulp-livereload');
 
-gulp.task('style', function() {
-	watch('core/*.css')
-		.pipe(gulp.dest('./css/'))
-		.pipe(livereload());    
+// Módulos utilizados nos testes.
+// Na configuração da task 'run-mocha' eles
+// serão injetados no mocha de forma global.
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
+var should = chai.should();
+chai.use(chaiAsPromised);
+
+gulp.task('run-mocha', function() {
+  return gulp.src(['test/*.js'], { read: false })
+    .pipe(mocha({
+      reporter: 'list',
+      globals: {
+        chai: chai,
+        should: should
+      }
+    }))
+    .on('error', gulpUtil.log);
 });
 
-gulp.task('develop', ['style']);
+gulp.task('develop-test', function() {
+  gulp.watch(['test/**', 'content/configurations.js', 'core/**'], ['run-mocha']);
+});

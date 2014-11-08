@@ -4,7 +4,8 @@
   "description": "Realtime news engine ( +gamification )",
   "main": "index.js",
   "dependencies": {
-    "express": "4.10.1"
+    "express": "4.10.1",
+    "native-promise-only": "0.7.6-a"
   },
   "devDependencies": {
     "gulp": "3.8.8",

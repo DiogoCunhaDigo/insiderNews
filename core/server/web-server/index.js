@@ -9,7 +9,7 @@ function webServer(spec) {
 
   function start() {
     return new Promise(function(resolve, reject){
-      httpServer = app.listen(3000, function serverListen(){
+      httpServer = app.listen(spec.webServerPort, spec.webServerHost, function serverListen(){
         var host = httpServer.address().address
         var port = httpServer.address().port
         

@@ -7,7 +7,7 @@ createCore(userConfigurations)
   .start()
   .then(serverStartSuccess)
   .catch(serverStartFail);
-  
+
 function serverStartSuccess(server) {
   console.log('Servidor iniciado no endereço: %s:%s', server.host, server.port);
 }

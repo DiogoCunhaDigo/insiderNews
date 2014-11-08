@@ -3,7 +3,7 @@ var defaultWebServer = require(configurations.paths.server + '/web-server/index.
 
 function core(spec) {
 	var spec = spec || {};
-	var server = spec.server || defaultWebServer();
+	var server = spec.server || defaultWebServer(spec);
 
 	function start() {
 		return server.start();

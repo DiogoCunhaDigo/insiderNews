@@ -1,7 +1,7 @@
 var configurations = require('./configurations/index.js');
 var defaultWebServer = require(configurations.paths.server + '/web-server/index.js');
 
-function core(spec) {
+function createCore(spec) {
 	var spec = spec || {};
 	var server = spec.server || defaultWebServer(spec);
 
@@ -17,4 +17,4 @@ function core(spec) {
 }
 
 
-module.exports = core;
+module.exports = createCore;

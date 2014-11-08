@@ -8,13 +8,16 @@
     "native-promise-only": "0.7.6-a"
   },
   "devDependencies": {
+    "chai": "^1.9.2",
+    "chai-as-promised": "^4.1.1",
     "gulp": "3.8.8",
     "gulp-watch": "1.0.3",
-    "gulp-webserver": "0.8.0"
+    "gulp-webserver": "0.8.0",
+    "mocha": "^2.0.1"
   },
   "scripts": {
     "start": "gulp develop & node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",

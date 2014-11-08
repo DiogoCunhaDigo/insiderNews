@@ -1,4 +1,4 @@
-var configurations;
+var configurations = {};
 
 // CONFIGURAÇÕES DO USUÁRIO
 // Altere os valores abaixo para configurar o sistema como desejar.

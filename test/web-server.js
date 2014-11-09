@@ -4,7 +4,7 @@ var createWebServer = require(configurations.paths.server + 'web-server/index.js
 describe('createWebServer', function() {
   
   describe('#start()', function() {
-    it('should start with default configurations', function() {
+    it('deve iniciar o servidor web', function() {
       var webServer = createWebServer();
       var startPromise = webServer.start();
       
@@ -12,11 +12,24 @@ describe('createWebServer', function() {
         .then(function() {
           webServer.stop();
         })
-        .catch(function() {
+  
+      return startPromise.should.be.fulfilled;
+    })
+    
+    it('deve retornar o valor padrão se nenhum spec for definido no construtor', function() {
+      var webServer = createWebServer();
+      var startPromise = webServer.start();
+      var defaultStartPromiseReturn = {
+        host: configurations.defaults.webServerHost,
+        port: configurations.defaults.webServerPort
+      }
+      
+      startPromise
+        .then(function() {
           webServer.stop();
         })
   
-        return startPromise.should.be.fulfilled;
+      return startPromise.should.eventually.deep.equal(defaultStartPromiseReturn);
     })
     
   })
@@ -24,7 +37,7 @@ describe('createWebServer', function() {
   
   describe('#stop()', function() {
     
-    it('should stop the web server', function() {
+    it('deve parar o servidor web', function() {
       var webServer = createWebServer();
       var stopPromise;
       

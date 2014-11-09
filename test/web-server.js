@@ -3,28 +3,29 @@ var createWebServer = require(configurations.paths.server + 'web-server/index.js
 
 describe('createWebServer', function() {
   
-  it('.start() should start with default configurations', function() {
+  it('#start() should start with default configurations', function() {
     var webServer = createWebServer();
     var startPromise = webServer.start();
     
     startPromise
-      .then(function() {
-        return webServer.stop();
+      .then(function(server) {
+        server.host.should.equal('0.0.0.0');
+        webServer.stop();
       })
-      .then(function() {
-        return startPromise;
+      .catch(function() {
+        webServer.stop();
       })
-    
+
+      return startPromise.should.be.fulfilled;
   })
   
-  it('.stop() should stop the web server', function() {
+  it('#stop() should stop the web server', function() {
     var webServer = createWebServer();
-    var stopPromise;
     
-    webServer.start()
+    return webServer
+      .start()
       .then(function() {
-        stopPromise = webServer.stop();
-        return stopPromise.should.be.fulfilled;
+        return webServer.stop().should.be.fulfilled;
       })
     
   })

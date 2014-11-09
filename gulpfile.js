@@ -21,7 +21,6 @@ gulp.task('run-mocha', function() {
         should: should
       }
     }))
-    .on('error', gulpUtil.log);
 });
 
 gulp.task('develop-test', function() {

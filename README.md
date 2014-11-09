@@ -40,7 +40,7 @@ Post global notifications  | 50.000
 
 ## Features
  - [ ] Realtime updates
- - [ ] RSS feed agregator
+ - [ ] RSS feed aggregator
  - [ ] Gamification
  - [ ] Per news chat
  - [ ] Rankings of users, threads and messages
@@ -49,12 +49,13 @@ Post global notifications  | 50.000
 
 Layer                        | Solution
 :--------------------------- | :------------------
-Web server                   | **Hapi**
+Web server                   | **Express**
 Realtime transport           | **Socket.io**
 Client side framework        | **AngularJS**
 Client side router           | **ui-router**
 Server side template engine  | **Swig**
-Model                        | **model-structure**
+Model client-side            | **Plain objects**
+Model server-side            | **Sequelize Model**
 ORM                          | **Sequelize**
 Default database             | **SQLite**
 Build process                | **Gulp**

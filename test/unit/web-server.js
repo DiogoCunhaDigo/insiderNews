@@ -1,4 +1,4 @@
-var configurations = require('../core/configurations/index.js');
+var configurations = require('../../core/configurations/index.js');
 var createWebServer = require(configurations.paths.server + 'web-server/index.js');
 
 describe('createWebServer', function() {

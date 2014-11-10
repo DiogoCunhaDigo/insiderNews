@@ -26,6 +26,6 @@ gulp.task('run-mocha', function() {
     }))
 });
 
-gulp.task('develop-test', function() {
+gulp.task('develop-tests', function() {
   gulp.watch(['test/**', 'gulpfile.js', 'content/configurations.js', 'core/**'], ['run-mocha']);
 });

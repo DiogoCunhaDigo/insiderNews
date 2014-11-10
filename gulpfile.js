@@ -3,6 +3,14 @@ var gulp = require('gulp');
 var mocha = require('gulp-mocha');
 var gulpUtil = require('gulp-util');
 var liveReload = require('gulp-livereload');
+var nodemon = require('gulp-nodemon');
+
+
+gulp.task('develop', function() {
+  nodemon({
+    script: 'index.js'
+  })
+});
 
 
 gulp.task('test-unit', function() {
@@ -23,7 +31,7 @@ gulp.task('test-unit', function() {
         should: should,
         expect: expect
       }
-    }))
+    }));
 });
 
 gulp.task('develop-test-unit', function() {

@@ -3,7 +3,8 @@ var rootPath = path.resolve(__dirname, '../../');
 var configurations = {};
 
 configurations.paths = {
-    server: path.join(rootPath, 'core/server/')
+    server: path.join(rootPath, 'core/server/'),
+    core: path.join(rootPath, 'core/')
 }
 
 configurations.defaults = {

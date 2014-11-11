@@ -3,7 +3,7 @@ var express = require('express');
 var Promise = require('native-promise-only');
 
 function createWebServer(spec) {
-  var spec = spec || {};
+  spec = spec || {};
   var host = spec.webServerHost || configurations.defaults.webServerHost;
   var port = spec.webServerPort || configurations.defaults.webServerPort;
   var app = spec.app || express();

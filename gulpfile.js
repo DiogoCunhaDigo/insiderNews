@@ -3,9 +3,17 @@ var gulp = require('gulp');
 var mocha = require('gulp-mocha');
 var gulpUtil = require('gulp-util');
 var liveReload = require('gulp-livereload');
+var nodemon = require('gulp-nodemon');
 
 
-gulp.task('run-mocha', function() {
+gulp.task('develop', function() {
+  nodemon({
+    script: 'index.js'
+  })
+});
+
+
+gulp.task('test-unit', function() {
   
   // Módulos utilizados que serão injetados
   // de forma global no mocha.
@@ -15,7 +23,7 @@ gulp.task('run-mocha', function() {
   var expect = chai.expect;
   chai.use(chaiAsPromised);
   
-  return gulp.src(['test/*.js'], { read: false })
+  return gulp.src(['test/unit/*.js'], { read: false })
     .pipe(mocha({
       reporter: 'list',
       globals: {
@@ -23,9 +31,9 @@ gulp.task('run-mocha', function() {
         should: should,
         expect: expect
       }
-    }))
+    }));
 });
 
-gulp.task('develop-tests', function() {
-  gulp.watch(['test/**', 'gulpfile.js', 'content/configurations.js', 'core/**'], ['run-mocha']);
+gulp.task('develop-test-unit', function() {
+  gulp.watch(['test/**', 'gulpfile.js', 'content/configurations.js', 'core/**'], ['test-unit']);
 });

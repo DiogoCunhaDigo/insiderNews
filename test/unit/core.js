@@ -3,6 +3,11 @@ var createCore = require(configurations.paths.core + 'index.js');
 
 describe('createCore', function() {
   
+  it('deve ser uma função', function() {
+    createCore.should.be.a('function');
+  })
+
+  
   describe('#start()', function() {
     it('deve iniciar o core do insiderNews', function() {
       var core = createCore();

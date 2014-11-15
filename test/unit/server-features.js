@@ -11,5 +11,19 @@ describe('createFeatures[server]', function () {
     createFeatures().should.be.a('object');
   })
   
+  describe('#getRouters', function() {
+
+    it('deve retornar um array com funções dentro', function() {
+      var routers = createFeatures().getRouters();
+
+      routers.should.be.a('array');
+
+      routers.forEach(function(router) {
+        router.should.be.a('function');
+      });
+      
+    })
+
+  })
 
 })

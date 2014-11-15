@@ -7,7 +7,7 @@ function createFeatures() {
   function getRouters() {
     var routersArray = [];
 
-    _.toArray(featuresRoutersObject())
+    _.toArray(findRouteFiles())
       .forEach(function(routerObject) {
         var routerFunction = routerObject.routes;
         routersArray.push(routerFunction);
@@ -16,8 +16,9 @@ function createFeatures() {
     return routersArray;
   }
   
-  function featuresRoutersObject() {
+  function findRouteFiles() {
     var onlyRoutesFileRegex = /routes.js$/;
+
     
     return requireDirectory(module, {
         include: onlyRoutesFileRegex

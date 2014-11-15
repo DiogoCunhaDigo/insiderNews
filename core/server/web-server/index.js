@@ -1,23 +1,23 @@
 var configurations = require('../../configurations/index.js');
 var express = require('express');
 var Promise = require('native-promise-only');
+var createFeatures = require(configurations.paths.serverFeatures + 'index.js');
 
 function createWebServer(spec) {
   spec = spec || {};
   var host = spec.webServerHost || configurations.defaults.webServerHost;
   var port = spec.webServerPort || configurations.defaults.webServerPort;
   var app = spec.app || express();
+  var features = spec.features || createFeatures();
   var httpServer;
   
   function start() {
+    configureApp();
     return startHttpServer();
   }
   
   function configureApp() {
-  }
-  
-  
-  function loadRoutes() {
+    app.use('/', features.getRouters());
   }
   
   function startHttpServer() {

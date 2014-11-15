@@ -5,7 +5,9 @@
   "main": "index.js",
   "dependencies": {
     "express": "4.10.1",
-    "native-promise-only": "0.7.6-a"
+    "lodash": "^2.4.1",
+    "native-promise-only": "0.7.6-a",
+    "require-directory": "^2.0.0"
   },
   "devDependencies": {
     "chai": "^1.9.2",

@@ -13,7 +13,7 @@ gulp.task('develop', function() {
 });
 
 
-gulp.task('test-unit', function() {
+gulp.task('run-unit-test', function() {
   
   // Módulos utilizados que serão injetados
   // de forma global no mocha.
@@ -34,6 +34,8 @@ gulp.task('test-unit', function() {
     }));
 });
 
-gulp.task('develop-test-unit', function() {
-  gulp.watch(['test/**', 'gulpfile.js', 'content/configurations.js', 'core/**'], ['test-unit']);
+gulp.task('run-tests', ['run-unit-test']);
+
+gulp.task('develop-unit-test', function() {
+  gulp.watch(['test/**', 'gulpfile.js', 'content/configurations.js', 'core/**'], ['run-unit-test']);
 });

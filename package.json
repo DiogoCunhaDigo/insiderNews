@@ -20,8 +20,8 @@
   },
   "scripts": {
     "start": "gulp develop",
-    "test": "gulp test-unit",
-    "develop-test-unit": "gulp develop-test-unit"
+    "test": "gulp run-tests",
+    "develop-unit-test": "gulp develop-unit-test"
   },
   "repository": {
     "type": "git",

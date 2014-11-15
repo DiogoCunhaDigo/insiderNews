@@ -10,7 +10,18 @@ function createWebServer(spec) {
   var httpServer;
   
   function start() {
-    return new Promise(function(resolve, reject) {
+    return startHttpServer();
+  }
+  
+  function configureApp() {
+  }
+  
+  
+  function loadRoutes() {
+  }
+  
+  function startHttpServer() {
+    return new Promise(function startHttpServerPromise(resolve, reject) {
       httpServer = app.listen(port, host, function serverListen() {
         var host = httpServer.address().address;
         var port = httpServer.address().port;
@@ -20,11 +31,12 @@ function createWebServer(spec) {
           port: port
         });
       });
+      
     });
   }
   
   function stop() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function stopPromise(resolve, reject) {
       httpServer.close(function serverClosed() {
         resolve();  
       });  

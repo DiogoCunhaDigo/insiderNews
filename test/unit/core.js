@@ -7,6 +7,9 @@ describe('createCore', function() {
     createCore.should.be.a('function');
   })
 
+  it('deve retornar um objeto quando executado', function() {
+    createCore().should.be.a('object');
+  })
   
   describe('#start()', function() {
     it('deve iniciar o core do insiderNews', function() {

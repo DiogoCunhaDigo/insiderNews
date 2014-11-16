@@ -20,8 +20,9 @@ describe('createFeatures[server]', function () {
 
       routers.forEach(function(router) {
         router.should.be.a('function');
+        router.should.have.property('stack');
       });
-      
+
     })
 
   })

@@ -3,14 +3,14 @@ var defaultWebServer = require(configurations.paths.server + '/web-server/index.
 
 function createCore(spec) {
 	spec = spec || {};
-	var server = spec.server || defaultWebServer(spec);
+	var webServer = spec.webServer || defaultWebServer(spec);
 
 	function start() {
-		return server.start();
+		return webServer.start();
 	}
 
 	function stop() {
-		return server.stop();
+		return webServer.stop();
 	}
 
 	// Quando o construtor do "core" for executado, será criado e retornado

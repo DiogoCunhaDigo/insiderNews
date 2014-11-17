@@ -3,6 +3,14 @@ var createWebServer = require(configurations.paths.server + 'web-server/index.js
 
 describe('createWebServer', function() {
   
+  it('deve ser uma função', function() {
+    createWebServer.should.be.a('function');
+  })
+
+  it('deve retornar um objeto quando executado', function() {
+    createWebServer().should.be.a('object');
+  })
+  
   describe('#start()', function() {
     it('deve iniciar o servidor web', function() {
       var webServer = createWebServer();

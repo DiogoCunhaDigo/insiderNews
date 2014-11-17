@@ -9,8 +9,8 @@ configurations.paths = {
 }
 
 configurations.defaults = {
-    webServerHost: '0.0.0.0',
-    webServerPort: 8181
+    webServerHost: process.env.INSIDERNEWS_HOST || process.env.HOST || '0.0.0.0',
+    webServerPort: process.env.INSIDERNEWS_PORT || process.env.PORT || 8181
 }
 
 module.exports = configurations;

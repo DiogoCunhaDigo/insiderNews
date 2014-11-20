@@ -18,11 +18,11 @@ function createFeatures() {
   
   function findRouteFiles() {
     var onlyRoutesFileRegex = /routes.js$/;
-
-    
-    return requireDirectory(module, {
+    var allRouteFilesObject = requireDirectory(module, {
         include: onlyRoutesFileRegex
     });
+    
+    return allRouteFilesObject;
   }
 
   return Object.freeze({

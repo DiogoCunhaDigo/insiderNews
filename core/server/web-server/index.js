@@ -1,5 +1,6 @@
 var configurations = require('../../configurations/index.js');
 var express = require('express');
+var swig = require('swig');
 var Promise = require('native-promise-only');
 var createFeatures = require(configurations.paths.serverFeatures + 'index.js');
 
@@ -17,6 +18,9 @@ function createWebServer(spec) {
   }
   
   function configureApp() {
+    app.engine('html', swig.renderFile);
+    app.set('view engine', 'html');
+    app.set('views', configurations.paths.serverFeatures);
     app.use('/', features.getRouters());
   }
   

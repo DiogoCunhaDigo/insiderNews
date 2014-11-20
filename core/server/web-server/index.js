@@ -18,10 +18,14 @@ function createWebServer(spec) {
   }
   
   function configureApp() {
+    swig.setDefaults({ cache: configurations.defaults.cacheServerViews });
+    
     app.engine('html', swig.renderFile);
     app.set('view engine', 'html');
     app.set('views', configurations.paths.serverFeatures);
+    app.set('view cache', configurations.defaults.cacheServerViews);
     app.use('/', features.getRouters());
+    
   }
   
   function startHttpServer() {

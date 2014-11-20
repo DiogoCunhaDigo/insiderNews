@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/wireframe', function(req, res) {
-  res.end('teste de wireframe');
+router.get('/', function(req, res) {
+  res.render('wireframe/views/index');
 });
 
 module.exports = router;

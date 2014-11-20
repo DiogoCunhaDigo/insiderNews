@@ -19,17 +19,8 @@ gulp.task('start-core', function() {
 });
 
 gulp.task('build-styles', function() {
-  var files = [
-    require.resolve('bootstrap/less/variables.less'),
-    require.resolve('bootstrap/less/mixins.less'),
-    require.resolve('bootstrap/less/normalize.less'),
-    require.resolve('bootstrap/less/scaffolding.less'),
-    require.resolve('bootstrap/less/grid.less'),
-    require.resolve('bootstrap/less/utilities.less'),
-    require.resolve('bootstrap/less/responsive-utilities.less')
-    ];
     
-  return gulp.src(files)
+  return gulp.src(configurations.paths.client + 'styles/index.less')
     .pipe(concat('style.css'))
     .pipe(less())
     .pipe(minifyCSS({

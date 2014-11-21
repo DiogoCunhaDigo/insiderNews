@@ -1,16 +1,33 @@
 var configurations = require('./core/configurations/index.js');
 var gulp = require('gulp');
-var mocha = require('gulp-mocha');
 var gulpUtil = require('gulp-util');
-var liveReload = require('gulp-livereload');
+var less = require('gulp-less');
+var concat = require('gulp-concat');
+var minifyCSS = require('gulp-minify-css');
 var nodemon = require('gulp-nodemon');
+var liveReload = require('gulp-livereload');
+var mocha = require('gulp-mocha');
 
+gulp.task('develop', ['build-styles', 'start-core'], function() {
+  // TODO: inserir watch e live-reload
+});
 
-gulp.task('develop', function() {
-  nodemon({
+gulp.task('start-core', function() {
+  return nodemon({
     script: 'index.js'
   })
 });
+
+gulp.task('build-styles', function() {
+    
+  return gulp.src(configurations.paths.client + 'styles/index.less')
+    .pipe(concat('style.css'))
+    .pipe(less())
+    .pipe(minifyCSS({
+      keepSpecialComments: 0
+    }))
+    .pipe(gulp.dest('./content/themes/default/'));
+})
 
 
 gulp.task('run-unit-test', function() {

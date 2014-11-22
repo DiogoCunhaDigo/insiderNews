@@ -24,7 +24,8 @@
     "gulp-nodemon": "^1.0.4",
     "gulp-util": "^3.0.1",
     "gulp-webserver": "^0.8.0",
-    "mocha": "^2.0.1"
+    "mocha": "^2.0.1",
+    "watchify": "^2.1.1"
   },
   "scripts": {
     "start": "gulp develop",

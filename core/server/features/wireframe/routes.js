@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var controllers = require('./controllers/index.js');
 
-router.get('/', function(req, res) {
-  res.render('wireframe/views/index');
-});
+router.get('/', controllers.mainPage);
 
 module.exports = router;

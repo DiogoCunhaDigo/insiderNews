@@ -21,12 +21,12 @@ gulp.task('start-core', function() {
 gulp.task('build-styles', function() {
     
   return gulp.src(configurations.paths.client + 'styles/index.less')
-    .pipe(concat('style.css'))
+    .pipe(concat('index.css'))
     .pipe(less())
     .pipe(minifyCSS({
       keepSpecialComments: 0
     }))
-    .pipe(gulp.dest('./content/themes/default/'));
+    .pipe(gulp.dest('./content/themes/default/css/'));
 })
 
 

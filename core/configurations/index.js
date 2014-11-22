@@ -16,7 +16,7 @@ configurations.defaults = {
     webServerHost: process.env.INSIDERNEWS_HOST || process.env.HOST || '0.0.0.0',
     webServerPort: +process.env.INSIDERNEWS_PORT || +process.env.PORT || 8181,
     cacheServerViews: false,
-    staticMaxAge: (60*60*24)
+    staticMaxAge: 60*60*24
 }
 
 module.exports = configurations;

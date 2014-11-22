@@ -25,6 +25,7 @@
     "gulp-util": "^3.0.1",
     "gulp-webserver": "^0.8.0",
     "mocha": "^2.0.1",
+    "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.1.1"
   },
   "scripts": {

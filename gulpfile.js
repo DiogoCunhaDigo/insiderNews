@@ -1,20 +1,25 @@
 var configurations = require('./core/configurations/index.js');
 var gulp = require('gulp');
-var gulpUtil = require('gulp-util');
+var gutil = require('gulp-util');
 var less = require('gulp-less');
 var concat = require('gulp-concat');
 var minifyCSS = require('gulp-minify-css');
 var nodemon = require('gulp-nodemon');
 var liveReload = require('gulp-livereload');
 var mocha = require('gulp-mocha');
+var browserify = require('browserify');
+var watchify = require('watchify');
+var source = require('vinyl-source-stream');
 
-gulp.task('develop', ['build-styles', 'start-core'], function() {
+
+gulp.task('develop', ['build-scripts', 'watch-scripts', 'build-styles', 'start-core'], function() {
   // TODO: inserir watch e live-reload
 });
 
 gulp.task('start-core', function() {
   return nodemon({
-    script: 'index.js'
+    script: 'index.js',
+    ignore: ['./content', './core/client']
   })
 });
 
@@ -26,8 +31,30 @@ gulp.task('build-styles', function() {
     .pipe(minifyCSS({
       keepSpecialComments: 0
     }))
-    .pipe(gulp.dest('./content/themes/default/css/'));
+    .pipe(gulp.dest(configurations.paths.content.themes + 'default/styles/'));
 })
+
+gulp.task('build-scripts', function() {
+  return browserify(configurations.paths.client + 'index.js')
+  .bundle()
+  .pipe(source('index.js'))
+  .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'));
+})
+
+gulp.task('watch-scripts', function() {
+  var bundler = watchify(browserify(configurations.paths.client + 'index.js', watchify.args));
+  bundler.on('update', rebundle);
+  bundler.on('log', gutil.log.bind(gutil, 'Watchify: '))
+ 
+  function rebundle() {
+    return bundler.bundle()
+      .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+      .pipe(source('index.js'))
+      .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'));
+  }
+ 
+  return rebundle();
+});
 
 
 gulp.task('run-unit-test', function() {

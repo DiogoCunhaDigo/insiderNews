@@ -6,13 +6,17 @@ configurations.paths = {
     core: path.join(rootPath, 'core/'),
     server: path.join(rootPath, 'core/server/'),
     client: path.join(rootPath, 'core/client/'),
-    serverFeatures: path.join(rootPath, 'core/server/features/')
+    serverFeatures: path.join(rootPath, 'core/server/features/'),
+    content: {
+        themes: path.join(rootPath, 'content/themes/')
+    }
 }
 
 configurations.defaults = {
     webServerHost: process.env.INSIDERNEWS_HOST || process.env.HOST || '0.0.0.0',
     webServerPort: +process.env.INSIDERNEWS_PORT || +process.env.PORT || 8181,
-    cacheServerViews: false
+    cacheServerViews: false,
+    staticMaxAge: (60*60*24)
 }
 
 module.exports = configurations;

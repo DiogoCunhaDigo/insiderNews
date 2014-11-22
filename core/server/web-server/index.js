@@ -20,6 +20,10 @@ function createWebServer(spec) {
   function configureApp() {
     swig.setDefaults({ cache: configurations.defaults.cacheServerViews });
     
+    app.use('/themes/', express.static(configurations.paths.content.themes, {
+      maxAge: configurations.defaults.staticMaxAge
+    }));
+    
     app.engine('html', swig.renderFile);
     app.set('view engine', 'html');
     app.set('views', configurations.paths.serverFeatures);

@@ -12,9 +12,8 @@ var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 
 
-gulp.task('develop', ['build-scripts', 'watch-scripts', 'build-styles', 'start-core'], function() {
-  // TODO: inserir watch e live-reload
-});
+gulp.task('develop', ['build-scripts','watch-scripts', 'build-styles', 'watch-styles', 'start-core']);
+
 
 gulp.task('start-core', function() {
   return nodemon({
@@ -23,28 +22,36 @@ gulp.task('start-core', function() {
   })
 });
 
+
 gulp.task('build-styles', function() {
-    
   return gulp.src(configurations.paths.client + 'styles/index.less')
     .pipe(concat('index.css'))
     .pipe(less())
     .pipe(minifyCSS({
       keepSpecialComments: 0
     }))
-    .pipe(gulp.dest(configurations.paths.content.themes + 'default/styles/'));
-})
+    .pipe(gulp.dest(configurations.paths.content.themes + 'default/styles/'))
+    .pipe(liveReload());
+});
+
+
+gulp.task('watch-styles', function() {
+  return gulp.watch(configurations.paths.client + 'styles/**', ['build-styles']);
+});
+
 
 gulp.task('build-scripts', function() {
   return browserify(configurations.paths.client + 'index.js')
   .bundle()
   .pipe(source('index.js'))
   .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'));
-})
+});
+
 
 gulp.task('watch-scripts', function() {
   var bundler = watchify(browserify(configurations.paths.client + 'index.js', watchify.args));
   bundler.on('update', rebundle);
-  bundler.on('log', gutil.log.bind(gutil, 'Watchify: '))
+  bundler.on('log', gutil.log.bind(gutil, 'Watchify: '));
  
   function rebundle() {
     return bundler.bundle()

@@ -12,7 +12,7 @@ var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 
 
-gulp.task('develop', ['build-scripts','watch-scripts', 'build-styles', 'watch-styles', 'start-core']);
+gulp.task('develop', ['build-scripts','watch-scripts', 'build-styles', 'watch-styles', 'watch-server-views', 'start-core']);
 
 
 gulp.task('start-core', function() {
@@ -51,17 +51,24 @@ gulp.task('build-scripts', function() {
 gulp.task('watch-scripts', function() {
   var bundler = watchify(browserify(configurations.paths.client + 'index.js', watchify.args));
   bundler.on('update', rebundle);
-  bundler.on('log', gutil.log.bind(gutil, 'Watchify: '));
+  bundler.on('log', gutil.log.bind(gutil, '[watchify]'));
  
   function rebundle() {
     return bundler.bundle()
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(source('index.js'))
-      .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'));
+      .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'))
+      .pipe(liveReload());
   }
- 
-  return rebundle();
 });
+
+
+gulp.task('watch-server-views', function() {
+  return gulp.watch([configurations.paths.server + '/features/**/*.html'])
+    .on('change', liveReload.changed);
+});
+
+
 
 
 gulp.task('run-unit-test', function() {

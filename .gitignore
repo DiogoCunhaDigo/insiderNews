@@ -1,6 +1,9 @@
 # User content
 content/themes
 
+# Mac
+.DS_Store
+
 # Logs
 logs
 *.log

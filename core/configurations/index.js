@@ -1,3 +1,5 @@
+'use strict';
+
 var path = require('path');
 var rootPath = path.resolve(__dirname, '../../');
 var configurations = {};
@@ -10,13 +12,13 @@ configurations.paths = {
     content: {
         themes: path.join(rootPath, 'content/themes/')
     }
-}
+};
 
 configurations.defaults = {
     webServerHost: process.env.INSIDERNEWS_HOST || process.env.HOST || '0.0.0.0',
     webServerPort: +process.env.INSIDERNEWS_PORT || +process.env.PORT || 8181,
     cacheServerViews: false,
     staticMaxAge: 60*60*24
-}
+};
 
 module.exports = configurations;

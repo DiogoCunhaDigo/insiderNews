@@ -1,3 +1,5 @@
+'use strict';
+
 var configurations = require('./configurations/index.js');
 var defaultWebServer = require(configurations.paths.server + '/web-server/index.js');
 

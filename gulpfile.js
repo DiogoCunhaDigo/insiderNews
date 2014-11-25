@@ -1,3 +1,6 @@
+'use strict';
+
+require('native-promise-only');
 var configurations = require('./core/configurations/index.js');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
@@ -19,7 +22,7 @@ gulp.task('start-core', function() {
   return nodemon({
     script: 'index.js',
     ignore: ['./content', './core/client']
-  })
+  });
 });
 
 
@@ -50,9 +53,7 @@ gulp.task('build-scripts', function() {
 
 gulp.task('watch-scripts', function() {
   var bundler = watchify(browserify(configurations.paths.client + 'index.js', watchify.args));
-  bundler.on('update', rebundle);
-  bundler.on('log', gutil.log.bind(gutil, '[watchify]'));
- 
+
   function rebundle() {
     return bundler.bundle()
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
@@ -60,6 +61,9 @@ gulp.task('watch-scripts', function() {
       .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'))
       .pipe(liveReload());
   }
+
+  bundler.on('update', rebundle);
+  bundler.on('log', gutil.log.bind(gutil, '[watchify]'));
 });
 
 
@@ -72,7 +76,7 @@ gulp.task('watch-server-views', function() {
 
 
 gulp.task('run-unit-test', function() {
-  
+
   // Módulos utilizados que serão injetados
   // de forma global no mocha.
   var chai = require('chai');
@@ -80,7 +84,7 @@ gulp.task('run-unit-test', function() {
   var should = chai.should();
   var expect = chai.expect;
   chai.use(chaiAsPromised);
-  
+
   return gulp.src(['test/unit/*.js'], { read: false })
     .pipe(mocha({
       reporter: 'list',
@@ -95,5 +99,5 @@ gulp.task('run-unit-test', function() {
 gulp.task('run-tests', ['run-unit-test']);
 
 gulp.task('develop-unit-test', function() {
-  gulp.watch(['test/**', 'gulpfile.js', 'content/configurations.js', 'core/**'], ['run-unit-test']);
+  gulp.watch(['./test/**', './index.js', './content/configurations.js', './core/**'], ['run-unit-test']);
 });

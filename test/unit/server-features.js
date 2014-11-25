@@ -1,3 +1,5 @@
+'use strict';
+
 var configurations = require('../../core/configurations/index.js');
 var createFeatures = require(configurations.paths.serverFeatures + 'index.js');
 
@@ -5,12 +7,12 @@ describe('createFeatures[server]', function () {
 
   it('deve ser uma função', function() {
     createFeatures.should.be.a('function');
-  })
+  });
 
   it('deve retornar um objeto quando executado', function() {
     createFeatures().should.be.a('object');
-  })
-  
+  });
+
   describe('#getRouters', function() {
 
     it('deve retornar um array com funções dentro', function() {
@@ -23,8 +25,8 @@ describe('createFeatures[server]', function () {
         router.should.have.property('stack');
       });
 
-    })
+    });
 
-  })
+  });
 
-})
+});

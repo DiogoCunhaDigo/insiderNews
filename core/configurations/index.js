@@ -8,6 +8,7 @@ configurations.paths = {
     core: path.join(rootPath, 'core/'),
     server: path.join(rootPath, 'core/server/'),
     client: path.join(rootPath, 'core/client/'),
+    assets: path.join(rootPath, 'core/assets/'),
     serverFeatures: path.join(rootPath, 'core/server/features/'),
     content: {
         themes: path.join(rootPath, 'content/themes/')

@@ -27,7 +27,7 @@ gulp.task('start-core', function() {
 
 
 gulp.task('build-styles', function() {
-  return gulp.src(configurations.paths.client + 'styles/index.less')
+  return gulp.src(configurations.paths.assets + 'styles/index.less')
     .pipe(concat('index.css'))
     .pipe(less())
     .pipe(minifyCSS({

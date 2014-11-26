@@ -27,7 +27,7 @@ gulp.task('start-core', function() {
 
 
 gulp.task('build-styles', function() {
-  return gulp.src(configurations.paths.client + 'styles/index.less')
+  return gulp.src(configurations.paths.assets + 'styles/index.less')
     .pipe(concat('index.css'))
     .pipe(less())
     .pipe(minifyCSS({
@@ -44,20 +44,20 @@ gulp.task('watch-styles', function() {
 
 
 gulp.task('build-scripts', function() {
-  return browserify(configurations.paths.client + 'index.js')
+  return browserify(configurations.paths.client + 'site/index.js')
   .bundle()
-  .pipe(source('index.js'))
+  .pipe(source('site.js'))
   .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'));
 });
 
 
 gulp.task('watch-scripts', function() {
-  var bundler = watchify(browserify(configurations.paths.client + 'index.js', watchify.args));
+  var bundler = watchify(browserify(configurations.paths.client + 'site/index.js', watchify.args));
 
   function rebundle() {
     return bundler.bundle()
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-      .pipe(source('index.js'))
+      .pipe(source('site.js'))
       .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'))
       .pipe(liveReload());
   }

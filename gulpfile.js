@@ -15,7 +15,16 @@ var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 
 
-gulp.task('develop', ['build-scripts','watch-scripts', 'build-styles', 'watch-styles', 'watch-server-views', 'start-core']);
+gulp.task('develop', [
+  'build-scripts',
+  'build-styles',
+  'build-images',
+  'watch-scripts',
+  'watch-styles',
+  'watch-images',
+  'watch-server-views',
+  'start-core'
+]);
 
 
 gulp.task('start-core', function() {
@@ -23,6 +32,13 @@ gulp.task('start-core', function() {
     script: 'index.js',
     ignore: ['./content', './core/client']
   });
+});
+
+
+gulp.task('build-images', function() {
+  return gulp.src(configurations.paths.assets + '/images/**/*')
+    .pipe(gulp.dest(configurations.paths.content.themes + 'default/images/'))
+    .pipe(liveReload());
 });
 
 
@@ -73,6 +89,10 @@ gulp.task('watch-server-views', function() {
 });
 
 
+gulp.task('watch-images', function() {
+  return gulp.watch([configurations.paths.assets + '/images/**/*'])
+    .on('change', liveReload.changed);
+});
 
 
 gulp.task('run-unit-test', function() {

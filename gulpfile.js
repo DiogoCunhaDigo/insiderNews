@@ -55,7 +55,7 @@ gulp.task('build-styles', function() {
 
 
 gulp.task('watch-styles', function() {
-  return gulp.watch(configurations.paths.client + 'styles/**', ['build-styles']);
+  return gulp.watch(configurations.paths.assets + 'styles/**', ['build-styles']);
 });
 
 

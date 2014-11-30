@@ -90,7 +90,7 @@ gulp.task('watch-server-views', function() {
 
 
 gulp.task('watch-images', function() {
-  return gulp.watch([configurations.paths.assets + '/images/**/*'])
+  return gulp.watch([configurations.paths.assets + '/images/**/*'], ['build-images'])
     .on('change', liveReload.changed);
 });
 

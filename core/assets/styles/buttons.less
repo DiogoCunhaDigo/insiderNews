@@ -5,8 +5,6 @@
   display: inline-block;
   line-height: 27px;
   appearance: none;
-  padding: 0 10px;
-  margin: 0;
   white-space: nowrap;
   position: relative;
   overflow: hidden;
@@ -21,17 +19,23 @@
   text-decoration: none;
 }
 
-.button-block {
+.button-outline {
   border: 1px solid #007aff;
   background: @white;
   border-radius: 5px;
+  padding: 0 10px;
+  margin: 0;
 }
 
-.button-block:active {
+.button-outline:active,
+.button-outline:focus
+{
   background: @blue-light-alpha;
+  text-decoration: none;
 }
 
 
-.button-link {
-
+.button-text {
+  padding: 0 10px;
+  margin: 0;
 }

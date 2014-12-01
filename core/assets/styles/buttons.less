@@ -1,5 +1,5 @@
 .button {
-  color: @blue-light;
+  color: @blue-default;
   text-decoration: none;
   text-align: center;
   display: inline-block;
@@ -12,10 +12,11 @@
   font-size: 14px;
   font-family: inherit;
   cursor: pointer;
+  vertical-align: middle;
 }
 
 .button:hover {
-  color: @blue-light;
+  color: @blue-default;
   text-decoration: none;
 }
 
@@ -24,18 +25,16 @@
   background: @white;
   border-radius: 5px;
   padding: 0 10px;
-  margin: 0;
 }
 
 .button-outline:active,
 .button-outline:focus
 {
-  background: @blue-light-alpha;
+  background: @blue-default-alpha;
   text-decoration: none;
 }
 
 
 .button-text {
   padding: 0 10px;
-  margin: 0;
 }

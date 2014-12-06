@@ -6,7 +6,9 @@
 @import "../../../node_modules/bootstrap/less/utilities.less";
 @import "../../../node_modules/bootstrap/less/responsive-utilities.less";
 
-/* Bootstrap extensions */
+/* EXTENSÕES DO BOOTSTRAP */
+
+/* Remover o espaçamento do container */
 
 .container-fluid.container-fluid-no-gutter {
     padding: 0;
@@ -16,4 +18,17 @@
       padding-left: 0px;
       padding-right: 0px;
     }
+}
+
+
+/* Alinha verticalmente conteúdos dentro de uma row */
+
+.row-vertical-align-middle {
+  display: table !important;
+}
+
+.row-vertical-align-middle div[class*='col-'] {
+  display: table-cell !important;
+  vertical-align: middle;
+  float: none;
 }

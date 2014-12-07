@@ -6,7 +6,7 @@ controllers.mainPage = function(req, res) {
 
   var news = [
     {
-      title: "Via Varejo vende Casa Bahia Contact Center para Atento",
+      title: "Warren Buffett faz doação para apoiar Hillary Clinton",
       lastComment: "comiranda: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       xp: 250
     },

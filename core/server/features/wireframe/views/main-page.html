@@ -2,49 +2,69 @@
 
 {% block body %}
 
-  <div class="container-fluid container-fluid-no-gutter">
+  <div class="top-menu">
 
+    <div class="container-fluid">
+      <div class="row top-menu-height row-vertical-align-middle">
 
-    <div class="top-menu row row-vertical-align-middle">
-
-      <div class="col-xs-2">
-        <div class="padding-left-2">
-          <a href="/" class="button">
-            <img src="/themes/default/images/logo-insidernews-small-blue-default.png">
-          </a>
-        </div>
-      </div>
-
-      <div class="col-xs-10">
-        <div class="padding-right-2 text-align-right">
-          <a href="#" class="button button-text">Login</a>
-          <a href="#" class="button button-outline">Registre-se</a>
-        </div>
-      </div>
-
-    </div>
-
-
-    <div class="news-feed">
-
-      <ul class="news-feed-list">
-        {% for news in news %}
-          <li class="news-feed-item">
-            <a href="" class="news-feed-item-link {% if loop.first %} selected {% endif %}">
-              <div class="news-feed-xp">{{news.xp}}</div>
-              <div class="news-feed-title">{{news.title}}</div>
-              <div class="news-feed-last-comment">{{news.lastComment}}</div>
+        <div class="col-xs-2 padding-0">
+          <div class="padding-left-2">
+            <a href="/" class="button">
+              <img src="/themes/default/images/logo-insidernews-small-blue-default.png">
             </a>
-          </li>
-        {% endfor %}
-      </ul>
+          </div>
+        </div>
 
+        <div class="col-xs-10 padding-0">
+          <div class="padding-right-2 text-align-right">
+            <a href="#" class="button button-text">Login</a>
+            <a href="#" class="button button-outline">Registre-se</a>
+          </div>
+        </div>
+
+      </div>
     </div>
 
+  </div>
 
-    <div class="news-detail">
+
+  <div class="news-feed">
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 padding-0">
+
+          <ul class="news-feed-list">
+            {% for news in news %}
+              <li class="news-feed-item">
+                <a href="" class="news-feed-item-link {% if loop.first %} selected {% endif %}">
+                  <div class="news-feed-xp">{{news.xp}}</div>
+                  <div class="news-feed-title">{{news.title}}</div>
+                  <div class="news-feed-last-comment">{{news.lastComment}}</div>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
     </div>
 
+  </div>
+
+
+  <div class="news-detail">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 padding-0">
+          <div class="news-detail-head">
+            <div class="news-detail-head-thumbnail"></div>
+            <h1 class="news-detail-head-title">
+              Via Varejo vende Casa Bahia Contact Center para Atento
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 {% endblock %}

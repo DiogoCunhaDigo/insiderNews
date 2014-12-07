@@ -6,14 +6,17 @@
 @import "../../../node_modules/bootstrap/less/utilities.less";
 @import "../../../node_modules/bootstrap/less/responsive-utilities.less";
 
-/* Bootstrap extensions */
+/* EXTENSÕES DO BOOTSTRAP */
 
-.container-fluid.container-fluid-no-gutter {
-    padding: 0;
+
+/* Alinha verticalmente conteúdos dentro de uma row */
+
+.row-vertical-align-middle {
+  display: table !important;
 }
-@media (max-width: 797px) {
-    body {
-      padding-left: 0px;
-      padding-right: 0px;
-    }
+
+.row-vertical-align-middle div[class*='col-'] {
+  display: table-cell !important;
+  vertical-align: middle;
+  float: none;
 }

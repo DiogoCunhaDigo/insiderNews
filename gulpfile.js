@@ -13,6 +13,24 @@ var mocha = require('gulp-mocha');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var source = require('vinyl-source-stream');
+var plumber = require('gulp-plumber');
+
+var errorHandler = function(error) {
+  gutil.beep();
+
+  console.log('\n');
+  gutil.log(gutil.colors.bgRed.white(' ERROR: ') + ' ' + gutil.colors.red(error.plugin));
+  gutil.log(gutil.colors.white(error.message));
+
+  console.log('');
+  gutil.log(gutil.colors.white(' -- Line ' + error.lineNumber + ' -- '));
+  gutil.log(gutil.colors.white(error.extract[0]));
+  gutil.log(gutil.colors.red(error.extract[1]));
+  gutil.log(gutil.colors.white(error.extract[2]));
+
+  console.log('\n');
+  this.emit('end');
+};
 
 
 gulp.task('develop', [
@@ -37,6 +55,9 @@ gulp.task('start-core', function() {
 
 gulp.task('build-images', function() {
   return gulp.src(configurations.paths.assets + '/images/**/*')
+    .pipe(plumber({
+      errorHandler: errorHandler
+	}))
     .pipe(gulp.dest(configurations.paths.content.themes + 'default/images/'))
     .pipe(liveReload());
 });
@@ -44,6 +65,9 @@ gulp.task('build-images', function() {
 
 gulp.task('build-styles', function() {
   return gulp.src(configurations.paths.assets + 'styles/index.less')
+    .pipe(plumber({
+      errorHandler: errorHandler
+	}))
     .pipe(concat('index.css'))
     .pipe(less())
     .pipe(minifyCSS({
@@ -62,6 +86,7 @@ gulp.task('watch-styles', function() {
 gulp.task('build-scripts', function() {
   return browserify(configurations.paths.client + 'site/index.js')
   .bundle()
+  .pipe(plumber())
   .pipe(source('site.js'))
   .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'));
 });
@@ -72,6 +97,7 @@ gulp.task('watch-scripts', function() {
 
   function rebundle() {
     return bundler.bundle()
+      .pipe(plumber())
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(source('site.js'))
       .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'))
@@ -106,6 +132,7 @@ gulp.task('run-unit-test', function() {
   chai.use(chaiAsPromised);
 
   return gulp.src(['test/unit/*.js'], { read: false })
+    .pipe(plumber())
     .pipe(mocha({
       reporter: 'list',
       globals: {

@@ -87,9 +87,59 @@ controllers.mainPage = function(req, res) {
     }
   ];
 
+  var messages = [
+    {
+      userName: "comiranda",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      createdAt: "1 hora atrás",
+    },
+    {
+      userName: "guerreiro",
+      content: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      createdAt: "há 1 minuto atrás",
+    },
+    {
+      userName: "rebatti",
+      content: "Duis aute irure dolor in reprehenderit in voluptate velit. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      createdAt: "poucos segundos atrás",
+    },
+    {
+      userName: "hf",
+      content: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      createdAt: "neste exato momento",
+    },
+    {
+      userName: "Tracker",
+      content: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia.",
+      createdAt: "neste exato momento",
+    },
+    {
+      userName: "neucrates",
+      content: "Et harum quidem rerum",
+      createdAt: "neste exato momento",
+    },
+    {
+      userName: "bacanacesar",
+      content: "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis.",
+      createdAt: "neste exato momento",
+    },
+    {
+      userName: "ferpa",
+      content: "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.",
+      createdAt: "neste exato momento",
+    },
+    {
+      userName: "oMinerim",
+      content: "Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+      createdAt: "neste exato momento",
+    },
+  ];
+
+
   res.render('wireframe/views/main-page.html', {
     title: 'insiderNews - Wireframe',
-    news: news
+    news: news,
+    messages: messages
   });
 };
 

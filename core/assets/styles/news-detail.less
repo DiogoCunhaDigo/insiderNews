@@ -7,7 +7,6 @@
   overflow: auto;
 }
 
-
 .news-detail-head {
   text-align: center;
 }
@@ -16,7 +15,7 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background: url(http://www.insidernews.com.br/bolsa-de-valores/noticias/warren-buffett-faz-doacao-para-apoiar-hillary-clinton/thumbnail.jpg) no-repeat;
+  background-repeat: no-repeat;
   background-position: center center;
   display: inline-block;
   background-size: cover;
@@ -29,7 +28,20 @@
   font-size: @font-size-6;
   color: @black;
   margin: 0;
-  padding: @spacing-3;
+  padding: @spacing-2;
   letter-spacing: -1px;
 
+}
+
+.news-detail-head-informations {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  font-size: @font-size-2;
+}
+
+.news-detail-head-informations > li {
+  float: left;
+  padding: 0 @spacing-1 0 @spacing-1;
 }

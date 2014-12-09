@@ -5,6 +5,9 @@
   bottom: 0;
   width: @news-feed-width;
   overflow: auto;
+  border-right: 1px solid @gray-xlight;
+  background: @white;
+  z-index: 2;
 }
 
 .news-feed-list {
@@ -77,11 +80,6 @@
 
 .news-feed-item-link:hover .news-feed-last-comment {
   color: @gray-dark;
-}
-
-
-.news-feed-item-link.selected {
-  background: @gray-xlight;
 }
 
 

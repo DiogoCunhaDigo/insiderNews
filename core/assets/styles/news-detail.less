@@ -9,28 +9,29 @@
 
 .news-detail-head {
   text-align: center;
+  background: @white;
+  position: fixed;
+  z-index: 1;
+  width: @news-detail-width;
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.15);
+  padding: 0 @spacing-2 @spacing-2 @spacing-2;
 }
 
 .news-detail-head-thumbnail {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
+  width: 100%;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center;
   display: inline-block;
   background-size: cover;
 }
 
 .news-detail-head-title {
-  text-align: center;
   font-family: @font-roboto;
   font-weight: 400;
   font-size: @font-size-6;
   color: @black;
   margin: 0;
-  padding: @spacing-2;
   letter-spacing: -1px;
-
 }
 
 .news-detail-head-informations {

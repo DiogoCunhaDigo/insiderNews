@@ -3,7 +3,7 @@ insiderNews
 
 Realtime news engine ( +gamification )
 
- > Work in progress: http://beta.insidernews.com.br
+ > Work in progress: http://insidernews-c9-filipedeschamps.c9.io/
 
 ## Main goal
 Harvest gold coins and increase xp points by contributing with content and chatting with other users. Unlock new features and abilities with higher xp points.

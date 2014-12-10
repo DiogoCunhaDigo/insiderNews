@@ -3,13 +3,12 @@
   text-decoration: none;
   text-align: center;
   display: inline-block;
-  line-height: 27px;
   appearance: none;
   white-space: nowrap;
   position: relative;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 14px;
+  font-size: @font-size-3;
   font-family: inherit;
   cursor: pointer;
   vertical-align: middle;
@@ -22,9 +21,9 @@
 
 .button-outline {
   border: 1px solid @blue-default;
-  background: @white;
+  background-color: @white;
   border-radius: 5px;
-  padding: 0 10px;
+  padding: @spacing-1 @spacing-2;
 }
 
 .button-outline:active,
@@ -36,5 +35,7 @@
 
 
 .button-text {
-  padding: 0 10px;
+  padding: @spacing-1 @spacing-2;
+  background-color: transparent;
+  border: 0;
 }

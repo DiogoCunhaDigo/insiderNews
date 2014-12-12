@@ -14,6 +14,8 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 var plumber = require('gulp-plumber');
+var gulpif = require('gulp-if');
+var taskName = gutil.env._[0];
 
 var errorHandler = function(error) {
   gutil.beep();
@@ -32,6 +34,13 @@ var errorHandler = function(error) {
   this.emit('end');
 };
 
+function isDevelopment() {
+  if (taskName === 'develop') {
+    return true;
+  }
+
+  return false;
+}
 
 gulp.task('develop', [
   'build-scripts',
@@ -59,7 +68,7 @@ gulp.task('build-images', function() {
       errorHandler: errorHandler
 	}))
     .pipe(gulp.dest(configurations.paths.content.themes + 'default/images/'))
-    .pipe(liveReload());
+    .pipe(gulpif(isDevelopment(), liveReload()));
 });
 
 
@@ -70,11 +79,9 @@ gulp.task('build-styles', function() {
 	}))
     .pipe(concat('index.css'))
     .pipe(less())
-    .pipe(minifyCSS({
-      keepSpecialComments: 0
-    }))
+    .pipe(gulpif(!isDevelopment(), minifyCSS({ keepSpecialComments: 0 })))
     .pipe(gulp.dest(configurations.paths.content.themes + 'default/styles/'))
-    .pipe(liveReload());
+    .pipe(gulpif(isDevelopment(), liveReload()));
 });
 
 
@@ -146,7 +153,6 @@ gulp.task('run-unit-test', function() {
 gulp.task('run-tests', ['run-unit-test']);
 
 gulp.task('build', ['build-scripts', 'build-styles', 'build-images']);
-
 
 gulp.task('develop-unit-test', function() {
   gulp.watch(['./test/**', './index.js', './content/configurations.js', './core/**'], ['run-unit-test']);

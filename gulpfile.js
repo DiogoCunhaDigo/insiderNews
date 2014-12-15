@@ -15,6 +15,7 @@ var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 var plumber = require('gulp-plumber');
 var gulpif = require('gulp-if');
+var ngAnnotate = require('gulp-ng-annotate');
 var taskName = gutil.env._[0];
 
 var errorHandler = function(error) {
@@ -95,6 +96,7 @@ gulp.task('build-scripts', function() {
   .bundle()
   .pipe(plumber())
   .pipe(source('site.js'))
+  .pipe(ngAnnotate())
   .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'));
 });
 

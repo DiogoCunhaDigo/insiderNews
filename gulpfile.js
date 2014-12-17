@@ -104,17 +104,18 @@ gulp.task('build-scripts', function() {
 gulp.task('watch-scripts', function() {
   var bundler = watchify(browserify(configurations.paths.client + 'site/index.js', watchify.args));
 
-  function rebundle() {
+  function bundle() {
     return bundler.bundle()
-      .pipe(plumber())
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(source('site.js'))
       .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'))
       .pipe(liveReload());
   }
 
-  bundler.on('update', rebundle);
+  bundler.on('update', bundle);
   bundler.on('log', gutil.log.bind(gutil, '[watchify]'));
+
+  return bundle();
 });
 
 

@@ -112,9 +112,9 @@
 
 	"maxerr": 100,      // Maximum errors before stopping.
 	"predef": [         // Extra globals.
-		//"exampleVar",
       "describe",
-      "it"
+      "it",
+      "angular"
 	],
 	"indent": 2         // Specify indentation spacing
 }

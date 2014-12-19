@@ -1,3 +1,6 @@
 'use strict';
 
-var angular = require('angular');
+require('angular');
+require('angular-ui-router');
+
+angular.module('in.home', ['ui.router']);

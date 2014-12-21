@@ -136,7 +136,7 @@ controllers.mainPage = function(req, res) {
   ];
 
 
-  res.render('wireframe/views/main-page.html', {
+  res.render('wireframe/templates/home.html', {
     title: 'insiderNews - Wireframe',
     news: news,
     messages: messages

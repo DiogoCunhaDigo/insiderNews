@@ -3,4 +3,8 @@
 require('angular');
 require('angular-ui-router');
 
-angular.module('in.home', ['ui.router']);
+angular.module('in.site', [
+  'in.site.templates',
+  'ui.router'
+]);
+

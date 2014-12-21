@@ -60,7 +60,9 @@ gulp.task('build-client-templates', function(){
       quotes: true
     }))
     .pipe(templateCache({
-      filename: 'site-templates.js'
+      filename: 'site-templates.js',
+      module: 'in.site.templates',
+      standalone: true
     }))
     .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'));
 });

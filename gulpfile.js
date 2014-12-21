@@ -157,6 +157,6 @@ gulp.task('run-tests', ['run-unit-test']);
 
 gulp.task('build', ['build-scripts', 'build-styles', 'build-images']);
 
-gulp.task('develop-unit-test', function() {
+gulp.task('develop-unit-test', ['run-unit-test'], function() {
   gulp.watch(['./test/**', './index.js', './content/configurations.js', './core/**'], ['run-unit-test']);
 });

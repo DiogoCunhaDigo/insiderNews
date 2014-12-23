@@ -1,0 +1,66 @@
+<div class="news-detail-head">
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-xs-12">
+
+        <h1 class="news-detail-head-title">
+          Warren Buffett faz doação para apoiar Hillary Clinton
+        </h1>
+
+        <ul class="news-detail-head-informations">
+          <li>
+            <div>14 horas atrás</div>
+          </li>
+          <li>
+            <a class="news-detail-head-source-link" href="http://exame.abril.com.br/negocios/noticias/warren-buffett-faz-doacao-para-apoiar-hillary-clinton">exame.abril.com.br</a>
+          </li>
+        </ul>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="chat-feed padding-top-6 padding-bottom-5">
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-xs-12 padding-0">
+
+        <ul class="chat-feed-messages">
+          {% for message in messages %}
+            <li class="chat-feed-message">
+              <div class="chat-feed-message-username">{{message.userName}} {{message.createdAt}}</div>
+              <div class="chat-feed-message-content">{{message.content}}</div>
+            </li>
+          {% endfor %}
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="chat-inputs">
+
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-xs-10 padding-0">
+        <input type="text" class="input" placeholder="Escreva sua resposta aqui">
+      </div>
+      <div class="col-xs-2 padding-right-0">
+        <input type="submit" href="#" value="Enviar" class="button button-outline display-block">
+      </div>
+    </div>
+  </div>
+</div>

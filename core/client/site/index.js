@@ -16,10 +16,31 @@ angular.module('in.site')
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
-      .state({
-        name: 'home',
+      .state('news', {
+        abstract: true,
+        templateUrl: 'news/templates/index.html'
+      })
+      .state('news.home', {
         url: '/',
-        templateUrl: 'home/templates/index.html'
+        views: {
+          'news-feed': {
+            templateUrl: 'news-feed/templates/index.html'
+          },
+          'news-detail': {
+            templateUrl: 'news/templates/introduction.html'
+          }
+        }
+      })
+      .state('news.detail', {
+        url: '/noticias/',
+        views: {
+          'news-feed': {
+            templateUrl: 'news-feed/templates/index.html'
+          },
+          'news-detail': {
+            templateUrl: 'news-detail/templates/index.html'
+          }
+        }
       });
 
 });

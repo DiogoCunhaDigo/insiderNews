@@ -16,6 +16,8 @@ var source = require('vinyl-source-stream');
 var plumber = require('gulp-plumber');
 var gulpif = require('gulp-if');
 var ngAnnotate = require('gulp-ng-annotate');
+var templateCache = require('gulp-angular-templatecache');
+var minifyHTML = require('gulp-minify-html');
 var taskName = gutil.env._[0];
 
 var errorHandler = function(error) {
@@ -43,17 +45,6 @@ function isDevelopment() {
   return false;
 }
 
-gulp.task('develop', [
-  'build-scripts',
-  'build-styles',
-  'build-images',
-  'watch-scripts',
-  'watch-styles',
-  'watch-images',
-  'watch-server-views',
-  'start-core'
-]);
-
 
 gulp.task('start-core', function() {
   return nodemon({
@@ -61,6 +52,27 @@ gulp.task('start-core', function() {
     ignore: ['./content', './core/client']
   });
 });
+
+
+gulp.task('build-client-templates', function(){
+  return gulp.src(configurations.paths.client + 'site/features/**/*.html')
+    .pipe(minifyHTML({
+      quotes: true
+    }))
+    .pipe(templateCache({
+      filename: 'site-templates.js',
+      module: 'in.site.templates',
+      standalone: true
+    }))
+    .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'));
+});
+
+
+gulp.task('watch-client-templates', function(){
+  return gulp.watch(configurations.paths.client + 'site/features/**/*.html', ['build-client-templates'])
+    .on('change', liveReload.changed);
+});
+
 
 
 gulp.task('build-images', function() {
@@ -153,9 +165,27 @@ gulp.task('run-unit-test', function() {
     }));
 });
 
-gulp.task('run-tests', ['run-unit-test']);
+gulp.task('develop', [
+  'build-scripts',
+  'build-client-templates',
+  'build-styles',
+  'build-images',
+  'watch-scripts',
+  'watch-client-templates',
+  'watch-styles',
+  'watch-images',
+  'watch-server-views',
+  'start-core'
+]);
 
-gulp.task('build', ['build-scripts', 'build-styles', 'build-images']);
+gulp.task('build', [
+  'build-scripts',
+  'build-client-templates',
+  'build-styles',
+  'build-images'
+]);
+
+gulp.task('run-tests', ['run-unit-test']);
 
 gulp.task('develop-unit-test', ['run-unit-test'], function() {
   gulp.watch(['./test/**', './index.js', './content/configurations.js', './core/**'], ['run-unit-test']);

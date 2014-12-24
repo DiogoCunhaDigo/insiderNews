@@ -22,25 +22,10 @@ angular.module('in.site')
       })
       .state('news.home', {
         url: '/',
-        views: {
-          'news-feed': {
-            templateUrl: 'news-feed/templates/index.html'
-          },
-          'news-detail': {
-            templateUrl: 'news/templates/introduction.html'
-          }
-        }
+        templateUrl: 'news/templates/introduction.html'
       })
       .state('news.detail', {
         url: '/noticias/',
-        views: {
-          'news-feed': {
-            templateUrl: 'news-feed/templates/index.html'
-          },
-          'news-detail': {
-            templateUrl: 'news-detail/templates/index.html'
-          }
-        }
+        templateUrl: 'news-detail/templates/index.html'
       });
-
 });

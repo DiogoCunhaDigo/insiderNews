@@ -1,16 +1,9 @@
 <div ng-include="'menu/templates/index.html'"></div>
 
+<div class="news-feed hide-scroll">
+  <div ng-include="'news-feed/templates/index.html'"></div>
+</div>
 
-  <div class="news-feed hide-scroll">
-
-    <div ui-view="news-feed"></div>
-
-  </div>
-
-
-
-  <div class="news-detail hide-scroll">
-
-    <div ui-view="news-detail"></div>
-
-  </div>
+<div class="news-detail hide-scroll">
+  <div ui-view></div>
+</div>

@@ -1,17 +1,14 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12 padding-0">
-
       <ul class="news-feed-list">
-        {% for news in news %}
-          <li class="news-feed-item">
+          <li class="news-feed-item" ng-repeat="news in news">
             <a href="" class="news-feed-item-link {% if loop.first %} selected {% endif %}">
               <div class="news-feed-xp">{{news.xp}}</div>
               <div class="news-feed-title">{{news.title}}</div>
               <div class="news-feed-last-comment">{{news.lastComment}}</div>
             </a>
           </li>
-        {% endfor %}
       </ul>
 
     </div>

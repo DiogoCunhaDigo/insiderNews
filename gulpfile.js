@@ -57,7 +57,8 @@ gulp.task('start-core', function() {
 gulp.task('build-client-templates', function(){
   return gulp.src(configurations.paths.client + 'site/features/**/*.html')
     .pipe(minifyHTML({
-      quotes: true
+      quotes: true,
+      empty: true
     }))
     .pipe(templateCache({
       filename: 'site-templates.js',

@@ -36,9 +36,10 @@
     "watchify": "2.2.1"
   },
   "scripts": {
-    "start": "gulp develop",
+    "start": "npm install && gulp build && gulp start-web-server",
     "test": "gulp run-tests",
     "build": "gulp build",
+    "develop": "gulp develop",
     "develop-unit-test": "gulp develop-unit-test"
   },
   "repository": {

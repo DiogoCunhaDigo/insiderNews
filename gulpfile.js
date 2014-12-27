@@ -46,7 +46,7 @@ function isDevelopment() {
 }
 
 
-gulp.task('start-core', function() {
+gulp.task('start-web-server', function() {
   return nodemon({
     script: 'index.js',
     ignore: ['./content', './core/client']
@@ -176,7 +176,7 @@ gulp.task('develop', [
   'watch-styles',
   'watch-images',
   'watch-server-views',
-  'start-core'
+  'start-web-server'
 ]);
 
 gulp.task('build', [

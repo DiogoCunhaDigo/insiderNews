@@ -1,7 +1,7 @@
 'use strict';
 
 var configurations = require('../../core/configurations/index.js');
-var createFeatures = require(configurations.paths.serverFeatures + 'index.js');
+var createFeatures = require(configurations.paths.server + 'features.js');
 
 describe('createFeatures[server]', function () {
 

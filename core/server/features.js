@@ -28,11 +28,12 @@ function createFeatures() {
   }
 
   function getRouterFunction(featureObject) {
-    return getFirstValueInObject(featureObject).routes;
+    var firstValue = getFirstValueInObject(featureObject);
+    return firstValue.routes;
   }
 
-  function getFirstValueInObject(object) {
-    return object[Object.keys(object)[0]];
+  function getFirstValueInObject(featureObject) {
+    return featureObject[Object.keys(featureObject)[0]];
   }
 
   return Object.freeze({

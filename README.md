@@ -1,53 +1,51 @@
 insiderNews
 ===========
 
-Realtime news engine ( +gamification )
+Notícias em tempo-real com gamificação.
 
- > Work in progress: http://insidernews-c9-filipedeschamps.c9.io/
+ > Versão beta: http://insidernews-c9-filipedeschamps.c9.io/
 
-## Main goal
-Harvest gold coins and increase xp points by contributing with content and chatting with other users. Unlock new features and abilities with higher xp points.
+## Objetivo principal
+Coletar moedas de ouro e aumentar os pontos de experiência ao conversar com outros usuários e contribuindo com conteúdo. Habilite novos recursos ao aumentar os seus pontos de experiência.
 
-## The economy model
+## O modelo econômico do sistema
 
-#### Users
- - [ ] Has gold coins and xp points.
- - [ ] Win gold coins for every new message posted.
- - [ ] Can exchange gold coins with other users by clicking on their messages.
+#### Usuários
+ - [ ] Possuem moedas de ouro e pontos de experiência.
+ - [ ] Ganham 2 moedas de ouro para cada nova mensagem publicada.
+ - [ ] Ganham 50 moedas de outro para cada notícia compartilhada no Facebook.
+ - [ ] Podem trocar moedas de ouro com outros usuários ao clicar nas mensagens deled.
+ 
+#### Notícias
+ - [ ] Possuem pontos de experiência.
+ - [ ] Começam com 100 pontos de experiência e perdem 1 ponto a cada segundo.
+ - [ ] Toda ver que alguém abre a notícia, ela ganha 1 ponto de experiência.
+ - [ ] Toda vez que alguém conversa dentro da notícia, ela ganha 10 pontos de experiência.
+ - [ ] Toda vez que alguém clica na mensagem de outro usuário para trocar moedas, ela ganha 1 ponto de experiência.
+ - [ ] Toda vez que alguém compartilha a notícia no Facebook, ela ganha 50 pontos de experiência.
+ 
+## Habilidade
 
-#### Threads
- - [ ] Has xp points.
- - [ ] Starts with 100 xp points and looses 1 point every second.
- - [ ] Everytime someone opens the Thread, it receives 1 xp point.
- - [ ] Everytime someone replies to the Thread, it receives 10 xp points.
- - [ ] Everytime someone rank other user message, the Thread receives 1 xp point.
- - [ ] Everytime someone shares the Thread in Facebook, it receives 50 xp points.
- - [ ] Threads have control over the uniqueness of the shares.
-
-## Abilities
-
-Ability to                 | Minimum xp points
-:------------------------- | ----------------:
-Post messages              | 0
-Change username            | 1
-Change username color      | 100
-Post news                  | 250
-Post messages with links   | 500
-Post bold messages         | 2.000
-Post messages with images  | 10.000
-Post global notifications  | 50.000
+Conseguir                    | Pontos de experiência mínimos
+:--------------------------- | ----------------:
+Enviar mensagens             | 0
+Alterar cor do usuário       | 100
+Enviar notícias              | 250
+Enviar mensagens com links   | 500
+Enviar mensagens em negrito  | 2.000
+Enviar mensagens com imagens | 10.000
+Publicar avisos globais      | 50.000
 
 
-## Features
- - [ ] Realtime updates
- - [ ] RSS feed aggregator
- - [ ] Gamification
- - [ ] Per news chat
- - [ ] Rankings of users, threads and messages
+## Recursos do sistema
+ - [ ] Atualização em tempo-real
+ - [ ] Agregador de notícias em múltiplas fontes
+ - [ ] Gamificação
+ - [ ] Ranking de usuários, notícias e mensagens
 
-## Infrastructure + Development
+## Infraestrutura e desenvolvimento
 
-Layer                        | Solution
+Camada                       | Solução
 :--------------------------- | :------------------
 Web server                   | **Express**
 Realtime transport           | **Socket.io**

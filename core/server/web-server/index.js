@@ -3,7 +3,7 @@
 var configurations = require('../../configurations/index.js');
 var express = require('express');
 var swig = require('swig');
-var createFeatures = require(configurations.paths.serverFeatures + 'index.js');
+var createFeatures = require(configurations.paths.server + 'features.js');
 
 function createWebServer(spec) {
   spec = spec || {};
@@ -27,7 +27,7 @@ function createWebServer(spec) {
 
     app.engine('html', swig.renderFile);
     app.set('view engine', 'html');
-    app.set('views', configurations.paths.serverFeatures);
+    app.set('views', configurations.paths.server);
     app.set('view cache', configurations.defaults.cacheServerViews);
     app.use('/', features.getRouters());
 

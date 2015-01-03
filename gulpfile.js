@@ -55,14 +55,14 @@ gulp.task('start-web-server', function() {
 
 
 gulp.task('build-client-templates', function(){
-  return gulp.src(configurations.paths.client + 'site/features/**/*.html')
+  return gulp.src(configurations.paths.client + '**/*.html')
     .pipe(minifyHTML({
       quotes: true,
       empty: true
     }))
     .pipe(templateCache({
-      filename: 'site-templates.js',
-      module: 'in.site.templates',
+      filename: 'insider-templates.js',
+      module: 'in.templates',
       standalone: true
     }))
     .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'));
@@ -70,7 +70,7 @@ gulp.task('build-client-templates', function(){
 
 
 gulp.task('watch-client-templates', function(){
-  return gulp.watch(configurations.paths.client + 'site/features/**/*.html', ['build-client-templates'])
+  return gulp.watch(configurations.paths.client + '**/*.html', ['build-client-templates'])
     .on('change', liveReload.changed);
 });
 
@@ -108,7 +108,7 @@ gulp.task('build-scripts', function() {
   return browserify(configurations.paths.client + 'site/index.js')
   .bundle()
   .pipe(plumber())
-  .pipe(source('site.js'))
+  .pipe(source('insider-site.js'))
   .pipe(ngAnnotate())
   .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'));
 });
@@ -120,7 +120,7 @@ gulp.task('watch-scripts', function() {
   function bundle() {
     return bundler.bundle()
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
-      .pipe(source('site.js'))
+      .pipe(source('insider-site.js'))
       .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'))
       .pipe(liveReload());
   }
@@ -133,7 +133,7 @@ gulp.task('watch-scripts', function() {
 
 
 gulp.task('watch-server-views', function() {
-  return gulp.watch([configurations.paths.server + '/features/**/*.html'])
+  return gulp.watch([configurations.paths.server + '**/*.html'])
     .on('change', liveReload.changed);
 });
 

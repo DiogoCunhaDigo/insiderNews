@@ -4,7 +4,7 @@ require('angular');
 require('angular-ui-router');
 
 angular.module('in.site', [
-  'in.site.templates',
+  'in.templates',
   'ui.router'
 ]);
 
@@ -18,14 +18,14 @@ angular.module('in.site')
     $stateProvider
       .state('news', {
         abstract: true,
-        templateUrl: 'news/templates/index.html'
+        templateUrl: 'site/news/templates/index.html'
       })
       .state('news.home', {
         url: '/',
-        templateUrl: 'news/templates/introduction.html'
+        templateUrl: 'site/news/templates/introduction.html'
       })
       .state('news.detail', {
         url: '/noticias/',
-        templateUrl: 'news-detail/templates/index.html'
+        templateUrl: 'site/news-detail/templates/index.html'
       });
 });

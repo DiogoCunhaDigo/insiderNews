@@ -68,8 +68,12 @@ gulp.task('build-client-templates', function(){
     .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'));
 });
 
+gulp.task('livereload-listen', function() {
+    return liveReload.listen();
+});
 
 gulp.task('watch-client-templates', function(){
+
   return gulp.watch(configurations.paths.client + '**/*.html', ['build-client-templates'])
     .on('change', liveReload.changed);
 });
@@ -171,6 +175,7 @@ gulp.task('develop', [
   'build-client-templates',
   'build-styles',
   'build-images',
+  'livereload-listen',
   'watch-scripts',
   'watch-client-templates',
   'watch-styles',

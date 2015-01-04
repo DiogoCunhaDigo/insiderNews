@@ -158,7 +158,7 @@ gulp.task('run-unit-test', function() {
   var expect = chai.expect;
   chai.use(chaiAsPromised);
 
-  return gulp.src(['test/unit/*.js'], { read: false })
+  return gulp.src(['test/unit/**/*.spec.js'], { read: false })
     .pipe(plumber())
     .pipe(mocha({
       reporter: 'list',

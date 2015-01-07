@@ -2,9 +2,11 @@
 
 require('angular');
 require('angular-ui-router');
+require('./news-feed/news-feed.module.js');
 
 angular.module('in.site', [
   'in.templates',
+  'in.newsFeed',
   'ui.router'
 ]);
 
@@ -17,15 +19,25 @@ angular.module('in.site')
 
     $stateProvider
       .state('news', {
-        abstract: true,
-        templateUrl: 'site/news/templates/index.html'
-      })
-      .state('news.home', {
         url: '/',
-        templateUrl: 'site/news/templates/introduction.html'
+        views: {
+          'main': {
+            templateUrl: 'site/news-home/templates/index.html'
+          },
+          'newsFeed@news': {
+            templateUrl: 'site/news-feed/templates/index.html'
+          },
+          'newsDetail@news': {
+            templateUrl: 'site/news-home/templates/introduction.html'
+          }
+        }
       })
       .state('news.detail', {
-        url: '/noticias/',
-        templateUrl: 'site/news-detail/templates/index.html'
+        url: 'noticias/',
+        views: {
+          'newsDetail@news': {
+            templateUrl: 'site/news-detail/templates/index.html'
+          }
+        }
       });
 });

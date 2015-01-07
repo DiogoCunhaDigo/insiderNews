@@ -1,1 +1,5 @@
-angular.module('in.newsFeed', ['ui.router']);
+'use strict';
+
+angular.module('in.newsFeed', []);
+
+require('./controllers/news-feed.controller.js');

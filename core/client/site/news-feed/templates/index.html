@@ -1,9 +1,10 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12 padding-0">
+
       <ul class="news-feed-list">
-          <li class="news-feed-item" ng-repeat="news in newsFeed.news">
-            <a ui-sref="newsHome.detail" ui-sref-active="active" class="news-feed-item-link">
+          <li class="news-feed-item" ng-repeat="news in newsFeed.news track by news.slug">
+            <a ui-sref="newsHome.detail({ slug: news.slug })" ui-sref-active="active" class="news-feed-item-link">
               <div class="news-feed-xp">{{news.xp}}</div>
               <div class="news-feed-title">{{news.title}}</div>
               <div class="news-feed-last-comment">{{news.lastComment}}</div>

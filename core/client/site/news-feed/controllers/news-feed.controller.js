@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('in.newsFeed').controller('NewsFeedCtrl', NewsFeedCtrl);
+angular.module('in.newsFeed').controller('NewsFeedController', NewsFeedController);
 
-function NewsFeedCtrl(createNewsFeed, $rootScope) {
+function NewsFeedController(createNewsFeed, $rootScope) {
   var vm = this;
   var newsFeed = createNewsFeed();
 

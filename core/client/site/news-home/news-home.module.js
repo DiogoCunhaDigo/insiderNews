@@ -21,7 +21,7 @@ function configureNewsHomeModule($stateProvider, $urlRouterProvider, $locationPr
         },
         'newsFeed@newsHome': {
           templateUrl: 'site/news-feed/templates/index.html',
-          controller: 'NewsFeedCtrl as newsFeed'
+          controller: 'NewsFeedController as newsFeed'
         },
         'newsDetail@newsHome': {
           templateUrl: 'site/news-home/templates/introduction.html'

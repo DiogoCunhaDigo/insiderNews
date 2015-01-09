@@ -2,7 +2,7 @@
 
 angular.module('in.newsFeed').controller('NewsFeedController', NewsFeedController);
 
-function NewsFeedController(createNewsFeed, $rootScope) {
+function NewsFeedController(createNewsFeed) {
   var vm = this;
   var newsFeed = createNewsFeed();
 

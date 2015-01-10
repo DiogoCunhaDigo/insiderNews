@@ -1,30 +1,16 @@
 'use strict';
 
-angular.module('in.newsFeed').factory('createNewsFeed', function createNewsFeedFactory($q, $http) {
+var createNewsFeed = require('../../../../models/news-feed.js');
+var createNewsFeedRepository = require('../repositories/news-feed.repository.js');
 
-  function createNewsFeed(spec) {
-    spec = spec || {};
-    var repository = spec.repository || $http;
+angular.module('in.newsFeed').factory('newsFeed', function createNewsFeedFactory($http) {
 
-    var newsList = [];
+  var newsFeedRepository = createNewsFeedRepository({
+    repository: $http
+  });
 
-    function find() {
+  return createNewsFeed({
+    repository: newsFeedRepository
+  });
 
-      /*jshint newcap: false */
-      return new $q(function findNews(resolve, reject) {
-
-        repository.get('https://dazzling-heat-7137.firebaseio.com/news.json')
-          .success(function(data) {
-            resolve(data);
-          });
-      });
-    }
-
-    return Object.freeze({
-      find: find
-    });
-
-  }
-
-  return createNewsFeed;
 });

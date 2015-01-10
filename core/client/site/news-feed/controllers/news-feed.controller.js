@@ -2,16 +2,19 @@
 
 angular.module('in.newsFeed').controller('NewsFeedController', NewsFeedController);
 
-function NewsFeedController(createNewsFeed) {
+function NewsFeedController($scope, newsFeed) {
   var vm = this;
-  var newsFeed = createNewsFeed();
 
   newsFeed
     .find()
-    .then(populateVmWithLastResults);
+    .then(populateVmWithLastResults)
+    .catch(function(data){
+      console.log(data);
+    });
 
   function populateVmWithLastResults(news) {
     vm.news = news;
+    $scope.$apply();
   }
 
 }

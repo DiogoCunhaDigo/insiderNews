@@ -1,5 +1,6 @@
 'use strict';
 
+require('native-promise-only');
 require('angular');
 require('angular-ui-router');
 require('./news-home/news-home.module.js');

@@ -150,23 +150,17 @@ gulp.task('watch-images', function() {
 
 gulp.task('run-unit-test', function() {
 
-  // Módulos utilizados que serão injetados
-  // de forma global no mocha.
+  // Módulos de assert que fazem o augment
+  // no Ojbect.protorype.
   var chai = require('chai');
   var chaiAsPromised = require('chai-as-promised');
-  var should = chai.should();
-  var expect = chai.expect;
+  chai.should();
   chai.use(chaiAsPromised);
 
   return gulp.src(['test/unit/**/*.spec.js'], { read: false })
     .pipe(plumber())
     .pipe(mocha({
-      reporter: 'list',
-      globals: {
-        chai: chai,
-        should: should,
-        expect: expect
-      }
+      reporter: 'spec'
     }));
 });
 

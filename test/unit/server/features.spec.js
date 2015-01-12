@@ -1,11 +1,11 @@
 'use strict';
 
-var configurations = require('../../core/configurations/index.js');
+var configurations = require('../../../core/configurations/index.js');
 var createFeatures = require(configurations.paths.server + 'features.js');
 
-describe('createFeatures[server]', function () {
+describe('features [feature]', function () {
 
-  it('deve ser uma função', function() {
+  it('deve ser uma Factory (função)', function() {
     createFeatures.should.be.a('function');
   });
 
@@ -15,7 +15,7 @@ describe('createFeatures[server]', function () {
 
   describe('#getRouters', function() {
 
-    it('deve retornar um array com funções dentro', function() {
+    it('deve retornar um array com funções Routers do Express', function() {
       var routers = createFeatures().getRouters();
 
       routers.should.be.a('array');

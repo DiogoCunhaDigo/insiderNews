@@ -1,11 +1,11 @@
 'use strict';
 
-var configurations = require('../../core/configurations/index.js');
+var configurations = require('../../../core/configurations/index.js');
 var createWebServer = require(configurations.paths.server + 'web-server/index.js');
 
-describe('createWebServer', function() {
+describe('webServer [feature]', function() {
 
-  it('deve ser uma função', function() {
+  it('deve ser uma Factory (função)', function() {
     createWebServer.should.be.a('function');
   });
 
@@ -14,7 +14,7 @@ describe('createWebServer', function() {
   });
 
   describe('#start()', function() {
-    it('deve iniciar o servidor web', function() {
+    it('deve resolver uma Promise e iniciar o servidor web', function() {
       var webServer = createWebServer();
       var startPromise = webServer.start();
 
@@ -26,7 +26,7 @@ describe('createWebServer', function() {
       return startPromise.should.be.fulfilled;
     });
 
-    it('deve retornar host e port padrões se nenhum spec for definido no construtor', function() {
+    it('deve retornar host e port padrões se nenhum spec for definido', function() {
       var webServer = createWebServer();
       var startPromise = webServer.start();
       var defaultStartPromiseReturn = {
@@ -42,7 +42,7 @@ describe('createWebServer', function() {
       return startPromise.should.eventually.deep.equal(defaultStartPromiseReturn);
     });
 
-    it('deve retornar host e port customizados se spec for definido no construtor', function() {
+    it('deve retornar host e port customizados se spec for definido', function() {
       var customWebServerSpec = {
         webServerHost: '127.0.0.1',
         webServerPort: 9999
@@ -67,7 +67,7 @@ describe('createWebServer', function() {
 
   describe('#stop()', function() {
 
-    it('deve parar o servidor web', function() {
+    it('deve resolver uma Promise e parar o servidor web', function() {
       var webServer = createWebServer();
       var stopPromise;
 

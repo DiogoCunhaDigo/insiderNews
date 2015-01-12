@@ -7,7 +7,7 @@ require('./news-home/news-home.module.js');
 
 angular.module('in.site', [
   'in.templates',
-  'in.newsHome',
+  'in.news',
   'ui.router'
 ]);
 

@@ -1,11 +1,11 @@
 'use strict';
 
-function createNewsFeedClientRepository(spec) {
+function createFirebaseRepository(spec) {
   spec = spec || {};
-  var $http = spec.repository ? spec.repository : undefined;
+  var $http = spec.resource ? spec.resource : undefined;
 
   if ( !$http ) {
-    throw new Error('You need to specify an AngularJS $http repository property: "createNewsFeedRepository({repository: $http})"');
+    throw new Error('You need to specify an AngularJS $http resource property: "createRepository({resource: $http})"');
   }
 
   function find() {
@@ -31,4 +31,4 @@ function createNewsFeedClientRepository(spec) {
 
 }
 
-module.exports = createNewsFeedClientRepository;
+module.exports = createFirebaseRepository;

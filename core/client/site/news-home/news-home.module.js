@@ -2,10 +2,12 @@
 
 angular.module('in.news', [
   'ui.router',
-  'in.newsFeed'
+  'in.newsFeed',
+  'in.newsDetail'
 ]);
 
 require('../news-feed/news-feed.module.js');
+require('../news-detail/news-detail.module.js');
 
 
 angular.module('in.news').config(configureNewsHomeModule);
@@ -25,14 +27,6 @@ function configureNewsHomeModule($stateProvider, $urlRouterProvider, $locationPr
         },
         'newsDetail@news': {
           templateUrl: 'site/news-home/templates/introduction.html'
-        }
-      }
-    })
-    .state('news.detail', {
-      url: 'noticias/:slug/',
-      views: {
-        'newsDetail@news': {
-          templateUrl: 'site/news-detail/templates/index.html'
         }
       }
     });

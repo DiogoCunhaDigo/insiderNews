@@ -6,6 +6,7 @@ function createNewsFeed(spec) {
   var repository = spec.repository || undefined;
   var events = new EventEmitter();
   var newsList = [];
+  var lorem = require('lorem-ipsum');
 
   if ( !repository ) {
     throw new Error('You need to specify the repository property: "createNewsFeed({repository: repositoryObject})"');
@@ -35,10 +36,10 @@ function createNewsFeed(spec) {
     setInterval(function() {
       sum = sum + 1;
       newsList.push({
-        "lastComment": "Comentário: " + sum,
+        "lastComment": "Comentário: " + lorem( { units: 'sentences' } ),
         "slug": sum,
-        "title": "Título " + sum,
-        "xp": sum
+        "title": lorem( { units: 'sentences' } ),
+        "xp": Math.round(Math.random()*500)
       });
 
       events.emit('newsList:updated', newsList);

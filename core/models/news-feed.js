@@ -45,20 +45,20 @@ function createNewsFeed(spec) {
       
 
       events.emit('newsList:updated', newsList);
-    }, 1000);
+    }, 1500);
     
     setInterval(function() {
 
       _.each(newsList, function(element, index, array) {
-        array[index].xp = array[index].xp + Math.round(Math.random()*2);
+        array[index].xp = array[index].xp + Math.round(Math.random()*5);
         
         if (array[index].xp > 0) {
-          array[index].xp = array[index].xp - Math.round(Math.random()*2);
+          array[index].xp = array[index].xp - Math.round(Math.random()*5);
         }
       });
       
       events.emit('newsList:updated', newsList);
-    }, 150);
+    }, 50);
     
   }
 

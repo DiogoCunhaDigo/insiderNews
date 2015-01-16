@@ -5,16 +5,14 @@ angular.module('in.newsFeed').controller('NewsFeedController', NewsFeedControlle
 function NewsFeedController($scope, newsFeed) {
   var vm = this;
 
-  newsFeed
-    .find()
-    .then(populateVmWithLastResults)
-    .catch(function(data){
-      console.log(data);
-    });
+  newsFeed.start();
 
-  function populateVmWithLastResults(news) {
-    vm.news = news;
-    $scope.$apply();
+  newsFeed.events.on('newsList:updated', updateVmWithLastResults);
+
+  function updateVmWithLastResults(newsList){
+    $scope.$apply(function apply() {
+      vm.news = newsList;
+    });
   }
 
 }

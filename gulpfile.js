@@ -18,6 +18,8 @@ var gulpif = require('gulp-if');
 var ngAnnotate = require('gulp-ng-annotate');
 var templateCache = require('gulp-angular-templatecache');
 var minifyHTML = require('gulp-minify-html');
+var uglify = require('gulp-uglify');
+var streamify = require('gulp-streamify');
 var taskName = gutil.env._[0];
 
 var errorHandler = function(error) {
@@ -38,13 +40,14 @@ var errorHandler = function(error) {
 };
 
 function isDevelopment() {
-  if (taskName === 'develop') {
-    return true;
+  var environment = process.env.NODE_ENV;
+
+  if ( environment === 'production' || environment === 'staging' ) {
+    return false;
   }
 
-  return false;
+  return true;
 }
-
 
 gulp.task('start-web-server', function() {
   return nodemon({
@@ -108,12 +111,14 @@ gulp.task('watch-styles', function() {
 });
 
 
+
 gulp.task('build-scripts', function() {
   return browserify(configurations.paths.client + 'site/index.js')
   .bundle()
   .pipe(plumber())
   .pipe(source('insider-site.js'))
   .pipe(ngAnnotate())
+  .pipe(gulpif(!isDevelopment(), streamify(uglify())))
   .pipe(gulp.dest(configurations.paths.content.themes + 'default/scripts/'));
 });
 

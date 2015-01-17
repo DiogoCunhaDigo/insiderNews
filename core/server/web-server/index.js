@@ -2,6 +2,7 @@
 
 var configurations = require('../../configurations/index.js');
 var express = require('express');
+var compression = require('compression');
 var swig = require('swig');
 var createFeatures = require(configurations.paths.server + 'features.js');
 
@@ -19,6 +20,7 @@ function createWebServer(spec) {
   }
 
   function configureApp() {
+    app.use(compression());
     swig.setDefaults({ cache: configurations.defaults.cacheServerViews });
 
     app.use('/themes/', express.static(configurations.paths.content.themes, {

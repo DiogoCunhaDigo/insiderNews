@@ -1,12 +1,8 @@
 'use strict';
-var EventEmitter = require('events').EventEmitter;
-var _ = require('lodash');
-var lorem = require('lorem-ipsum');
 
 function createNewsFeed(spec) {
   spec = spec || {};
-  var repository = spec.repository || undefined;
-  var events = new EventEmitter();
+  var repository = spec.repository;
   var newsList = [];
 
   if ( !repository ) {
@@ -19,7 +15,6 @@ function createNewsFeed(spec) {
       repository
         .find()
         .then(function success(newsList) {
-          events.emit('newsList:updated', newsList);
           resolve(newsList);
         })
         .catch(function error(result) {
@@ -29,14 +24,8 @@ function createNewsFeed(spec) {
     });
   }
 
-  function start() {
-
-  }
-
   return Object.create({
-    find: find,
-    start: start,
-    events: events
+    find: find
   });
 
 }

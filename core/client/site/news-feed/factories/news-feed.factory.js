@@ -1,14 +1,16 @@
 'use strict';
 
 var createNewsFeed = require('../../../../models/news-feed.js');
-var createRepository = require('../../../../repositories/firebase.repository.js');
+var createRepository = require('../../../../repositories/firebase.js');
 
 angular.module('in.newsFeed').factory('newsFeed', function createNewsFeedFactory() {
 
-  var firebase = createRepository();
+  var repository = createRepository();
 
-  return createNewsFeed({
-    repository: firebase
+  var newsFeed = createNewsFeed({
+    repository: repository
   });
+
+  return newsFeed;
 
 });

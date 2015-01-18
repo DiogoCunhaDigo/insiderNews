@@ -113,7 +113,7 @@ gulp.task('watch-styles', function() {
 
 
 gulp.task('build-scripts', function() {
-  return browserify(configurations.paths.client + 'site/index.js')
+  return browserify(configurations.paths.client + 'site/insider-site.module.js')
   .bundle()
   .pipe(plumber())
   .pipe(source('insider-site.js'))
@@ -124,7 +124,7 @@ gulp.task('build-scripts', function() {
 
 
 gulp.task('watch-scripts', function() {
-  var bundler = watchify(browserify(configurations.paths.client + 'site/index.js', watchify.args));
+  var bundler = watchify(browserify(configurations.paths.client + 'site/insider-site.module.js', watchify.args));
 
   function bundle() {
     return bundler.bundle()

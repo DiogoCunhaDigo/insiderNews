@@ -6,7 +6,7 @@ var createNewsFeedStream = require(configurations.paths.models + 'news-feed-stre
 var createMockRepository = require('../mocks/news-feed-stream.repository.js');
 
 
-describe('newsFeedStream [model]', function () {
+describe('[model] newsFeedStream', function () {
 
   it('deve ser uma Factory (função)', function() {
     createNewsFeedStream.should.be.a('function');
@@ -41,7 +41,22 @@ describe('newsFeedStream [model]', function () {
     newsFeedStream.start.should.be.a('function');
   });
 
+  it('deve conter o método "stop"', function() {
+    var repository = createMockRepository();
+    var newsFeedStream = createNewsFeedStream({ repository: repository });
+
+    newsFeedStream.should.have.property('stop');
+    newsFeedStream.start.should.be.a('function');
+  });
+
   describe('#events', function() {
+    var newsObjectExample = {
+      "lastComment": "Ana: Lorem ipsum",
+      "slug": "semana-teve-rumores-sobre-eike-e-tombo-gigantesco-da-oi",
+      "title": "Semana teve rumores sobre Eike e tombo gigantesco da Oi",
+      "uuid": "c4397bea-9f3e-11e4-89d3-123b93f75cba",
+      "xp": 50
+    };
 
     it('deve conter a propriedade "on"', function() {
       var repository = createMockRepository();
@@ -69,28 +84,54 @@ describe('newsFeedStream [model]', function () {
       newsFeedStream.events.emit('onEmitTest', [1,2,3,4,5]);
     });
 
+    it('deve emitir "news:added" ao receber objeto de notícia do repositório', function(done) {
+      var repository = createMockRepository();
+      var newsFeedStream = createNewsFeedStream({ repository: repository });
+
+      newsFeedStream.events.on('news:added', function onNewsAdded(news) {
+        news.should.be.a('object');
+        news.should.be.deep.equal(newsObjectExample);
+        done();
+      });
+
+      repository.events.emit('news:added', newsObjectExample);
+    });
+
+    it('deve atualizar a lista de notícias no evento "news:added"', function() {
+      var repository = createMockRepository();
+      var newsFeedStream = createNewsFeedStream({ repository: repository });
+
+      chai.expect(newsFeedStream.getNewsList().length).to.be.equal(0);
+
+      repository.events.emit('news:added', newsObjectExample);
+
+      chai.expect(newsFeedStream.getNewsList().length).to.be.equal(1);
+    });
+
+
+    it('deve emitir "newsList:updated" ao receber nova notícia do repositório', function(done) {
+      var repository = createMockRepository();
+      var newsFeedStream = createNewsFeedStream({ repository: repository });
+
+      newsFeedStream.events.on('newsList:updated', function onNewsAdded(newsList) {
+        newsList.should.be.a('array');
+        done();
+      });
+
+      repository.events.emit('news:added', newsObjectExample);
+    });
+
+
   });
 
 
   describe('#start', function() {
 
-    it('quando executado deve emitir o evento "started"', function(done) {
+    it('quando executado e repositório iniciar, deve emitir o evento "started"', function(done) {
       var repository = createMockRepository();
       var newsFeedStream = createNewsFeedStream({ repository: repository });
 
       newsFeedStream.events.on('started', function onStart() {
-        done();
-      });
-
-      newsFeedStream.start();
-
-    });
-
-    it('quando repositório iniciar deve emitir o evento "repository:started"', function(done) {
-      var repository = createMockRepository();
-      var newsFeedStream = createNewsFeedStream({ repository: repository });
-
-      newsFeedStream.events.on('repository:started', function onStart() {
         done();
       });
 
@@ -104,23 +145,11 @@ describe('newsFeedStream [model]', function () {
 
   describe('#stop', function() {
 
-    it('quando executado deve emitir o evento "stopped"', function(done) {
+    it('quando executado e repositório parar, deve emitir o evento "stopped"', function(done) {
       var repository = createMockRepository();
       var newsFeedStream = createNewsFeedStream({ repository: repository });
 
-      newsFeedStream.events.on('stopped', function onStop() {
-        done();
-      });
-
-      newsFeedStream.stop();
-
-    });
-
-    it('quando repositório parar deve emitir o evento "repository:stopped"', function(done) {
-      var repository = createMockRepository();
-      var newsFeedStream = createNewsFeedStream({ repository: repository });
-
-      newsFeedStream.events.on('repository:stopped', function onStart() {
+      newsFeedStream.events.on('stopped', function onStart() {
         done();
       });
 

@@ -12,29 +12,41 @@ function createNewsFeedStream(spec) {
   }
 
   function start() {
-    events.emit('started');
-
-    repository.events.on('started', function repositoryStarted() {
-      events.emit('repository:started');
-    });
-
     repository.start();
   }
 
   function stop() {
-    events.emit('stopped');
-
-    repository.events.on('stopped', function repositoryStarted() {
-      events.emit('repository:stopped');
-    });
-
     repository.stop();
-
   }
+
+  function addToNewsList(news) {
+    newsList.push(news);
+
+    events.emit('news:added', news);
+    events.emit('newsList:updated', newsList);
+  }
+
+  function getNewsList() {
+    return newsList;
+  }
+
+  repository.events.on('stream:started', function repositoryStarted() {
+    events.emit('started');
+  });
+
+  repository.events.on('stream:stopped', function repositoryStopped() {
+    events.emit('stopped');
+  });
+
+  repository.events.on('news:added', function repositoryNewsAdded(news) {
+    addToNewsList(news);
+  });
+
 
   return Object.create({
     start: start,
     stop: stop,
+    getNewsList: getNewsList,
     events: events
   });
 

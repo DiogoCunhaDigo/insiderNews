@@ -2,7 +2,7 @@
 
 require('native-promise-only');
 require('angular');
-require('angular-animate/angular-animate.js');
+require('angular-animate');
 require('angular-ui-router');
 require('./news-home/news-home.module.js');
 

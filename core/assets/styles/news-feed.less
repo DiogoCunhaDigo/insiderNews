@@ -16,6 +16,10 @@
   padding: 0;
 }
 
+.news-feed-item {
+  display: block;
+}
+
 .news-feed-item-link {
   padding: @spacing-3 @spacing-3 @spacing-3 @spacing-5;
   display: block;
@@ -94,3 +98,31 @@
   color: @blue-default;
 }
 
+
+/* ANIMAÇÕES */
+.news-feed-item.ng-enter,
+.news-feed-item.ng-leave,
+.news-feed-item.ng-move {
+  transition: 200ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+  position: relative;
+}
+
+.news-feed-item.ng-enter {
+  opacity: 0;
+  left: -50px;
+}
+
+.news-feed-item.ng-enter.ng-enter-active {
+  opacity: 1;
+  left: 0px;
+}
+
+.news-feed-item.ng-leave.ng-leave-active {
+  opacity: 1;
+  left: 0px;
+}
+
+.news-feed-item.ng-leave {
+  opacity: 0;
+  left: -50px;
+}

@@ -50,15 +50,15 @@ function createNewsFeed(spec) {
     setInterval(function() {
 
       _.each(newsList, function(element, index, array) {
-        array[index].xp = array[index].xp + Math.round(Math.random()*5);
+        array[index].xp = array[index].xp + Math.round(Math.random()*2);
 
         if (array[index].xp > 0) {
-          array[index].xp = array[index].xp - Math.round(Math.random()*5);
+          array[index].xp = array[index].xp - Math.round(Math.random()*2);
         }
       });
 
       events.emit('newsList:updated', newsList);
-    }, 50);
+    }, 150);
 
   }
 

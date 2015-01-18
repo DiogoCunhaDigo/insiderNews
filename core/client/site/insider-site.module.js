@@ -2,13 +2,15 @@
 
 require('native-promise-only');
 require('angular');
+require('angular-animate/angular-animate.js');
 require('angular-ui-router');
 require('./news-home/news-home.module.js');
 
 angular.module('in.site', [
   'in.templates',
   'in.news',
-  'ui.router'
+  'ui.router',
+  'ngAnimate'
 ]);
 
 angular.module('in.site')

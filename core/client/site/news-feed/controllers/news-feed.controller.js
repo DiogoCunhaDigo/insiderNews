@@ -2,16 +2,16 @@
 
 angular.module('in.newsFeed').controller('NewsFeedController', NewsFeedController);
 
-function NewsFeedController($scope, newsFeed) {
+function NewsFeedController($scope, newsFeedStream) {
   var vm = this;
 
-  newsFeed.start();
+  newsFeedStream.start();
 
-  newsFeed.events.on('newsList:updated', updateVmWithLastResults);
+  newsFeedStream.events.on('newsList:updated', updateVmWithLastResults);
 
-  function updateVmWithLastResults(newsList){
+  function updateVmWithLastResults(newsList) {
     $scope.$apply(function apply() {
-      vm.news = newsList;
+      vm.newsList = newsList;
     });
   }
 

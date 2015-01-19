@@ -165,7 +165,7 @@ gulp.task('run-unit-test', function() {
   return gulp.src(['test/unit/**/*.spec.js'], { read: false })
     .pipe(plumber())
     .pipe(mocha({
-      reporter: 'spec'
+      reporter: 'list'
     }));
 });
 

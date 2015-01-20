@@ -9,25 +9,17 @@ function createNewsFeedStreamRepository(spec) {
 
   function start() {
     events.emit('stream:started');
-    resource = new Firebase('https://dazzling-heat-7137.firebaseio.com/');
+    resource = new Firebase('https://dazzling-heat-7137.firebaseio.com/newsList');
 
-    resource
-      .orderByKey()
-      .startAt("newsList")
-      .endAt("newsList")
-      .on('child_added', function onChildAdded(snapshot) {
-        var values = snapshot.val();
-
-        values.forEach(function(news) {
-          events.emit('news:added', news);
-        });
+    resource.on('child_added', function onChildAdded(snapshot) {
+      var news = snapshot.val();
+      events.emit('news:added', news);
     });
 
-//    resource.on('child_changed', function onChildChanged(snapshot) {
-//      values.forEach(function(news) {
-//        console.log(news);
-//      });
-//    });
+    resource.on('child_changed', function onChildChanged(snapshot) {
+      var news = snapshot.val();
+      events.emit('news:updated', news);
+    });
 
   }
 

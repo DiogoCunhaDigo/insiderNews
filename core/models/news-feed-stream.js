@@ -1,5 +1,6 @@
 'use strict';
 var EventEmitter = require('events').EventEmitter;
+var _ = require('lodash');
 
 function createNewsFeedStream(spec) {
   spec = spec || {};
@@ -19,6 +20,14 @@ function createNewsFeedStream(spec) {
     repository.stop();
   }
 
+  function getNewsList() {
+    return newsList;
+  }
+
+  function find(queryObject) {
+    return _.find(newsList, queryObject);
+  }
+
   function addToNewsList(news) {
     newsList.push(news);
 
@@ -26,8 +35,19 @@ function createNewsFeedStream(spec) {
     events.emit('newsList:updated', newsList);
   }
 
-  function getNewsList() {
-    return newsList;
+  function updateInNewsList(news) {
+
+    var updatedNews = update({ uuid: news.uuid }, news );
+
+    events.emit('news:updated', updatedNews);
+    events.emit('newsList:updated', newsList);
+  }
+
+  function update(queryObject, newObject) {
+    var oldObject = find(queryObject);
+    var updatedNews = _.assign(oldObject, newObject);
+
+    return updatedNews;
   }
 
   repository.events.on('stream:started', function repositoryStarted() {
@@ -42,12 +62,17 @@ function createNewsFeedStream(spec) {
     addToNewsList(news);
   });
 
+  repository.events.on('news:updated', function repositoryNewsUpdated(news) {
+    updateInNewsList(news);
+  });
+
 
   return Object.create({
     start: start,
     stop: stop,
+    events: events,
     getNewsList: getNewsList,
-    events: events
+    find: find
   });
 
 }

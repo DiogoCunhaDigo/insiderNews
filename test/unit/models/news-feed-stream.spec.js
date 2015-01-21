@@ -49,13 +49,14 @@ describe('[model] newsFeedStream', function () {
     newsFeedStream.start.should.be.a('function');
   });
 
+
   describe('#events', function() {
-    var newsObjectExample = {
-      "lastComment": "Ana: Lorem ipsum",
-      "slug": "semana-teve-rumores-sobre-eike-e-tombo-gigantesco-da-oi",
-      "title": "Semana teve rumores sobre Eike e tombo gigantesco da Oi",
-      "uuid": "c4397bea-9f3e-11e4-89d3-123b93f75cba",
-      "xp": 50
+    var newsObjectTemplate1 = {
+      "lastComment": "Exercitation aliquip deserunt aute proident est amet non.",
+      "slug": "exercitation-aliquip-deserunt-aute-proident-est-amet-non",
+      "title": "Exercitation aliquip deserunt aute proident est amet non.",
+      "uuid": "d36fb8b2-a0e8-11e4-89d3-123b93f75cba",
+      "xp": 100
     };
 
     it('deve conter a propriedade "on"', function() {
@@ -84,17 +85,17 @@ describe('[model] newsFeedStream', function () {
       newsFeedStream.events.emit('onEmitTest', [1,2,3,4,5]);
     });
 
-    it('deve emitir "news:added" ao receber objeto de notícia do repositório', function(done) {
+    it('deve emitir "news:added" ao receber nova notícia do repositório', function(done) {
       var repository = createMockRepository();
       var newsFeedStream = createNewsFeedStream({ repository: repository });
 
       newsFeedStream.events.on('news:added', function onNewsAdded(news) {
         news.should.be.a('object');
-        news.should.be.deep.equal(newsObjectExample);
+        news.should.be.deep.equal(newsObjectTemplate1);
         done();
       });
 
-      repository.events.emit('news:added', newsObjectExample);
+      repository.events.emit('news:added', newsObjectTemplate1);
     });
 
     it('deve atualizar a lista de notícias no evento "news:added"', function() {
@@ -103,11 +104,10 @@ describe('[model] newsFeedStream', function () {
 
       chai.expect(newsFeedStream.getNewsList().length).to.be.equal(0);
 
-      repository.events.emit('news:added', newsObjectExample);
+      repository.events.emit('news:added', newsObjectTemplate1);
 
       chai.expect(newsFeedStream.getNewsList().length).to.be.equal(1);
     });
-
 
     it('deve emitir "newsList:updated" ao receber nova notícia do repositório', function(done) {
       var repository = createMockRepository();
@@ -118,7 +118,54 @@ describe('[model] newsFeedStream', function () {
         done();
       });
 
-      repository.events.emit('news:added', newsObjectExample);
+      repository.events.emit('news:added', newsObjectTemplate1);
+    });
+
+    it('deve atualizar notícia na newsList ao receber "news:updated" do repositório', function(done) {
+      var repository = createMockRepository();
+      var newsFeedStream = createNewsFeedStream({ repository: repository });
+
+
+      var newsObjectTemplate2 = {
+        "lastComment": "Dolor anim eu velit fugiat irure sit.",
+        "slug": "dolor-anim-eu-velit-fugiat-irure-sit",
+        "title": "Dolor anim eu velit fugiat irure sit.",
+        "uuid": "c4397bea-9f3e-11e4-89d3-123b93f75cba",
+        "xp": 50
+      };
+
+      // Popula o model com duas notícias utilizando o repositório
+      repository.events.emit('news:added', newsObjectTemplate1);
+      repository.events.emit('news:added', newsObjectTemplate2);
+
+      // Somente depois de popular o model vamos começar a escutar
+      // o evento sobre a newsList ser atualizada, pois do contrário,
+      // ele seria disparado duas vezes enquanto estávamos atualizando
+      // o model anteriormente.
+      newsFeedStream.events.on('newsList:updated', function newsListUpdated(newsList) {
+        chai.expect(newsList.length).to.be.equal(2);
+
+        var firstNews = newsFeedStream.find( { uuid: newsObjectTemplate1.uuid } );
+        var modifiedNews = newsFeedStream.find( { uuid: newsObjectTemplate2.uuid } );
+
+        chai.expect(firstNews.xp).to.be.equal(100);
+        chai.expect(modifiedNews.xp).to.be.equal(150);
+        done();
+
+      });
+
+      var newsObjectTemplate2Modified = {
+        "lastComment": "Dolor anim eu velit fugiat irure sit.",
+        "slug": "dolor-anim-eu-velit-fugiat-irure-sit",
+        "title": "Dolor anim eu velit fugiat irure sit.",
+        "uuid": "c4397bea-9f3e-11e4-89d3-123b93f75cba",
+        "xp": 150
+      };
+
+      repository.events.emit('news:updated', newsObjectTemplate2Modified);
+
+
+
     });
 
 

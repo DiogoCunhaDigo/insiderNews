@@ -44,8 +44,6 @@ function createNewsFeedStreamMockRepository(spec) {
 
   function start() {
     events.emit('stream:started');
-
-//    startExampleStream();
   }
 
   function stop() {

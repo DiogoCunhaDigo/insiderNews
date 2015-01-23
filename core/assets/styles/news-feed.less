@@ -100,14 +100,10 @@
 
 
 /* ANIMAÇÕES */
-.news-feed-item.ng-enter,
-.news-feed-item.ng-leave,
-.news-feed-item.ng-move {
-  transition: 200ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
-  position: relative;
-}
 
 .news-feed-item.ng-enter {
+  transition: 200ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+  position: relative;
   opacity: 0;
   left: -50px;
 }
@@ -118,6 +114,8 @@
 }
 
 .news-feed-item.ng-leave {
+  transition: 250ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+  position: relative;
   opacity: 1;
   left: 0px;
 }
@@ -127,6 +125,16 @@
   left: -50px;
 }
 
-.news-feed-item.ng-move.ng-move-active .news-feed-xp {
-  background-color: @pink-default;
+.news-feed-item.ng-move {
+  transition: 250ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+  position: relative;
+}
+
+.news-feed-item.ng-move .news-feed-xp {
+
+  background-color: @blue-default;
+  -webkit-animation: pulse 250ms;
+  -moz-animation: pulse 250ms;
+  -ms-animation: pulse 250ms;
+  animation: pulse 250ms;
 }

@@ -114,7 +114,8 @@
 	"predef": [         // Extra globals.
       "describe",
       "it",
-      "angular"
+      "angular",
+      "beforeEach"
 	],
 	"indent": 2         // Specify indentation spacing
 }

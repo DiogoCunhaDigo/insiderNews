@@ -29,6 +29,14 @@ function createNewsFeedStream(spec) {
   }
 
   function addToNewsList(news) {
+    var newsAlreadyExist = find( { uuid: news.uuid } );
+
+    if (newsAlreadyExist) {
+      update({ uuid: news.uuid }, news );
+      events.emit('newsList:updated', newsList);
+      return;
+    }
+
     newsList.push(news);
 
     events.emit('news:added', news);
@@ -36,18 +44,25 @@ function createNewsFeedStream(spec) {
   }
 
   function updateInNewsList(news) {
-
     var updatedNews = update({ uuid: news.uuid }, news );
 
-    events.emit('news:updated', updatedNews);
-    events.emit('newsList:updated', newsList);
+    if (updatedNews) {
+      events.emit('news:updated', updatedNews);
+      events.emit('newsList:updated', newsList);
+    }
+
   }
 
-  function update(queryObject, newObject) {
-    var oldObject = find(queryObject);
-    var updatedNews = _.assign(oldObject, newObject);
+  function update(queryObject, newNews) {
 
-    return updatedNews;
+    var oldNews = find(queryObject);
+
+    if (oldNews) {
+      var updatedNews = _.assign(oldNews, newNews);
+      return updatedNews;
+    }
+
+    return false;
   }
 
   repository.events.on('stream:started', function repositoryStarted() {

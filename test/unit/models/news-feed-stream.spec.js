@@ -51,13 +51,17 @@ describe('[model] newsFeedStream', function () {
 
 
   describe('#events', function() {
-    var newsObjectTemplate1 = {
-      "lastComment": "Exercitation aliquip deserunt aute proident est amet non.",
-      "slug": "exercitation-aliquip-deserunt-aute-proident-est-amet-non",
-      "title": "Exercitation aliquip deserunt aute proident est amet non.",
-      "uuid": "d36fb8b2-a0e8-11e4-89d3-123b93f75cba",
-      "xp": 100
-    };
+    var newsObjectTemplate1;
+
+    beforeEach(function() {
+      newsObjectTemplate1 = {
+        "lastComment": "Exercitation aliquip deserunt aute proident est amet non.",
+        "slug": "exercitation-aliquip-deserunt-aute-proident-est-amet-non",
+        "title": "Exercitation aliquip deserunt aute proident est amet non.",
+        "uuid": "d36fb8b2-a0e8-11e4-89d3-123b93f75cba",
+        "xp": 100
+      };
+    });
 
     it('deve conter a propriedade "on"', function() {
       var repository = createMockRepository();
@@ -107,6 +111,29 @@ describe('[model] newsFeedStream', function () {
       repository.events.emit('news:added', newsObjectTemplate1);
 
       chai.expect(newsFeedStream.getNewsList().length).to.be.equal(1);
+    });
+
+    it('não deve duplicar notícia receber a mesma notícia do repositório', function() {
+
+      var newsObjectTemplate1Modified = {
+        "lastComment": "(modified) Exercitation aliquip deserunt aute proident est amet non.",
+        "slug": "modified-exercitation-aliquip-deserunt-aute-proident-est-amet-non",
+        "title": "(modified) Exercitation aliquip deserunt aute proident est amet non.",
+        "uuid": "d36fb8b2-a0e8-11e4-89d3-123b93f75cba",
+        "xp": 200
+      };
+
+      var repository = createMockRepository();
+      var newsFeedStream = createNewsFeedStream({ repository: repository });
+
+      chai.expect(newsFeedStream.getNewsList().length).to.be.equal(0);
+
+      repository.events.emit('news:added', newsObjectTemplate1);
+      repository.events.emit('news:added', newsObjectTemplate1Modified);
+
+      chai.expect(newsFeedStream.getNewsList().length).to.be.equal(1);
+      var modifiedNewsXp = newsFeedStream.getNewsList()[0].xp;
+      chai.expect(modifiedNewsXp).to.be.equal(200);
     });
 
     it('deve emitir "newsList:updated" ao receber nova notícia do repositório', function(done) {

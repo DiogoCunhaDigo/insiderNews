@@ -32,8 +32,7 @@ function createNewsFeedStream(spec) {
     var newsAlreadyExist = find( { uuid: news.uuid } );
 
     if (newsAlreadyExist) {
-      update({ uuid: news.uuid }, news );
-      events.emit('newsList:updated', newsList);
+      updateInNewsList(news);
       return;
     }
 

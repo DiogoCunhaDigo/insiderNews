@@ -4,7 +4,7 @@ require('native-promise-only');
 require('angular');
 require('angular-animate');
 require('angular-ui-router');
-require('./news-home/news-home.module.js');
+require('./news/news.module.js');
 
 angular.module('in.site', [
   'in.templates',
@@ -19,5 +19,11 @@ angular.module('in.site')
     $locationProvider.html5Mode(true);
 
     $urlRouterProvider.otherwise('/');
+
+});
+
+
+angular.module('in.site').directive('news-post', function() {
+
 
 });

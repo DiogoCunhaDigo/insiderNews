@@ -19,14 +19,14 @@ function configureNewsHomeModule($stateProvider, $urlRouterProvider, $locationPr
       url: '/',
       views: {
         'main': {
-          templateUrl: 'site/news-home/templates/index.html'
+          templateUrl: 'site/news/templates/index.html'
         },
         'newsFeed@news': {
           templateUrl: 'site/news-feed/templates/index.html',
           controller: 'NewsFeedController as newsFeed'
         },
         'newsDetail@news': {
-          templateUrl: 'site/news-home/templates/introduction.html'
+          templateUrl: 'site/news/templates/introduction.html'
         }
       }
     });

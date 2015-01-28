@@ -1,14 +1,8 @@
 'use strict';
 
 angular.module('in.news', [
-  'ui.router',
-  'in.newsFeed',
-  'in.newsDetail'
+  'ui.router'
 ]);
-
-require('../news-feed/news-feed.module.js');
-require('../news-detail/news-detail.module.js');
-
 
 angular.module('in.news').config(configureNewsHomeModule);
 

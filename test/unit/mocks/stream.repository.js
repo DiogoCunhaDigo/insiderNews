@@ -1,7 +1,7 @@
 'use strict';
 var EventEmitter = require('events').EventEmitter;
 
-function createNewsFeedStreamMockRepository(spec) {
+function createStreamMockRepository(spec) {
   spec = spec || {};
   var events = new EventEmitter();
   var newsQueue = [
@@ -67,12 +67,20 @@ function createNewsFeedStreamMockRepository(spec) {
     }, 100);
   }
 
+  function create(data) {
+    return new Promise(function createPromise(resolve, reject) {
+      events.emit(data.type + ':created', data.data);
+      resolve(data.data);
+    });
+  }
+
   return Object.freeze({
     start: start,
     stop: stop,
+    create: create,
     events: events
   });
 
 }
 
-module.exports = createNewsFeedStreamMockRepository;
+module.exports = createStreamMockRepository;

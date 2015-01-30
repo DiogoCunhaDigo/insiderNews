@@ -10,7 +10,7 @@ function NewsCreateController($scope) {
   var vm = this;
   var news = createNews({
     data: {
-      title: "Qatar Airways compra fatia de US$1,7 bi na IAG"
+      title: "México anuncia plano de reduzir gastos em US$ 8,3 bi em 2015"
     },
     repository: createRepository()
   });

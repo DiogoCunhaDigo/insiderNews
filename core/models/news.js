@@ -1,6 +1,6 @@
 'use strict';
 
-var slug = require('to-slug-case');
+var slug = require('cozy-slug');
 
 function createNews(spec) {
   spec = spec || {};

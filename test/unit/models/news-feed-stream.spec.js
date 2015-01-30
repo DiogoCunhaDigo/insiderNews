@@ -3,7 +3,7 @@
 var chai = require('chai');
 var configurations = require('../../../core/configurations/index.js');
 var createNewsFeedStream = require(configurations.paths.models + 'news-feed-stream.js');
-var createMockRepository = require('../mocks/news-feed-stream.repository.js');
+var createMockRepository = require('../mocks/stream.repository.js');
 
 
 describe('[model] newsFeedStream', function () {

@@ -2,6 +2,8 @@
   <div class="row">
     <div class="col-xs-12 padding-0">
 
+      <div news-create-form></div>
+
       <ul class="news-feed-list">
           <li class="news-feed-item" ng-repeat="news in newsFeed.newsList | orderBy: '-xp' track by news.uuid">
             <a ui-sref="news.detail({ slug: news.slug })" ui-sref-active="active" class="news-feed-item-link">
@@ -11,8 +13,6 @@
             </a>
           </li>
       </ul>
-
-      <div news-create-form></div>
 
     </div>
   </div>

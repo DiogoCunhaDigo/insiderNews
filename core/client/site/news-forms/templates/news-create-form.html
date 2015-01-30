@@ -1,12 +1,19 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-10 padding-left-2 padding-right-0">
-      <form>
-        <input type="text" class="input" placeholder="Título da notícia">
-      </form>
-    </div>
-    <div class="col-xs-2">
-      <input type="submit" value="Enviar" class="button button-outline display-block">
-    </div>
+    <form ng-submit="newsCreate.submit()">
+
+      <div class="col-xs-10 padding-left-2 padding-right-0">
+          <input ng-model="newsCreate.news.data.title" ng-change="newsCreate.news.updateSlug()" type="text" class="input" placeholder="Título da notícia">
+
+          <div ng-show="newsCreate.news.data.slug" class="font-size-2 padding-2 text-color-gray-default">
+            URL: http://www.insidernews.com.br/noticias/{{newsCreate.news.data.slug}}/
+        </div>
+      </div>
+
+      <div class="col-xs-2">
+        <input type="submit" value="Enviar" class="button button-outline display-block">
+      </div>
+    </form>
+
   </div>
 </div>

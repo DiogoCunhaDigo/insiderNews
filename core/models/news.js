@@ -1,11 +1,18 @@
 'use strict';
 
+var slug = require('to-slug-case');
+
 function createNews(spec) {
   spec = spec || {};
   var repository = spec.repository;
+  var data = spec.data;
 
   if ( !repository ) {
     throw new Error('You need to specify the repository property: "createNews({repository: repositoryObject})"');
+  }
+
+  function updateSlug() {
+    data.slug = slug(data.title);
   }
 
   function save() {
@@ -13,7 +20,7 @@ function createNews(spec) {
 
       var newsData = {
         type: 'news',
-        data: spec.data
+        data: data
       };
 
       repository
@@ -23,9 +30,12 @@ function createNews(spec) {
     });
   }
 
+  updateSlug();
 
   return Object.freeze({
-    save: save
+    save: save,
+    updateSlug: updateSlug,
+    data: data
   });
 
 }

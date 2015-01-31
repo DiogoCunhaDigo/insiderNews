@@ -10,7 +10,7 @@ function NewsFeedController($scope, newsFeedStream) {
   newsFeedStream.events.on('newsList:updated', updateVmWithLastResults);
 
   function updateVmWithLastResults(newsList) {
-    $scope.$apply(function apply() {
+    $scope.$evalAsync(function evalAsync() {
       vm.newsList = newsList;
     });
   }

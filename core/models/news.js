@@ -29,10 +29,10 @@ function createNews(spec) {
         data: data
       };
 
-//      repository
-//        .create(newsData)
-//        .then(resolve)
-//        .catch(reject);
+      repository
+        .create(newsData)
+        .then(resolve)
+        .catch(reject);
     });
   }
 

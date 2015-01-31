@@ -23,7 +23,7 @@ describe('[model] news', function() {
     createNews({ repository: repository }).should.be.a('object');
   });
 
-  describe.only('#save', function() {
+  describe('#save', function() {
 
     it('deve criar uma nova notícia e resolver a promise', function() {
       var repository = createMockRepository();

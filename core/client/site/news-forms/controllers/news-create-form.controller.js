@@ -21,7 +21,7 @@ function NewsCreateController($scope) {
   };
 
   function resetNews() {
-    $scope.$apply(function() {
+    $scope.$evalAsync(function evalAsync() {
       vm.news = createNews({ repository: createRepository() });
     });
   }

@@ -17,8 +17,7 @@ function createNews(spec) {
       return data.slug;
     }
 
-    data.slug = undefined;
-    return data.slug;
+    delete data.slug;
   }
 
   function save() {

@@ -5,14 +5,20 @@ var slug = require('cozy-slug');
 function createNews(spec) {
   spec = spec || {};
   var repository = spec.repository;
-  var data = spec.data;
+  var data = spec.data || {};
 
   if ( !repository ) {
     throw new Error('You need to specify the repository property: "createNews({repository: repositoryObject})"');
   }
 
   function updateSlug() {
-    data.slug = slug(data.title);
+    if (data.title) {
+      data.slug = slug(data.title);
+      return data.slug;
+    }
+
+    data.slug = undefined;
+    return data.slug;
   }
 
   function save() {

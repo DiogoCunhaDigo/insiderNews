@@ -9,9 +9,6 @@ var createRepository = require('../../../../repositories/firebase-stream.js');
 function NewsCreateController($scope) {
   var vm = this;
   var news = createNews({
-    data: {
-      title: "México anuncia plano de reduzir gastos em US$ 8,3 bi em 2015"
-    },
     repository: createRepository()
   });
 

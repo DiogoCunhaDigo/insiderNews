@@ -13,8 +13,11 @@ function configureNewsDetailModule($stateProvider, $urlRouterProvider, $location
       url: 'noticias/:slug/',
       views: {
         'newsDetail@news': {
-          templateUrl: 'site/news-detail/templates/index.html'
+          templateUrl: 'site/news-detail/templates/index.html',
+          controller: 'NewsDetailController as newsDetail'
         }
       }
     });
 }
+
+require('./controllers/news-detail.controller.js');

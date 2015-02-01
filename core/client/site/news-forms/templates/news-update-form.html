@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row">
+    <form ng-submit="newsUpdate.submit()">
+
+      <div class="col-xs-10 padding-left-2 padding-right-0">
+          <input ng-model="newsUpdate.news.data.title" ng-change="newsUpdate.news.updateSlug()" type="text" class="input" placeholder="Título da notícia">
+
+          <div ng-if="newsUpdate.news.data.slug" class="news-create-form-slug">
+            URL: http://www.insidernews.com.br/noticias/<span class="text-color-gray-dark">{{newsUpdate.news.data.slug}}</span>/
+        </div>
+      </div>
+
+      <div class="col-xs-2">
+        <input type="submit" value="Enviar" class="button button-outline display-block">
+      </div>
+    </form>
+
+  </div>
+</div>

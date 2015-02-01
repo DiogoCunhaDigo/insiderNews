@@ -51,13 +51,29 @@ function createNewsFeedStreamRepository(spec) {
     });
   }
 
+  function find(query) {
+    var key = Object.keys(query)[0];
+    var value = query[key];
 
+    return new Promise(function createPromise(resolve, reject) {
+      var resource = new Firebase('https://dazzling-heat-7137.firebaseio.com/newsList');
+
+      resource
+        .orderByChild(key)
+        .equalTo(value)
+        .once('child_added', function value(snapshot){
+          var news = snapshot.val();
+          resolve(news);
+        });
+    });
+  }
 
   return Object.freeze({
     start: start,
     stop: stop,
     create: create,
-    events: events
+    events: events,
+    find: find
   });
 
 }

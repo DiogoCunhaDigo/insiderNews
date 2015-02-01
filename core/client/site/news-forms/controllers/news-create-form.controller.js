@@ -14,10 +14,11 @@ function NewsCreateFormController($scope) {
   vm.submit = function submitNews() {
     vm.news
       .save()
-      .then(resetNews)
       .catch(function(error) {
         console.log(error);
       });
+
+      resetNews();
   };
 
   function resetNews() {

@@ -1,6 +1,7 @@
 'use strict';
 
 var slug = require('cozy-slug');
+var _ = require('lodash');
 
 function createNews(spec) {
   spec = spec || {};
@@ -40,10 +41,11 @@ function createNews(spec) {
 
       repository
         .find(query)
-        .then(resolveFind)
+        .then(updateDataAndResolveFind)
         .catch(rejectFind);
 
-      function resolveFind(news) {
+      function updateDataAndResolveFind(news) {
+        updateData(news);
         resolve(news);
       }
 
@@ -52,6 +54,10 @@ function createNews(spec) {
       }
 
     });
+  }
+
+  function updateData(news) {
+    return _.assign(data, news);
   }
 
   return Object.freeze({

@@ -62,7 +62,7 @@ describe('[model] news', function() {
   });
 
 
-  describe.only('#find', function() {
+  describe('#find', function() {
 
     it('deve ser uma função', function() {
       var news = createNews({

@@ -27,11 +27,5 @@ function NewsUpdateFormController($scope) {
 //        console.log(error);
 //      });
 //  };
-//
-//  function resetNews() {
-//    $scope.$evalAsync(function evalAsync() {
-//      vm.news = createNews({ repository: createRepository() });
-//    });
-//  }
 
 }

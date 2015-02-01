@@ -3,11 +3,18 @@
     <div class="row">
       <div class="col-xs-7 padding-left-2 padding-right-0">
 
-          <input ng-model="newsUpdate.news.data.xp" type="text" class="input">
-          <input ng-model="newsUpdate.news.data.title" ng-change="newsUpdate.news.updateSlug()" type="text" class="input">
-          <input ng-model="newsUpdate.news.data.slug" type="text" class="input">
 
-          <input type="submit" value="Enviar" class="button button-outline">
+        <input ng-model="newsUpdate.news.data.xp" type="text" class="input">
+        <input ng-model="newsUpdate.news.data.title" ng-change="newsUpdate.news.updateSlug()" type="text" class="input">
+        <input ng-model="newsUpdate.news.data.slug" type="text" class="input">
+
+        <input type="submit" value="Enviar" class="button button-outline">
+        <input type="button" value="Deletar" class="button button-outline">
+
+        <h1 class="news-detail-head-title padding-top-5">
+          {{newsUpdate.news.data.title}}
+        </h1>
+
 
       </div>
 

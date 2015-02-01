@@ -1,10 +1,11 @@
 'use strict';
 var EventEmitter = require('events').EventEmitter;
+var _ = require('lodash');
 
 function createStreamMockRepository(spec) {
   spec = spec || {};
   var events = new EventEmitter();
-  var newsQueue = [
+  var newsInDatabase = [
     {
       "lastComment": "hf: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "slug": "black-friday-nos-eua-tem-filas-e-muitos-brasileiros",
@@ -55,7 +56,7 @@ function createStreamMockRepository(spec) {
     var interval;
 
     interval = setInterval(function() {
-      var news = newsQueue.shift();
+      var news = newsInDatabase.shift();
 
       if (news) {
         events.emit('news:added', news);
@@ -74,11 +75,27 @@ function createStreamMockRepository(spec) {
     });
   }
 
+  function find(query) {
+    return new Promise(function findPromise(resolve, reject) {
+
+      if (!query) {
+        resolve(newsInDatabase);
+        return;
+      }
+
+      var news = _.find(newsInDatabase, query);
+
+      resolve(news);
+
+    });
+  }
+
   return Object.freeze({
     start: start,
     stop: stop,
     create: create,
-    events: events
+    events: events,
+    find: find
   });
 
 }

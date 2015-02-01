@@ -35,12 +35,30 @@ function createNews(spec) {
     });
   }
 
-  updateSlug();
+  function find(query) {
+    return new Promise(function findPromise(resolve, reject) {
+
+      repository
+        .find(query)
+        .then(resolveFind)
+        .catch(rejectFind);
+
+      function resolveFind(news) {
+        resolve(news);
+      }
+
+      function rejectFind(error) {
+        reject(error);
+      }
+
+    });
+  }
 
   return Object.freeze({
+    data: data,
     save: save,
-    updateSlug: updateSlug,
-    data: data
+    find: find,
+    updateSlug: updateSlug
   });
 
 }

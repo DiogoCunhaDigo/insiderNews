@@ -23,6 +23,22 @@ describe('[model] news', function() {
     createNews({ repository: repository }).should.be.a('object');
   });
 
+
+  describe('@data', function() {
+
+    it('deve estar em branco quando iniciado sem dados', function() {
+      var repository = createMockRepository();
+      var news = createNews({
+        repository: repository
+      });
+
+      chai.expect(news.data).to.be.deep.equal({});
+
+    });
+
+  });
+
+
   describe('#save', function() {
 
     it('deve criar uma nova notícia e resolver a promise', function() {
@@ -46,15 +62,45 @@ describe('[model] news', function() {
   });
 
 
-  describe('@data', function() {
+  describe.only('#find', function() {
 
-    it('deve estar em branco quando iniciado sem dados', function() {
-      var repository = createMockRepository();
+    it('deve ser uma função', function() {
       var news = createNews({
-        repository: repository
+        repository: createMockRepository()
       });
 
-      chai.expect(news.data).to.be.deep.equal({});
+      chai.expect(news.find).to.be.a('function');
+
+    });
+
+    it('quando executada deve retornar uma Promise', function() {
+      var news = createNews({
+        repository: createMockRepository()
+      });
+
+      var findPromise = news.find();
+      findPromise.should.have.property('then');
+      findPromise.should.have.property('catch');
+
+    });
+
+    it('deve executar a query contra o repositório e retornar a notícia', function() {
+
+      var newsInsideDatabase = {
+        "lastComment": "hf: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "slug": "black-friday-nos-eua-tem-filas-e-muitos-brasileiros",
+        "title": "Black Friday nos EUA tem filas e muitos brasileiros",
+        "uuid": "8fc38d1a-9f3e-11e4-89d3-123b93f75cba",
+        "xp": 100
+      };
+
+      var news = createNews({
+        repository: createMockRepository()
+      });
+
+      var findPromise = news.find({ slug: 'black-friday-nos-eua-tem-filas-e-muitos-brasileiros'});
+
+      return findPromise.should.eventually.deep.equal(newsInsideDatabase);
 
     });
 

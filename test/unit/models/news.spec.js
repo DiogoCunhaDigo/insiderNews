@@ -63,6 +63,19 @@ describe('[model] news', function() {
 
 
   describe('#find', function() {
+    var newsInsideDatabase;
+
+    beforeEach(function() {
+
+      newsInsideDatabase = {
+        "lastComment": "hf: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "slug": "black-friday-nos-eua-tem-filas-e-muitos-brasileiros",
+        "title": "Black Friday nos EUA tem filas e muitos brasileiros",
+        "uuid": "8fc38d1a-9f3e-11e4-89d3-123b93f75cba",
+        "xp": 100
+      };
+
+    });
 
     it('deve ser uma função', function() {
       var news = createNews({
@@ -84,15 +97,7 @@ describe('[model] news', function() {
 
     });
 
-    it('deve executar a query contra o repositório e retornar a notícia', function() {
-
-      var newsInsideDatabase = {
-        "lastComment": "hf: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "slug": "black-friday-nos-eua-tem-filas-e-muitos-brasileiros",
-        "title": "Black Friday nos EUA tem filas e muitos brasileiros",
-        "uuid": "8fc38d1a-9f3e-11e4-89d3-123b93f75cba",
-        "xp": 100
-      };
+    it('deve executar a query e retornar a notícia resolvendo a promise', function() {
 
       var news = createNews({
         repository: createMockRepository()
@@ -101,6 +106,18 @@ describe('[model] news', function() {
       var findPromise = news.find({ slug: 'black-friday-nos-eua-tem-filas-e-muitos-brasileiros'});
 
       return findPromise.should.eventually.deep.equal(newsInsideDatabase);
+
+    });
+
+    it('deve executar a query e atualizar o @data internamente', function(done) {
+
+      var news = createNews({ repository: createMockRepository() });
+      news
+        .find({ slug: 'black-friday-nos-eua-tem-filas-e-muitos-brasileiros'})
+        .then(function() {
+          chai.expect(news.data).to.be.deep.equal(newsInsideDatabase);
+          done();
+        });
 
     });
 

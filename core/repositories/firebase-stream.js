@@ -52,16 +52,16 @@ function createNewsFeedStreamRepository(spec) {
   }
 
   function find(query) {
-    var where = query.where;
-    var key = Object.keys(where)[0];
-    var value = where[key];
-
     return new Promise(function createPromise(resolve, reject) {
+      var where = query.where;
+      var whereKey = Object.keys(where)[0];
+      var whereValue = where[whereKey];
+
       var resource = new Firebase('https://dazzling-heat-7137.firebaseio.com/newsList');
 
       resource
-        .orderByChild(key)
-        .equalTo(value)
+        .orderByChild(whereKey)
+        .equalTo(whereValue)
         .once('child_added', function value(snapshot){
           var news = snapshot.val();
           resolve(news);
@@ -69,12 +69,37 @@ function createNewsFeedStreamRepository(spec) {
     });
   }
 
+  function update(query) {
+    return new Promise(function updatePromise(resolve, reject) {
+
+      var where = query.where;
+      var whereKey = Object.keys(where)[0];
+      var whereValue = where[whereKey];
+
+      var resource = new Firebase('https://dazzling-heat-7137.firebaseio.com/newsList');
+
+      resource
+        .orderByChild(whereKey)
+        .equalTo(whereValue)
+        .once('child_added', function value(snapshot){
+          var key = snapshot.key();
+          var resource = new Firebase('https://dazzling-heat-7137.firebaseio.com/newsList/' + key);
+
+          resource.update(query.data);
+
+        });
+
+    });
+
+  }
+
   return Object.freeze({
     start: start,
     stop: stop,
     create: create,
     events: events,
-    find: find
+    find: find,
+    update: update
   });
 
 }

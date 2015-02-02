@@ -124,6 +124,50 @@ describe('[model] news', function() {
   });
 
 
+  describe('#update', function() {
+
+    it('deve ser uma função', function() {
+      var news = createNews({ repository: createMockRepository() });
+
+      chai.expect(news.update).to.be.a('function');
+    });
+
+    it('quando executada deve retornar uma Promise', function() {
+      var news = createNews({ repository: createMockRepository() });
+
+      var updatePromise = news.update();
+      updatePromise.should.have.property('then');
+      updatePromise.should.have.property('catch');
+    });
+
+    it('quando executado sem parâmetros deve se auto-atualizar contra o repositório', function() {
+      var news = createNews({ repository: createMockRepository() });
+
+      return news
+        .find({ slug: 'brasil-cresce-so-01-com-gastos-publicos'})
+        .then(changeData)
+        .then(updateModel)
+        .then(compareResults);
+
+      function changeData(){
+        news.data.xp = 500;
+        news.data.title = 'Novo título para notícia que será atualizada';
+        news.updateSlug();
+      }
+
+      function updateModel() {
+        return news.update();
+      }
+
+      function compareResults(updatedNewsResult) {
+        return chai.expect(updatedNewsResult).to.be.deep.equal(news.data);
+      }
+
+    });
+
+  });
+
+
   describe('#updateSlug', function() {
 
     it('deve gerar um slug a partir do título', function() {

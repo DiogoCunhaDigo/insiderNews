@@ -45,7 +45,7 @@ function createNews(spec) {
         .catch(rejectFind);
 
       function updateDataAndResolveFind(news) {
-        updateData(news);
+        updateInternalData(news);
         resolve(news);
       }
 
@@ -56,7 +56,37 @@ function createNews(spec) {
     });
   }
 
-  function updateData(news) {
+  function update() {
+
+    return new Promise(function updatePromise(resolve, reject) {
+
+      if (!data.uuid) {
+        reject('No uuid found!');
+        return;
+      }
+
+      var query = {
+        type: 'news',
+        data: data,
+        where: {
+          uuid: data.uuid
+        }
+      };
+
+      repository
+        .update(query)
+        .then(resolveUpdate);
+
+      function resolveUpdate(news) {
+        updateInternalData(news);
+        resolve(news);
+      }
+
+    });
+  }
+
+
+  function updateInternalData(news) {
     return _.assign(data, news);
   }
 
@@ -64,6 +94,7 @@ function createNews(spec) {
     data: data,
     save: save,
     find: find,
+    update: update,
     updateSlug: updateSlug
   });
 

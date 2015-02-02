@@ -113,7 +113,7 @@ describe('[model] newsFeedStream', function () {
       chai.expect(newsFeedStream.getNewsList().length).to.be.equal(1);
     });
 
-    it('não deve duplicar notícia receber a mesma notícia do repositório', function() {
+    it('não deve duplicar notícia ao receber a mesma notícia do repositório', function() {
 
       var newsObjectTemplate1Modified = {
         "lastComment": "(modified) Exercitation aliquip deserunt aute proident est amet non.",

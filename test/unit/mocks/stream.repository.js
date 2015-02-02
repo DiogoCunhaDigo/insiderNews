@@ -90,12 +90,22 @@ function createStreamMockRepository(spec) {
     });
   }
 
+  function update(query) {
+
+    return new Promise(function updatePromise(resolve, reject) {
+
+      resolve(query.data);
+
+    });
+  }
+
   return Object.freeze({
     start: start,
     stop: stop,
     create: create,
     events: events,
-    find: find
+    find: find,
+    update: update
   });
 
 }

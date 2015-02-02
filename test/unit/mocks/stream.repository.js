@@ -76,6 +76,8 @@ function createStreamMockRepository(spec) {
   }
 
   function find(query) {
+    var where = query.where;
+
     return new Promise(function findPromise(resolve, reject) {
 
       if (!query) {
@@ -83,7 +85,7 @@ function createStreamMockRepository(spec) {
         return;
       }
 
-      var news = _.find(newsInDatabase, query);
+      var news = _.find(newsInDatabase, where);
 
       resolve(news);
 

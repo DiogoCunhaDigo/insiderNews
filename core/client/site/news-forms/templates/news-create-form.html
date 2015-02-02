@@ -2,7 +2,7 @@
   <div class="row">
     <form ng-submit="newsCreate.submit()">
 
-      <div class="col-xs-10 padding-left-2 padding-right-0">
+      <div class="col-xs-9 padding-left-2 padding-right-0">
           <input ng-model="newsCreate.news.data.title" ng-change="newsCreate.news.updateSlug()" type="text" class="input" placeholder="Título da notícia">
 
           <div ng-if="newsCreate.news.data.slug" class="news-create-form-slug">
@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <div class="col-xs-2">
+      <div class="col-xs-3">
         <input type="submit" value="Enviar" class="button button-outline display-block">
       </div>
     </form>

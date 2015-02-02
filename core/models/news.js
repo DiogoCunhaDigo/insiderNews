@@ -24,20 +24,25 @@ function createNews(spec) {
   function save() {
     return new Promise(function savePromise(resolve, reject) {
 
-      var newsData = {
+      var query = {
         type: 'news',
         data: data
       };
 
       repository
-        .create(newsData)
+        .create(query)
         .then(resolve)
         .catch(reject);
     });
   }
 
-  function find(query) {
+  function find(where) {
     return new Promise(function findPromise(resolve, reject) {
+
+      var query = {
+        type: 'news',
+        where: where
+      };
 
       repository
         .find(query)

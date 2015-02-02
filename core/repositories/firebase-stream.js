@@ -52,8 +52,9 @@ function createNewsFeedStreamRepository(spec) {
   }
 
   function find(query) {
-    var key = Object.keys(query)[0];
-    var value = query[key];
+    var where = query.where;
+    var key = Object.keys(where)[0];
+    var value = where[key];
 
     return new Promise(function createPromise(resolve, reject) {
       var resource = new Firebase('https://dazzling-heat-7137.firebaseio.com/newsList');

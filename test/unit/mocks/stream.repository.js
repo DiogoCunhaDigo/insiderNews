@@ -101,13 +101,23 @@ function createStreamMockRepository(spec) {
     });
   }
 
+  function remove(query) {
+
+    return new Promise(function removePromise(resolve, reject) {
+
+      resolve(query.data);
+
+    });
+  }
+
   return Object.freeze({
     start: start,
     stop: stop,
     create: create,
     events: events,
     find: find,
-    update: update
+    update: update,
+    remove: remove
   });
 
 }

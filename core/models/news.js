@@ -90,6 +90,29 @@ function createNews(spec) {
     });
   }
 
+  function remove() {
+    return new Promise(function deletePromise(resolve, reject) {
+
+      var query = {
+        type: 'news',
+        data: data,
+        where: {
+          uuid: data.uuid
+        }
+      };
+
+      repository
+        .remove(query)
+        .then(resolveRemove);
+
+      function resolveRemove(news) {
+        updateInternalData(news);
+        resolve(news);
+      }
+
+    });
+  }
+
 
   function updateInternalData(news) {
     return _.assign(data, news);
@@ -100,6 +123,7 @@ function createNews(spec) {
     save: save,
     find: find,
     update: update,
+    remove: remove,
     updateSlug: updateSlug
   });
 

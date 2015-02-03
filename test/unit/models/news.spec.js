@@ -168,6 +168,32 @@ describe('[model] news', function() {
   });
 
 
+  describe.only('#remove', function() {
+
+    it('deve ser uma função', function() {
+      var news = createNews({ repository: createMockRepository() });
+
+      chai.expect(news.remove).to.be.a('function');
+    });
+
+    it('quando executada deve retornar uma Promise', function() {
+      var news = createNews({ repository: createMockRepository() });
+
+      var removePromise = news.remove();
+      removePromise.should.have.property('then');
+      removePromise.should.have.property('catch');
+    });
+
+    it('quando executada deve remover o item do repositório', function() {
+      var news = createNews({ repository: createMockRepository() });
+
+      return news.remove().should.be.fulfilled;
+    });
+
+
+  });
+
+
   describe('#updateSlug', function() {
 
     it('deve gerar um slug a partir do título', function() {

@@ -106,7 +106,6 @@ function createNews(spec) {
         .then(resolveRemove);
 
       function resolveRemove(news) {
-        updateInternalData(news);
         resolve(news);
       }
 

@@ -9,7 +9,7 @@
         <input ng-model="newsUpdate.news.data.slug" type="text" class="input margin-bottom-2">
 
         <input type="submit" value="Enviar" class="button button-outline">
-        <input type="button" value="Deletar" class="button button-outline">
+        <input type="button" ng-click="newsUpdate.remove()" value="Deletar" class="button button-outline">
 
         <h1 class="news-detail-head-title padding-top-5">
           {{newsUpdate.news.data.title}}

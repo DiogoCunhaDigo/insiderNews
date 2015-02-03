@@ -18,14 +18,13 @@ function NewsUpdateFormController($scope) {
   function updateView() {
     $scope.$evalAsync();
   }
-//
-//  vm.submit = function submitNews() {
-//    vm.news
-//      .save()
-//      .then(resetNews)
-//      .catch(function(error) {
-//        console.log(error);
-//      });
-//  };
+
+  vm.submit = function submitNews() {
+    vm.news
+      .update()
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
 
 }

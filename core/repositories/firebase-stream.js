@@ -83,9 +83,9 @@ function createNewsFeedStreamRepository(spec) {
         .equalTo(whereValue)
         .once('child_added', function value(snapshot){
           var key = snapshot.key();
-          var resource = new Firebase('https://dazzling-heat-7137.firebaseio.com/newsList/' + key);
+          var childResource = resource.child(key);
 
-          resource.update(query.data);
+          childResource.update(query.data);
 
         });
 

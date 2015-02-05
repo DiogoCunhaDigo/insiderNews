@@ -93,13 +93,39 @@ function createNewsFeedStreamRepository(spec) {
 
   }
 
+  function remove(query) {
+    return new Promise(function removePromise(resolve, reject) {
+
+      var where = query.where;
+      var whereKey = Object.keys(where)[0];
+      var whereValue = where[whereKey];
+
+      var resource = new Firebase('https://dazzling-heat-7137.firebaseio.com/newsList');
+
+      resource
+        .orderByChild(whereKey)
+        .equalTo(whereValue)
+        .once('child_added', function value(snapshot){
+          var key = snapshot.key();
+          var childResource = resource.child(key);
+
+          childResource.remove();
+          resolve();
+
+        });
+
+    });
+
+  }
+
   return Object.freeze({
     start: start,
     stop: stop,
     create: create,
     events: events,
     find: find,
-    update: update
+    update: update,
+    remove: remove
   });
 
 }

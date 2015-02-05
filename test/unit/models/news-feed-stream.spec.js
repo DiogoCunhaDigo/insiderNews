@@ -191,10 +191,29 @@ describe('[model] newsFeedStream', function () {
 
       repository.events.emit('news:updated', newsObjectTemplate2Modified);
 
-
-
     });
 
+    it('deve emitir "news:removed" ao remover uma notícia da newsList', function(done) {
+      var repository = createMockRepository();
+      var newsFeedStream = createNewsFeedStream({ repository: repository });
+
+      chai.expect(newsFeedStream.getNewsList().length).to.be.equal(0);
+
+      repository.events.emit('news:added', newsObjectTemplate1);
+
+      chai.expect(newsFeedStream.getNewsList().length).to.be.equal(1);
+
+      newsFeedStream.events.on('news:removed', function onNewsRemoved(news) {
+        news.should.be.a('object');
+        news.should.be.deep.equal(newsObjectTemplate1);
+        done();
+      });
+
+      repository.events.emit('news:removed', newsObjectTemplate1);
+
+      chai.expect(newsFeedStream.getNewsList().length).to.be.equal(0);
+
+    });
 
   });
 

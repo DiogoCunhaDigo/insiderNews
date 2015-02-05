@@ -20,6 +20,11 @@ function createNewsFeedStreamRepository(spec) {
       events.emit('news:updated', news);
     });
 
+    resource.on('child_removed', function onChildRemoved(snapshot) {
+      var news = snapshot.val();
+      events.emit('news:removed', news);
+    });
+
   }
 
   function stop() {

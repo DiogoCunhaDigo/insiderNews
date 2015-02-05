@@ -168,7 +168,7 @@ describe('[model] news', function() {
   });
 
 
-  describe.only('#remove', function() {
+  describe('#remove', function() {
 
     it('deve ser uma função', function() {
       var news = createNews({ repository: createMockRepository() });

@@ -53,12 +53,35 @@ function createNewsFeedStream(spec) {
   }
 
   function update(queryObject, newNews) {
+    var newsToBeUpdated = find(queryObject);
+    var updatedNews;
 
-    var oldNews = find(queryObject);
-
-    if (oldNews) {
-      var updatedNews = _.assign(oldNews, newNews);
+    if (newsToBeUpdated) {
+      updatedNews = _.assign(newsToBeUpdated, newNews);
       return updatedNews;
+    }
+
+    return false;
+  }
+
+
+  function removeFromNewsList(news) {
+    var removedNews = remove({ uuid: news.uuid });
+
+    if (removedNews) {
+      events.emit('news:removed', news);
+      events.emit('newsList:updated', newsList);
+    }
+
+  }
+
+  function remove(query) {
+    var newsToBeRemoved = find(query);
+    var removedNews;
+
+    if (newsToBeRemoved) {
+      removedNews = _.remove(newsList, query);
+      return removedNews;
     }
 
     return false;
@@ -78,6 +101,10 @@ function createNewsFeedStream(spec) {
 
   repository.events.on('news:updated', function repositoryNewsUpdated(news) {
     updateInNewsList(news);
+  });
+
+  repository.events.on('news:removed', function repositoryNewsRemoved(news) {
+    removeFromNewsList(news);
   });
 
 

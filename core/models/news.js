@@ -117,14 +117,14 @@ function createNews(spec) {
     return _.assign(data, news);
   }
 
-  return Object.freeze({
+  return {
     data: data,
     save: save,
     find: find,
     update: update,
     remove: remove,
     updateSlug: updateSlug
-  });
+  };
 
 }
 

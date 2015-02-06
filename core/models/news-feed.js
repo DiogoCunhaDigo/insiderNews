@@ -24,9 +24,9 @@ function createNewsFeed(spec) {
     });
   }
 
-  return Object.create({
+  return {
     find: find
-  });
+  };
 
 }
 

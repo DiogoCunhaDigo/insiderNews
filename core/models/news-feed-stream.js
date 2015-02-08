@@ -108,13 +108,13 @@ function createNewsFeedStream(spec) {
   });
 
 
-  return Object.create({
+  return {
     start: start,
     stop: stop,
     events: events,
     getNewsList: getNewsList,
     find: find
-  });
+  };
 
 }
 

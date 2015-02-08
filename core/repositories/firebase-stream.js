@@ -123,7 +123,7 @@ function createNewsFeedStreamRepository(spec) {
 
   }
 
-  return Object.freeze({
+  return {
     start: start,
     stop: stop,
     create: create,
@@ -131,7 +131,7 @@ function createNewsFeedStreamRepository(spec) {
     find: find,
     update: update,
     remove: remove
-  });
+  };
 
 }
 

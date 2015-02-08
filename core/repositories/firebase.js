@@ -30,9 +30,9 @@ function createFirebaseRepository(spec) {
 
   }
 
-  return Object.freeze({
+  return {
     find: find
-  });
+  };
 
 }
 

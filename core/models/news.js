@@ -2,11 +2,28 @@
 
 var slug = require('cozy-slug');
 var _ = require('lodash');
+var validator = require('tv4');
 
 function createNews(spec) {
   spec = spec || {};
   var repository = spec.repository;
   var data = spec.data || {};
+
+  var schema = {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "title": {
+        "type": "string"
+      },
+      "slug": {
+        "type": "string"
+      }
+    },
+    "required": ["title", "slug"],
+    "additionalProperties": false
+  };
+
 
   if ( !repository ) {
     throw new Error('You need to specify the repository property: "createNews({repository: repositoryObject})"');
@@ -21,18 +38,45 @@ function createNews(spec) {
     delete data.slug;
   }
 
+  function validate() {
+    return new Promise(function validatePromise(resolve, reject) {
+
+      var validation = validator.validateMultiple(data, schema);
+
+      if (validation.valid) {
+        resolve();
+        return;
+      }
+
+      reject(validation.errors);
+    });
+  }
+
   function save() {
     return new Promise(function savePromise(resolve, reject) {
 
-      var query = {
-        type: 'news',
-        data: data
-      };
+      validate()
+        .then(queryRepository)
+        .catch(rejectValidation);
 
-      repository
-        .create(query)
-        .then(resolve)
-        .catch(reject);
+
+      function queryRepository() {
+        var query = {
+          type: 'news',
+          data: data
+        };
+
+        repository
+          .create(query)
+          .then(resolve)
+          .catch(reject);
+      }
+
+      function rejectValidation(errors) {
+        reject(errors);
+      }
+
+
     });
   }
 

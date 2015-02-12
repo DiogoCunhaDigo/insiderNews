@@ -41,7 +41,27 @@ describe('[model] news', function() {
 
   describe('#save', function() {
 
-    it('deve criar uma nova notícia e resolver a promise', function() {
+    it('deve criar uma nova notícia, se válida, e resolver a promise', function() {
+      var repository = createMockRepository();
+      var newsData;
+      var news;
+
+      newsData = {
+        title: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem.',
+        slug: 'sed-ut-perspiciatis-unde-omnis-iste-natus-error-sit-voluptatem.'
+      };
+
+      news = createNews({
+        data: newsData,
+        repository: repository
+      });
+
+      return news.save().should.be.fulfilled;
+
+    });
+
+
+    it('deve rejeitar a promise se notícia não for validada pelo schema', function() {
       var repository = createMockRepository();
       var newsData;
       var news;
@@ -55,7 +75,7 @@ describe('[model] news', function() {
         repository: repository
       });
 
-      return news.save().should.be.fulfilled;
+      return news.save().should.be.rejected;
 
     });
 

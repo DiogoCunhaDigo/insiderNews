@@ -8,6 +8,7 @@ function createNews(spec) {
   spec = spec || {};
   var repository = spec.repository;
   var data = spec.data || {};
+  var errors = [];
 
   var schema = {
     "$schema": "http://json-schema.org/draft-04/schema#",
@@ -48,9 +49,11 @@ function createNews(spec) {
         return;
       }
 
-      reject(validation.errors);
+      reject(validation);
     });
   }
+
+
 
   function save() {
     return new Promise(function savePromise(resolve, reject) {
@@ -72,8 +75,8 @@ function createNews(spec) {
           .catch(reject);
       }
 
-      function rejectValidation(errors) {
-        reject(errors);
+      function rejectValidation(validation) {
+        reject(validation.errors);
       }
 
 

@@ -8,7 +8,7 @@ function createNews(spec) {
   spec = spec || {};
   var repository = spec.repository;
   var data = spec.data || {};
-  var errors = [];
+  var errors = {};
 
   var schema = {
     "$schema": "http://json-schema.org/draft-04/schema#",
@@ -42,15 +42,33 @@ function createNews(spec) {
   function validate() {
     return new Promise(function validatePromise(resolve, reject) {
 
-      var validation = validator.validateMultiple(data, schema);
+      var validation = validator.validateResult(data, schema);
+      var formatedError;
 
       if (validation.valid) {
         resolve();
         return;
       }
 
-      reject(validation);
+      formatedError = formatError(validation.error);
+      updateInstaceErrors(formatedError);
+      reject(errors);
     });
+  }
+
+  function formatError(unformatedError) {
+    var key = unformatedError.params.key;
+    var message = unformatedError.message;
+    var formatedError = {};
+
+    formatedError[key] = [message];
+
+    return formatedError;
+
+  }
+
+  function updateInstaceErrors(formatedErrors) {
+    return _.assign(errors, formatedErrors);
   }
 
 
@@ -97,7 +115,7 @@ function createNews(spec) {
         .catch(rejectFind);
 
       function updateDataAndResolveFind(news) {
-        updateInternalData(news);
+        updateInstanceData(news);
         resolve(news);
       }
 
@@ -130,7 +148,7 @@ function createNews(spec) {
         .then(resolveUpdate);
 
       function resolveUpdate(news) {
-        updateInternalData(news);
+        updateInstanceData(news);
         resolve(news);
       }
 
@@ -160,14 +178,16 @@ function createNews(spec) {
   }
 
 
-  function updateInternalData(news) {
+  function updateInstanceData(news) {
     return _.assign(data, news);
   }
 
   return {
     data: data,
+    errors: errors,
     save: save,
     find: find,
+    validate: validate,
     update: update,
     remove: remove,
     updateSlug: updateSlug

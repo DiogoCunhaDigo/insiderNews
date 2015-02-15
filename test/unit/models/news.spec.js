@@ -160,7 +160,7 @@ describe('[model] news', function() {
 
     });
 
-    it('deve limpar o @errors se notícia for validada pelo schema', function(done) {
+    it('deve limpar o @errors se notícia for validada pelo schema', function() {
       var repository = createMockRepository();
       var newsData;
       var news;
@@ -176,7 +176,7 @@ describe('[model] news', function() {
 
       chai.expect(news.errors).to.deep.equal({});
 
-      news
+      return news
         .validate()
         .catch(expectValidationErrors)
         .then(cleanErrors)
@@ -187,13 +187,13 @@ describe('[model] news', function() {
       }
 
       function cleanErrors() {
-        news.updateSlug();
+//        news.updateSlug();
         return news.validate();
       }
 
       function expectNoValidationErrors() {
+        console.log(1);
         chai.expect(news.errors).to.not.have.property('slug');
-        done();
       }
 
     });

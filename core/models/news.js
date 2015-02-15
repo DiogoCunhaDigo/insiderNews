@@ -42,15 +42,16 @@ function createNews(spec) {
   function validate() {
     return new Promise(function validatePromise(resolve, reject) {
 
-      var validation = validator.validateResult(data, schema);
+      var validationResult = validator.validateResult(data, schema);
       var formatedError;
 
-      if (validation.valid) {
+      if (validationResult.valid) {
+        clearInstanceErrors();
         resolve();
         return;
       }
 
-      formatedError = formatError(validation.error);
+      formatedError = formatError(validationResult.error);
       updateInstaceErrors(formatedError);
       reject(errors);
     });
@@ -69,6 +70,12 @@ function createNews(spec) {
 
   function updateInstaceErrors(formatedErrors) {
     return _.assign(errors, formatedErrors);
+  }
+
+  function clearInstanceErrors() {
+    _.forEach(errors, function deleteKeyFromErrors(value, key) {
+      delete errors[key];
+    });
   }
 
 

@@ -187,7 +187,7 @@ describe('[model] news', function() {
       }
 
       function cleanErrors() {
-//        news.updateSlug();
+        news.updateSlug();
         return news.validate();
       }
 

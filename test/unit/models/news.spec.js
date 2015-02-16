@@ -160,6 +160,44 @@ describe('[model] news', function() {
 
     });
 
+    it('deve limpar o @errors se notícia for validada pelo schema', function() {
+      var repository = createMockRepository();
+      var newsData;
+      var news;
+
+      newsData = {
+        title: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem.'
+      };
+
+      news = createNews({
+        data: newsData,
+        repository: repository
+      });
+
+      chai.expect(news.errors).to.deep.equal({});
+
+      return news
+        .validate()
+        .catch(expectValidationErrors)
+        .then(cleanErrors)
+        .then(expectNoValidationErrors);
+
+      function expectValidationErrors() {
+        chai.expect(news.errors).to.have.property('slug');
+      }
+
+      function cleanErrors() {
+//        news.updateSlug();
+        return news.validate();
+      }
+
+      function expectNoValidationErrors() {
+        console.log(1);
+        chai.expect(news.errors).to.not.have.property('slug');
+      }
+
+    });
+
   });
 
 

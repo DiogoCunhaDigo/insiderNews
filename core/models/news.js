@@ -100,8 +100,8 @@ function createNews(spec) {
           .catch(reject);
       }
 
-      function rejectValidation(validation) {
-        reject(validation.errors);
+      function rejectValidation(errors) {
+        reject(errors);
       }
 
 

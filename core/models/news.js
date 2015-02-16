@@ -2,7 +2,7 @@
 
 var slug = require('cozy-slug');
 var _ = require('lodash');
-var validator = require('tv4');
+var schemaValidation = require('is-my-json-valid');
 
 function createNews(spec) {
   spec = spec || {};
@@ -15,10 +15,12 @@ function createNews(spec) {
     "type": "object",
     "properties": {
       "title": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1
       },
       "slug": {
-        "type": "string"
+        "type": "string",
+        "minLength": 1
       }
     },
     "required": ["title", "slug"],
@@ -36,35 +38,39 @@ function createNews(spec) {
       return data.slug;
     }
 
-    delete data.slug;
+    data.slug = "";
   }
 
   function validate() {
     return new Promise(function validatePromise(resolve, reject) {
 
-      var validationResult = validator.validateResult(data, schema);
+      var validator = schemaValidation(schema);
+      var validationResult = validator(data);
       var formatedError;
 
-      if (validationResult.valid) {
+      if (validationResult) {
         clearInstanceErrors();
         resolve();
         return;
       }
 
-      formatedError = formatError(validationResult.error);
+      formatedError = formatErrors(validator.errors);
       updateInstaceErrors(formatedError);
       reject(errors);
     });
   }
 
-  function formatError(unformatedError) {
-    var key = unformatedError.params.key;
-    var message = unformatedError.message;
-    var formatedError = {};
+  function formatErrors(unformatedErrors) {
+    var formatedErrors = {};
 
-    formatedError[key] = [message];
+    unformatedErrors.forEach(function(error) {
+      var key = error.field.split('.')[1];
+      var message = error.message;
 
-    return formatedError;
+      formatedErrors[key] = [message];
+    });
+
+    return formatedErrors;
 
   }
 

@@ -7,24 +7,35 @@ var createRepository = require('../../../../repositories/firebase-stream.js');
 
 
 function NewsCreateFormController($scope) {
-  var vm = this;
+  var newsCreate = this;
 
-  vm.news = createNews({ repository: createRepository() });
+  newsCreate.news = createNews({ repository: createRepository() });
 
-  vm.submit = function submitNews() {
-    vm.news
+  newsCreate.submit = function submitNews() {
+
+    newsCreate.news
       .save()
-      .catch(function(error) {
-        console.log(error);
-      });
+      .then(resetNews)
+      .catch(updateView);
 
-      resetNews();
+  };
+
+  newsCreate.newsTitleChange = function newsTitleChange() {
+    newsCreate.news.updateSlug();
+
+    newsCreate.news
+      .validate()
+      .catch(updateView);
   };
 
   function resetNews() {
     $scope.$evalAsync(function evalAsync() {
-      vm.news = createNews({ repository: createRepository() });
+      newsCreate.news = createNews({ repository: createRepository() });
     });
+  }
+
+  function updateView() {
+    $scope.$evalAsync();
   }
 
 }

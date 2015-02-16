@@ -192,7 +192,6 @@ describe('[model] news', function() {
       }
 
       function expectNoValidationErrors() {
-        console.log(1);
         chai.expect(news.errors).to.not.have.property('slug');
       }
 

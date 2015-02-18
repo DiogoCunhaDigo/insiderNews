@@ -135,7 +135,7 @@ describe('[model] news', function() {
 
     });
 
-    it('deve popular o @errors se notícia não for validada pelo schema', function(done) {
+    it('deve popular o @errors se notícia não for validada pelo schema', function() {
       var repository = createMockRepository();
       var newsData;
       var news;
@@ -151,11 +151,10 @@ describe('[model] news', function() {
 
       chai.expect(news.errors).to.deep.equal({});
 
-      news
+      return news
         .validate()
         .catch(function validationFailed() {
           chai.expect(news.errors).to.have.property('slug');
-          done();
         });
 
     });

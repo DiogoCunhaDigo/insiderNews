@@ -3,7 +3,7 @@
 var configurations = require('../../core/configurations/index.js');
 var createCore = require(configurations.paths.core + 'index.js');
 
-describe('core [feature]', function() {
+describe('[feature] core', function() {
 
   it('deve ser uma Factory (função)', function() {
     createCore.should.be.a('function');

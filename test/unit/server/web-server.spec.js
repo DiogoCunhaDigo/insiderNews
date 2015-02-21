@@ -3,7 +3,7 @@
 var configurations = require('../../../core/configurations/index.js');
 var createWebServer = require(configurations.paths.server + 'web-server/index.js');
 
-describe('webServer [feature]', function() {
+describe('[feature] webServer', function() {
 
   it('deve ser uma Factory (função)', function() {
     createWebServer.should.be.a('function');

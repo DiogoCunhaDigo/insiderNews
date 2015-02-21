@@ -5,7 +5,7 @@ var configurations = require('../../../core/configurations/index.js');
 var createNewsFeed = require(configurations.paths.models + 'news-feed.js');
 var createNewsFeedRepository = require('../mocks/news-feed.repository.js');
 
-describe('newsFeed [model]', function () {
+describe('[model] newsFeed', function () {
 
   it('deve ser uma Factory (função)', function() {
     createNewsFeed.should.be.a('function');

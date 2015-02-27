@@ -6,24 +6,24 @@ var defaultWebServer = require(configurations.paths.server + '/web-server/index.
 var userConfigurations = require('../content/configurations.js');
 
 function createCore(spec) {
-	spec = _.merge({}, spec, userConfigurations);
+  spec = _.merge({}, spec, userConfigurations);
 
-	var webServer = spec.webServer || defaultWebServer(spec);
+  var webServer = spec.webServer || defaultWebServer(spec);
 
-	function start() {
-		return webServer.start();
-	}
+  function start() {
+      return webServer.start();
+  }
 
-	function stop() {
-		return webServer.stop();
-	}
+  function stop() {
+      return webServer.stop();
+  }
 
-	// Quando o construtor do "core" for executado, será criado e retornado
-	// um novo objeto com a interface pública abaixo.
-	return Object.freeze({
-		start: start,
-		stop: stop
-	});
+  // Quando o construtor do "core" for executado, será criado e retornado
+  // um novo objeto com a interface pública abaixo.
+  return {
+      start: start,
+      stop: stop
+  };
 }
 
 

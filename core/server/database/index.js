@@ -4,17 +4,19 @@ var Sequelize = require('sequelize');
 var sequelize = new Sequelize('insidernews', null, null, {
   dialect: 'sqlite'
 });
-var migrations = require('./migrations.js');
-var associations = require('./associations.js');
 
 function start() {
   return new Promise(function startPromise(resolve, reject) {
+
+    var migrations = require('./migrations.js');
+    var associations = require('./associations.js');
 
     migrations
       .start()
       .then(associationsStart)
       .then(sequelizeSync)
-      .then(finish);
+      .then(finish)
+      .catch(reject);
 
     function associationsStart() {
       return associations.start();

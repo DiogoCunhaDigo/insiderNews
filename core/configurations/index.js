@@ -10,6 +10,7 @@ configurations.paths = {
     client: path.join(rootPath, 'core/client/'),
     assets: path.join(rootPath, 'core/assets/'),
     models: path.join(rootPath, 'core/models/'),
+    migrations: path.join(rootPath, 'core/server/database/migrations/'),
     content: {
         themes: path.join(rootPath, 'content/themes/')
     }

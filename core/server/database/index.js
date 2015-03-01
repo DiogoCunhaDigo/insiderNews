@@ -21,7 +21,14 @@ function start() {
     }
 
     function sequelizeSync() {
-      return sequelize.sync();
+      sequelize
+        .sync()
+        .complete(function syncCompleted(err) {
+          if (err) {
+            reject(err);
+            return;
+          }
+        });
     }
 
     function finish() {

@@ -19,7 +19,8 @@ function createCore(spec) {
       database
         .start()
         .then(startWebServer)
-        .then(finish);
+        .then(finish)
+        .catch(reject);
 
       function startWebServer() {
         return webServer.start();

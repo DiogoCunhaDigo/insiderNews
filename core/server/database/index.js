@@ -1,9 +1,8 @@
 'use strict';
 
+var configurations = require('../../configurations/index.js');
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('insidernews', null, null, {
-  dialect: 'sqlite'
-});
+var sequelize = new Sequelize('insidernews', null, null, configurations.database);
 
 function start() {
   return new Promise(function startPromise(resolve, reject) {

@@ -1,5 +1,6 @@
 # User content
 content/themes
+content/database/*.sqlite
 
 # Mac
 .DS_Store

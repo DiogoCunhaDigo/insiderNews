@@ -1,8 +1,12 @@
 'use strict';
 
+var _ = require('lodash');
 var path = require('path');
 var rootPath = path.resolve(__dirname, '../../');
+
 var configurations = {};
+var userConfigurations = require('../../content/configurations');
+var mergedConfigurations;
 
 configurations.paths = {
     core: path.join(rootPath, 'core/'),
@@ -12,7 +16,8 @@ configurations.paths = {
     models: path.join(rootPath, 'core/models/'),
     migrations: path.join(rootPath, 'core/server/database/migrations/'),
     content: {
-        themes: path.join(rootPath, 'content/themes/')
+      themes: path.join(rootPath, 'content/themes/'),
+      database: path.join(rootPath, 'content/database/')
     }
 };
 
@@ -23,4 +28,12 @@ configurations.defaults = {
     staticMaxAge: 60*60*24
 };
 
-module.exports = configurations;
+configurations.database = {
+  dialect: 'sqlite',
+  storage: configurations.paths.content.database + 'insidernews.sqlite'
+};
+
+
+mergedConfigurations = _.merge(configurations, userConfigurations);
+
+module.exports = mergedConfigurations;

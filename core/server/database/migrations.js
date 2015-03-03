@@ -24,7 +24,7 @@ function start() {
   return new Promise(function startPromise(resolve, reject) {
 
     umzug
-      .pending()
+      .up()
       .then(function (migrations) {
         console.log(migrations);
       })

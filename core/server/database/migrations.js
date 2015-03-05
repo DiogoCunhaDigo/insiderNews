@@ -25,9 +25,6 @@ function start() {
 
     umzug
       .up()
-      .then(function (migrations) {
-        console.log(migrations);
-      })
       .then(finish)
       .catch(reject);
 

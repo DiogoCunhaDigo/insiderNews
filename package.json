@@ -49,10 +49,10 @@
   },
   "scripts": {
     "start": "npm install && gulp build && gulp start-web-server",
-    "test": "gulp run-tests",
+    "test": "NODE_ENV=test gulp run-tests",
     "build": "gulp build",
     "develop": "gulp develop",
-    "develop-unit-test": "gulp develop-unit-test"
+    "develop-unit-test": "NODE_ENV=test gulp develop-unit-test"
   },
   "repository": {
     "type": "git",

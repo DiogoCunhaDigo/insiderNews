@@ -3,8 +3,6 @@ insiderNews
 
 Notícias em tempo-real com gamificação.
 
- > Versão beta: http://insidernews-c9-filipedeschamps.c9.io/
-
 ## Objetivo principal
 Coletar moedas de ouro e aumentar os pontos de experiência ao conversar com outros usuários e contribuindo com conteúdo. Habilite novos recursos ao aumentar os seus pontos de experiência.
 

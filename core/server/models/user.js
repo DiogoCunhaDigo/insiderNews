@@ -5,12 +5,47 @@ var database = require('../database/index.js');
 var sequelize = database.sequelize;
 
 var User = sequelize.define('user', {
-  firstName: {
-    type: Sequelize.STRING,
-    field: 'first_name' // Will result in an attribute that is firstName when user facing but first_name in the database
+  id: {
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV1,
+    primaryKey: true,
+    allowNull: false,
+    validate: {
+      isUUID: 4
+    }
   },
-  lastName: {
-    type: Sequelize.STRING
+
+  userName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      notEmpty: true
+    }
+  },
+
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      isEmail: true
+    }
+  },
+
+  password: {
+    type: Sequelize.STRING,
+    validate: {
+      len: [2]
+    }
+  },
+
+  xp: {
+    type: Sequelize.FLOAT
+  },
+
+  gold: {
+    type: Sequelize.FLOAT
   }
 });
 

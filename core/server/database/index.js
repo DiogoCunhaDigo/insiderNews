@@ -12,12 +12,12 @@ function start() {
 
     migrations
       .start()
-      .then(associationsStart)
+      .then(modelsAssociationsStart)
       .then(sequelizeSync)
       .then(finish)
       .catch(reject);
 
-    function associationsStart() {
+    function modelsAssociationsStart() {
       return associations.start();
     }
 

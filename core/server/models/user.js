@@ -47,6 +47,13 @@ var User = sequelize.define('user', {
   gold: {
     type: Sequelize.FLOAT
   }
+}, {
+  classMethods: {
+    associate: function() {
+      var News = require('./news.js');
+      User.hasMany(News);
+    }
+  }
 });
 
 module.exports = User;

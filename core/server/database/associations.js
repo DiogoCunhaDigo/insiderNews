@@ -5,8 +5,8 @@ function start() {
     var User = require('../models/user.js');
     var News = require('../models/news.js');
 
-    User.hasMany(News);
-    News.belongsTo(User);
+    User.associate();
+    News.associate();
 
     resolve();
   });

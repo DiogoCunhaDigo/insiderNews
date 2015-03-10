@@ -13,6 +13,13 @@ var News = sequelize.define('news', {
   title: {
     type: Sequelize.STRING
   }
+}, {
+  classMethods: {
+    associate: function() {
+      var User = require('./user.js');
+      News.belongsTo(User);
+    }
+  }
 });
 
 module.exports = News;

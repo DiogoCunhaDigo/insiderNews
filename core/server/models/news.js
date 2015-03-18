@@ -15,7 +15,7 @@ var News = sequelize.define('news', {
   }
 }, {
   classMethods: {
-    associate: function() {
+    associate: function associateNews() {
       var User = require('./user.js');
       News.belongsTo(User);
     }

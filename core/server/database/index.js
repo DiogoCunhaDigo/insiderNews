@@ -3,22 +3,22 @@
 var configurations = require('../../configurations/index.js');
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('insidernews', null, null, configurations.database);
+var models;
 
 function start() {
   return new Promise(function startPromise(resolve, reject) {
 
     var migrations = require('./migrations.js');
-    var associations = require('./associations.js');
 
     migrations
       .start()
-      .then(modelsAssociationsStart)
+      .then(loadModels)
       .then(sequelizeSync)
       .then(finish)
       .catch(reject);
 
-    function modelsAssociationsStart() {
-      return associations.start();
+    function loadModels() {
+      models = require('../models/index.js');
     }
 
     function sequelizeSync() {
@@ -41,5 +41,6 @@ function start() {
 
 module.exports = {
   sequelize: sequelize,
-  start: start
+  start: start,
+  models: models
 };

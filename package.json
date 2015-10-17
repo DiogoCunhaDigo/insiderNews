@@ -11,8 +11,8 @@
     "lodash": "3.5.0",
     "native-promise-only": "0.7.6-a",
     "require-directory": "2.1.0",
-    "sequelize": "2.0.4",
-    "sqlite3": "3.0.5",
+    "sequelize": "3.12.1",
+    "sqlite3": "3.1.0",
     "swig": "1.4.2",
     "tv4": "1.1.9",
     "umzug": "1.6.0"

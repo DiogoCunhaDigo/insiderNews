@@ -8,13 +8,13 @@
     "cozy-slug": "0.2.2",
     "express": "4.13.3",
     "is-my-json-valid": "2.9.4",
-    "lodash": "3.5.0",
-    "native-promise-only": "0.7.6-a",
+    "lodash": "3.10.1",
+    "native-promise-only": "0.8.1",
     "require-directory": "2.1.0",
     "sequelize": "3.12.1",
     "sqlite3": "3.1.0",
     "swig": "1.4.2",
-    "tv4": "1.1.9",
+    "tv4": "1.2.7",
     "umzug": "1.6.0"
   },
   "devDependencies": {

@@ -4,9 +4,9 @@
   "description": "Realtime news engine ( +gamification )",
   "main": "index.js",
   "dependencies": {
-    "compression": "1.4.1",
+    "compression": "1.6.0",
     "cozy-slug": "0.2.2",
-    "express": "4.12.2",
+    "express": "4.13.3",
     "is-my-json-valid": "2.9.4",
     "lodash": "3.5.0",
     "native-promise-only": "0.7.6-a",

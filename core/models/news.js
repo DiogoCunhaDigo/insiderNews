@@ -1,16 +1,16 @@
 'use strict';
 
-var slug = require('cozy-slug');
-var _ = require('lodash');
-var schemaValidation = require('is-my-json-valid');
+let slug = require('cozy-slug');
+let _ = require('lodash');
+let schemaValidation = require('is-my-json-valid');
 
 function createNews(spec) {
   spec = spec || {};
-  var repository = spec.repository;
-  var data = spec.data || {};
-  var errors = {};
+  let repository = spec.repository;
+  let data = spec.data || {};
+  let errors = {};
 
-  var schema = {
+  let schema = {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {
@@ -44,9 +44,9 @@ function createNews(spec) {
   function validate() {
     return new Promise(function validatePromise(resolve, reject) {
 
-      var validator = schemaValidation(schema);
-      var validationResult = validator(data);
-      var formatedError;
+      let validator = schemaValidation(schema);
+      let validationResult = validator(data);
+      let formatedError;
 
       if (validationResult) {
         clearInstanceErrors();
@@ -61,11 +61,11 @@ function createNews(spec) {
   }
 
   function formatErrors(unformatedErrors) {
-    var formatedErrors = {};
+    let formatedErrors = {};
 
     unformatedErrors.forEach(function(error) {
-      var key = error.field.split('.')[1];
-      var message = error.message;
+      let key = error.field.split('.')[1];
+      let message = error.message;
 
       formatedErrors[key] = [message];
     });
@@ -95,7 +95,7 @@ function createNews(spec) {
 
 
       function queryRepository() {
-        var query = {
+        let query = {
           type: 'news',
           data: data
         };
@@ -117,7 +117,7 @@ function createNews(spec) {
   function find(where) {
     return new Promise(function findPromise(resolve, reject) {
 
-      var query = {
+      let query = {
         type: 'news',
         where: where
       };
@@ -148,7 +148,7 @@ function createNews(spec) {
         return;
       }
 
-      var query = {
+      let query = {
         type: 'news',
         data: data,
         where: {
@@ -171,7 +171,7 @@ function createNews(spec) {
   function remove() {
     return new Promise(function deletePromise(resolve, reject) {
 
-      var query = {
+      let query = {
         type: 'news',
         data: data,
         where: {

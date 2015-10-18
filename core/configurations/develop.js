@@ -1,4 +1,6 @@
-var configurations = {};
+'use strict';
+
+let configurations = {};
 
 configurations.database = {
   dialect: 'sqlite',

@@ -1,10 +1,10 @@
 'use strict';
 
-var defaultResource = require('browser-request');
+let defaultResource = require('browser-request');
 
 function createFirebaseRepository(spec) {
   spec = spec || {};
-  var resource = spec.resource || defaultResource;
+  let resource = spec.resource || defaultResource;
 
   if ( !resource ) {
     throw new Error('You need to specify a resource property: "createRepository({resource: resource})"');

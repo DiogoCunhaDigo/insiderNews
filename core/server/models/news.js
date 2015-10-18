@@ -1,10 +1,10 @@
 'use strict';
 
-var Sequelize = require('sequelize');
-var database = require('../database/index.js');
-var sequelize = database.sequelize;
+let Sequelize = require('sequelize');
+let database = require('../database/index.js');
+let sequelize = database.sequelize;
 
-var News = sequelize.define('news', {
+let News = sequelize.define('news', {
   id: {
     type: Sequelize.UUID,
     defaultValue: Sequelize.UUIDV1,
@@ -16,7 +16,7 @@ var News = sequelize.define('news', {
 }, {
   classMethods: {
     associate: function associateNews() {
-      var User = require('./user.js');
+      let User = require('./user.js');
       News.belongsTo(User);
     }
   }

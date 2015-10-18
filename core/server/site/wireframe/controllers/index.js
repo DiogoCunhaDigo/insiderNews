@@ -1,10 +1,10 @@
 'use strict';
 
-var controllers = {};
+let controllers = {};
 
 controllers.mainPage = function(req, res) {
 
-  var news = [
+  let news = [
     {
       title: "Warren Buffett faz doação para apoiar Hillary Clinton",
       lastComment: "comiranda: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -87,7 +87,7 @@ controllers.mainPage = function(req, res) {
     }
   ];
 
-  var messages = [
+  let messages = [
     {
       userName: "comiranda",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",

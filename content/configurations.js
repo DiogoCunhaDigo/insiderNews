@@ -1,6 +1,6 @@
 'use strict';
 
-var configurations = {};
+let configurations = {};
 
 /* CONFIGURAÇÕES DO USUÁRIO */
 // Personalize o insiderNews alterando os valores abaixo:

@@ -1,17 +1,17 @@
 'use strict';
 
-var configurations = require('../configurations/index.js');
-var _ = require('lodash');
-var requireDirectory = require('require-directory');
+let configurations = require('../configurations/index.js');
+let _ = require('lodash');
+let requireDirectory = require('require-directory');
 
 function createFeatures() {
 
   function getRouters() {
-    var routersArray = [];
+    let routersArray = [];
 
     _.toArray(findRouteFiles())
       .forEach(function(featureObject) {
-        var routerFunction = getRouterFunction(featureObject);
+        let routerFunction = getRouterFunction(featureObject);
         routersArray.push(routerFunction);
       });
 
@@ -19,8 +19,8 @@ function createFeatures() {
   }
 
   function findRouteFiles() {
-    var onlyRoutesFileRegex = /routes.js$/;
-    var allRouteFilesObject = requireDirectory(module, {
+    let onlyRoutesFileRegex = /routes.js$/;
+    let allRouteFilesObject = requireDirectory(module, {
         include: onlyRoutesFileRegex
     });
 
@@ -28,7 +28,7 @@ function createFeatures() {
   }
 
   function getRouterFunction(featureObject) {
-    var firstValue = getFirstValueInObject(featureObject);
+    let firstValue = getFirstValueInObject(featureObject);
     return firstValue.routes;
   }
 

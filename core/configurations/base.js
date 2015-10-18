@@ -1,10 +1,10 @@
 'use strict';
 
-var _ = require('lodash');
-var path = require('path');
-var rootPath = path.resolve(__dirname, '../../');
+let _ = require('lodash');
+let path = require('path');
+let rootPath = path.resolve(__dirname, '../../');
 
-var configurations = {};
+let configurations = {};
 
 configurations.paths = {
     core: path.join(rootPath, 'core/'),

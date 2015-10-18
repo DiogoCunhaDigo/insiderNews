@@ -1,16 +1,16 @@
 'use strict';
 
-var _ = require('lodash');
-var configurations = require('./configurations/index.js');
-var defaultWebServer = require(configurations.paths.server + '/web-server/index.js');
-var userConfigurations = require('../content/configurations.js');
-var database = require(configurations.paths.server + '/database/index.js');
+let _ = require('lodash');
+let configurations = require('./configurations/index.js');
+let defaultWebServer = require(configurations.paths.server + '/web-server/index.js');
+let userConfigurations = require('../content/configurations.js');
+let database = require(configurations.paths.server + '/database/index.js');
 
 
 function createCore(spec) {
 
   spec = _.merge({}, spec, userConfigurations);
-  var webServer = spec.webServer || defaultWebServer(spec);
+  let webServer = spec.webServer || defaultWebServer(spec);
 
 
   function start() {

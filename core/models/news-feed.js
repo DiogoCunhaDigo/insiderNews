@@ -2,8 +2,8 @@
 
 function createNewsFeed(spec) {
   spec = spec || {};
-  var repository = spec.repository;
-  var newsList = [];
+  let repository = spec.repository;
+  let newsList = [];
 
   if ( !repository ) {
     throw new Error('You need to specify the repository property: "createNewsFeed({repository: repositoryObject})"');

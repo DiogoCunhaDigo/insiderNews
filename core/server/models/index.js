@@ -1,9 +1,9 @@
 'use strict';
 
-var models = {};
+let models = {};
 
-var User = require('./user.js');
-var News = require('./news.js');
+let User = require('./user.js');
+let News = require('./news.js');
 
 User.associate();
 News.associate();

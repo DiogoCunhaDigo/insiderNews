@@ -1,4 +1,4 @@
-var configurations = {};
+let configurations = {};
 
 configurations.database = {
   logging: false

@@ -1,12 +1,12 @@
 'use strict';
 
-var Sequelize = require('sequelize');
-var database = require('../database/index.js');
-var sequelize = database.sequelize;
-var configurations = require('../../configurations/index.js');
+let Sequelize = require('sequelize');
+let database = require('../database/index.js');
+let sequelize = database.sequelize;
+let configurations = require('../../configurations/index.js');
 
-var Umzug = require('umzug');
-var umzug = new Umzug({
+let Umzug = require('umzug');
+let umzug = new Umzug({
   storage: 'sequelize',
   storageOptions: {
     sequelize: sequelize

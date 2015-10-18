@@ -1,18 +1,18 @@
 'use strict';
 
-var configurations = require('../../configurations/index.js');
-var express = require('express');
-var compression = require('compression');
-var swig = require('swig');
-var createFeatures = require(configurations.paths.server + 'features.js');
+let configurations = require('../../configurations/index.js');
+let express = require('express');
+let compression = require('compression');
+let swig = require('swig');
+let createFeatures = require(configurations.paths.server + 'features.js');
 
 function createWebServer(spec) {
   spec = spec || {};
-  var host = spec.webServerHost || configurations.defaults.webServerHost;
-  var port = spec.webServerPort || configurations.defaults.webServerPort;
-  var app = spec.app || express();
-  var features = spec.features || createFeatures();
-  var httpServer;
+  let host = spec.webServerHost || configurations.defaults.webServerHost;
+  let port = spec.webServerPort || configurations.defaults.webServerPort;
+  let app = spec.app || express();
+  let features = spec.features || createFeatures();
+  let httpServer;
 
   function start() {
     configureApp();
@@ -38,8 +38,8 @@ function createWebServer(spec) {
   function startHttpServer() {
     return new Promise(function startHttpServerPromise(resolve, reject) {
       httpServer = app.listen(port, host, function serverListen() {
-        var host = httpServer.address().address;
-        var port = httpServer.address().port;
+        let host = httpServer.address().address;
+        let port = httpServer.address().port;
 
         resolve({
           host: host,

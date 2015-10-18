@@ -1,12 +1,12 @@
 'use strict';
-var EventEmitter = require('events').EventEmitter;
-var _ = require('lodash');
+let EventEmitter = require('events').EventEmitter;
+let _ = require('lodash');
 
 function createNewsFeedStream(spec) {
   spec = spec || {};
-  var repository = spec.repository || undefined;
-  var events = new EventEmitter();
-  var newsList = [];
+  let repository = spec.repository || undefined;
+  let events = new EventEmitter();
+  let newsList = [];
 
   if ( !repository ) {
     throw new Error('You need to specify the repository property: "createNewsFeedStream({repository: repositoryObject})"');
@@ -29,7 +29,7 @@ function createNewsFeedStream(spec) {
   }
 
   function addToNewsList(news) {
-    var newsAlreadyExist = find( { uuid: news.uuid } );
+    let newsAlreadyExist = find( { uuid: news.uuid } );
 
     if (newsAlreadyExist) {
       updateInNewsList(news);
@@ -43,7 +43,7 @@ function createNewsFeedStream(spec) {
   }
 
   function updateInNewsList(news) {
-    var updatedNews = update({ uuid: news.uuid }, news );
+    let updatedNews = update({ uuid: news.uuid }, news );
 
     if (updatedNews) {
       events.emit('news:updated', updatedNews);
@@ -53,8 +53,8 @@ function createNewsFeedStream(spec) {
   }
 
   function update(queryObject, newNews) {
-    var newsToBeUpdated = find(queryObject);
-    var updatedNews;
+    let newsToBeUpdated = find(queryObject);
+    let updatedNews;
 
     if (newsToBeUpdated) {
       updatedNews = _.assign(newsToBeUpdated, newNews);
@@ -66,7 +66,7 @@ function createNewsFeedStream(spec) {
 
 
   function removeFromNewsList(news) {
-    var removedNews = remove({ uuid: news.uuid });
+    let removedNews = remove({ uuid: news.uuid });
 
     if (removedNews) {
       events.emit('news:removed', news);
@@ -76,8 +76,8 @@ function createNewsFeedStream(spec) {
   }
 
   function remove(query) {
-    var newsToBeRemoved = find(query);
-    var removedNews;
+    let newsToBeRemoved = find(query);
+    let removedNews;
 
     if (newsToBeRemoved) {
       removedNews = _.remove(newsList, query);

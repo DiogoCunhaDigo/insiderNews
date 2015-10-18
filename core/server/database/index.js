@@ -24,7 +24,7 @@ function start() {
     function sequelizeSync() {
       sequelize
         .sync()
-        .complete(function syncCompleted(err) {
+        .then(function syncCompleted(err) {
           if (err) {
             reject(err);
             return;

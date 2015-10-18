@@ -1,7 +1,7 @@
 'use strict';
 
-var configurations = require('../../../core/configurations/index.js');
-var createFeatures = require(configurations.paths.server + 'features.js');
+let configurations = require('../../../core/configurations/index.js');
+let createFeatures = require(configurations.paths.server + 'features.js');
 
 describe('[feature] features', function () {
 
@@ -16,7 +16,7 @@ describe('[feature] features', function () {
   describe('#getRouters', function() {
 
     it('deve retornar um array com funções Routers do Express', function() {
-      var routers = createFeatures().getRouters();
+      let routers = createFeatures().getRouters();
 
       routers.should.be.a('array');
 

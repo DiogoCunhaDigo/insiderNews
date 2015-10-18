@@ -1,9 +1,9 @@
 'use strict';
 
-var chai = require('chai');
-var configurations = require('../../../core/configurations/index.js');
-var createNews = require(configurations.paths.models + 'news.js');
-var createMockRepository = require('../mocks/stream.repository.js');
+let chai = require('chai');
+let configurations = require('../../../core/configurations/index.js');
+let createNews = require(configurations.paths.models + 'news.js');
+let createMockRepository = require('../mocks/stream.repository.js');
 
 describe('[model] news', function() {
 
@@ -18,7 +18,7 @@ describe('[model] news', function() {
   });
 
   it('deve retornar um objeto quando executado com repositório', function() {
-    var repository = createMockRepository();
+    let repository = createMockRepository();
 
     createNews({ repository: repository }).should.be.a('object');
   });
@@ -27,8 +27,8 @@ describe('[model] news', function() {
   describe('@data', function() {
 
     it('deve ser um objeto em branco quando factory for executada sem dados', function() {
-      var repository = createMockRepository();
-      var news = createNews({
+      let repository = createMockRepository();
+      let news = createNews({
         repository: repository
       });
 
@@ -41,8 +41,8 @@ describe('[model] news', function() {
   describe('@errors', function() {
 
     it('deve ser um objeto em branco quando factory for executada', function() {
-      var repository = createMockRepository();
-      var news = createNews({
+      let repository = createMockRepository();
+      let news = createNews({
         repository: repository
       });
 
@@ -56,9 +56,9 @@ describe('[model] news', function() {
   describe('#save', function() {
 
     it('deve criar uma nova notícia, se válida, e resolver a promise', function() {
-      var repository = createMockRepository();
-      var newsData;
-      var news;
+      let repository = createMockRepository();
+      let newsData;
+      let news;
 
       newsData = {
         title: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem.',
@@ -76,9 +76,9 @@ describe('[model] news', function() {
 
 
     it('deve rejeitar a promise se notícia não for validada pelo schema', function() {
-      var repository = createMockRepository();
-      var newsData;
-      var news;
+      let repository = createMockRepository();
+      let newsData;
+      let news;
 
       newsData = {
         title: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem.'
@@ -99,9 +99,9 @@ describe('[model] news', function() {
   describe('#validate', function() {
 
     it('deve resolver a promise se notícia for validada pelo schema', function() {
-      var repository = createMockRepository();
-      var newsData;
-      var news;
+      let repository = createMockRepository();
+      let newsData;
+      let news;
 
       newsData = {
         title: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem.',
@@ -118,9 +118,9 @@ describe('[model] news', function() {
     });
 
     it('deve rejeitar a promise se notícia não for validada pelo schema', function() {
-      var repository = createMockRepository();
-      var newsData;
-      var news;
+      let repository = createMockRepository();
+      let newsData;
+      let news;
 
       newsData = {
         title: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem.'
@@ -136,9 +136,9 @@ describe('[model] news', function() {
     });
 
     it('deve popular o @errors se notícia não for validada pelo schema', function() {
-      var repository = createMockRepository();
-      var newsData;
-      var news;
+      let repository = createMockRepository();
+      let newsData;
+      let news;
 
       newsData = {
         title: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem.'
@@ -160,9 +160,9 @@ describe('[model] news', function() {
     });
 
     it('deve limpar o @errors se notícia for validada pelo schema', function() {
-      var repository = createMockRepository();
-      var newsData;
-      var news;
+      let repository = createMockRepository();
+      let newsData;
+      let news;
 
       newsData = {
         title: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem.'
@@ -200,7 +200,7 @@ describe('[model] news', function() {
 
 
   describe('#find', function() {
-    var newsInsideDatabase;
+    let newsInsideDatabase;
 
     beforeEach(function() {
 
@@ -215,7 +215,7 @@ describe('[model] news', function() {
     });
 
     it('deve ser uma função', function() {
-      var news = createNews({
+      let news = createNews({
         repository: createMockRepository()
       });
 
@@ -224,11 +224,11 @@ describe('[model] news', function() {
     });
 
     it('quando executada deve retornar uma Promise', function() {
-      var news = createNews({
+      let news = createNews({
         repository: createMockRepository()
       });
 
-      var findPromise = news.find();
+      let findPromise = news.find();
       findPromise.should.have.property('then');
       findPromise.should.have.property('catch');
 
@@ -236,11 +236,11 @@ describe('[model] news', function() {
 
     it('deve executar a query e retornar a notícia resolvendo a promise', function() {
 
-      var news = createNews({
+      let news = createNews({
         repository: createMockRepository()
       });
 
-      var findPromise = news.find({ slug: 'black-friday-nos-eua-tem-filas-e-muitos-brasileiros'});
+      let findPromise = news.find({ slug: 'black-friday-nos-eua-tem-filas-e-muitos-brasileiros'});
 
       return findPromise.should.eventually.deep.equal(newsInsideDatabase);
 
@@ -248,7 +248,7 @@ describe('[model] news', function() {
 
     it('deve executar a query e atualizar o @data internamente', function(done) {
 
-      var news = createNews({ repository: createMockRepository() });
+      let news = createNews({ repository: createMockRepository() });
       news
         .find({ slug: 'black-friday-nos-eua-tem-filas-e-muitos-brasileiros'})
         .then(function() {
@@ -264,21 +264,21 @@ describe('[model] news', function() {
   describe('#update', function() {
 
     it('deve ser uma função', function() {
-      var news = createNews({ repository: createMockRepository() });
+      let news = createNews({ repository: createMockRepository() });
 
       chai.expect(news.update).to.be.a('function');
     });
 
     it('quando executada deve retornar uma Promise', function() {
-      var news = createNews({ repository: createMockRepository() });
+      let news = createNews({ repository: createMockRepository() });
 
-      var updatePromise = news.update();
+      let updatePromise = news.update();
       updatePromise.should.have.property('then');
       updatePromise.should.have.property('catch');
     });
 
     it('quando executado sem parâmetros deve se auto-atualizar contra o repositório', function() {
-      var news = createNews({ repository: createMockRepository() });
+      let news = createNews({ repository: createMockRepository() });
 
       return news
         .find({ slug: 'brasil-cresce-so-01-com-gastos-publicos'})
@@ -308,21 +308,21 @@ describe('[model] news', function() {
   describe('#remove', function() {
 
     it('deve ser uma função', function() {
-      var news = createNews({ repository: createMockRepository() });
+      let news = createNews({ repository: createMockRepository() });
 
       chai.expect(news.remove).to.be.a('function');
     });
 
     it('quando executada deve retornar uma Promise', function() {
-      var news = createNews({ repository: createMockRepository() });
+      let news = createNews({ repository: createMockRepository() });
 
-      var removePromise = news.remove();
+      let removePromise = news.remove();
       removePromise.should.have.property('then');
       removePromise.should.have.property('catch');
     });
 
     it('quando executada deve remover o item do repositório', function() {
-      var news = createNews({ repository: createMockRepository() });
+      let news = createNews({ repository: createMockRepository() });
 
       return news.remove().should.be.fulfilled;
     });
@@ -334,9 +334,9 @@ describe('[model] news', function() {
   describe('#updateSlug', function() {
 
     it('deve gerar um slug a partir do título', function() {
-      var repository = createMockRepository();
-      var newsData;
-      var news;
+      let repository = createMockRepository();
+      let newsData;
+      let news;
 
       newsData = {
         title: 'ÁÉÍÓÚ AEIOU áéíóú aeiou ÂÇç $  @ = *(){}[]/ | 100%;,#~ !'

@@ -1,9 +1,9 @@
 'use strict';
 
-var chai = require('chai');
-var configurations = require('../../../core/configurations/index.js');
-var createNewsFeed = require(configurations.paths.models + 'news-feed.js');
-var createNewsFeedRepository = require('../mocks/news-feed.repository.js');
+let chai = require('chai');
+let configurations = require('../../../core/configurations/index.js');
+let createNewsFeed = require(configurations.paths.models + 'news-feed.js');
+let createNewsFeedRepository = require('../mocks/news-feed.repository.js');
 
 describe('[model] newsFeed', function () {
 
@@ -18,7 +18,7 @@ describe('[model] newsFeed', function () {
   });
 
   it('deve retornar um objeto quando executado com repositório', function() {
-    var repository = createNewsFeedRepository();
+    let repository = createNewsFeedRepository();
 
     createNewsFeed( { repository: repository } ).should.be.a('object');
   });
@@ -26,9 +26,9 @@ describe('[model] newsFeed', function () {
   describe('#find()', function() {
 
     it('deve resolver uma Promise', function() {
-      var repository = createNewsFeedRepository();
-      var newsFeed = createNewsFeed( {repository: repository } );
-      var findPromise = newsFeed.find();
+      let repository = createNewsFeedRepository();
+      let newsFeed = createNewsFeed( {repository: repository } );
+      let findPromise = newsFeed.find();
 
       findPromise
         .then(function(news){
@@ -40,9 +40,9 @@ describe('[model] newsFeed', function () {
     });
 
     it('deve resolver uma Promise com array de notícias', function() {
-      var repository = createNewsFeedRepository();
-      var newsFeed = createNewsFeed( {repository: repository } );
-      var findPromise = newsFeed.find();
+      let repository = createNewsFeedRepository();
+      let newsFeed = createNewsFeed( {repository: repository } );
+      let findPromise = newsFeed.find();
 
       return findPromise
         .then(function(news){

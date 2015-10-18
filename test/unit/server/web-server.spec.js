@@ -1,7 +1,7 @@
 'use strict';
 
-var configurations = require('../../../core/configurations/index.js');
-var createWebServer = require(configurations.paths.server + 'web-server/index.js');
+let configurations = require('../../../core/configurations/index.js');
+let createWebServer = require(configurations.paths.server + 'web-server/index.js');
 
 describe('[feature] webServer', function() {
 
@@ -15,8 +15,8 @@ describe('[feature] webServer', function() {
 
   describe('#start()', function() {
     it('deve resolver uma Promise e iniciar o servidor web', function() {
-      var webServer = createWebServer();
-      var startPromise = webServer.start();
+      let webServer = createWebServer();
+      let startPromise = webServer.start();
 
       startPromise
         .then(function() {
@@ -27,9 +27,9 @@ describe('[feature] webServer', function() {
     });
 
     it('deve retornar host e port padrões se nenhum spec for definido', function() {
-      var webServer = createWebServer();
-      var startPromise = webServer.start();
-      var defaultStartPromiseReturn = {
+      let webServer = createWebServer();
+      let startPromise = webServer.start();
+      let defaultStartPromiseReturn = {
         host: configurations.defaults.webServerHost,
         port: configurations.defaults.webServerPort
       };
@@ -43,13 +43,13 @@ describe('[feature] webServer', function() {
     });
 
     it('deve retornar host e port customizados se spec for definido', function() {
-      var customWebServerSpec = {
+      let customWebServerSpec = {
         webServerHost: '127.0.0.1',
         webServerPort: 9999
       };
 
-      var webServer = createWebServer(customWebServerSpec);
-      var startPromise = webServer.start();
+      let webServer = createWebServer(customWebServerSpec);
+      let startPromise = webServer.start();
 
       startPromise
         .then(function() {
@@ -68,8 +68,8 @@ describe('[feature] webServer', function() {
   describe('#stop()', function() {
 
     it('deve resolver uma Promise e parar o servidor web', function() {
-      var webServer = createWebServer();
-      var stopPromise;
+      let webServer = createWebServer();
+      let stopPromise;
 
       return webServer
         .start()

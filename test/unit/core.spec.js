@@ -1,7 +1,7 @@
 'use strict';
 
-var configurations = require('../../core/configurations/index.js');
-var createCore = require(configurations.paths.core + 'index.js');
+let configurations = require('../../core/configurations/index.js');
+let createCore = require(configurations.paths.core + 'index.js');
 
 describe('[feature] core', function() {
 
@@ -15,8 +15,8 @@ describe('[feature] core', function() {
 
   describe('#start()', function() {
     it('deve resolver uma Promise e iniciar o core do insiderNews', function() {
-      var core = createCore();
-      var startPromise = core.start();
+      let core = createCore();
+      let startPromise = core.start();
 
       startPromise
         .then(function() {

@@ -1,9 +1,9 @@
 'use strict';
 
-var chai = require('chai');
-var configurations = require('../../../core/configurations/index.js');
-var createNewsFeedStream = require(configurations.paths.models + 'news-feed-stream.js');
-var createMockRepository = require('../mocks/stream.repository.js');
+let chai = require('chai');
+let configurations = require('../../../core/configurations/index.js');
+let createNewsFeedStream = require(configurations.paths.models + 'news-feed-stream.js');
+let createMockRepository = require('../mocks/stream.repository.js');
 
 
 describe('[model] newsFeedStream', function () {
@@ -19,31 +19,31 @@ describe('[model] newsFeedStream', function () {
   });
 
   it('deve retornar um objeto quando executado com repositório', function() {
-    var repository = createMockRepository();
+    let repository = createMockRepository();
 
 
     createNewsFeedStream({ repository: repository }).should.be.a('object');
   });
 
   it('deve conter a propriedade "events"', function() {
-    var repository = createMockRepository();
-    var newsFeedStream = createNewsFeedStream({ repository: repository });
+    let repository = createMockRepository();
+    let newsFeedStream = createNewsFeedStream({ repository: repository });
 
     newsFeedStream.should.have.property('events');
     newsFeedStream.should.be.a('object');
   });
 
   it('deve conter o método "start"', function() {
-    var repository = createMockRepository();
-    var newsFeedStream = createNewsFeedStream({ repository: repository });
+    let repository = createMockRepository();
+    let newsFeedStream = createNewsFeedStream({ repository: repository });
 
     newsFeedStream.should.have.property('start');
     newsFeedStream.start.should.be.a('function');
   });
 
   it('deve conter o método "stop"', function() {
-    var repository = createMockRepository();
-    var newsFeedStream = createNewsFeedStream({ repository: repository });
+    let repository = createMockRepository();
+    let newsFeedStream = createNewsFeedStream({ repository: repository });
 
     newsFeedStream.should.have.property('stop');
     newsFeedStream.start.should.be.a('function');
@@ -51,7 +51,7 @@ describe('[model] newsFeedStream', function () {
 
 
   describe('#events', function() {
-    var newsObjectTemplate1;
+    let newsObjectTemplate1;
 
     beforeEach(function() {
       newsObjectTemplate1 = {
@@ -64,22 +64,22 @@ describe('[model] newsFeedStream', function () {
     });
 
     it('deve conter a propriedade "on"', function() {
-      var repository = createMockRepository();
-      var newsFeedStream = createNewsFeedStream({ repository: repository });
+      let repository = createMockRepository();
+      let newsFeedStream = createNewsFeedStream({ repository: repository });
 
       newsFeedStream.events.should.have.property('on');
     });
 
     it('deve conter a propriedade "emit"', function() {
-      var repository = createMockRepository();
-      var newsFeedStream = createNewsFeedStream({ repository: repository });
+      let repository = createMockRepository();
+      let newsFeedStream = createNewsFeedStream({ repository: repository });
 
       newsFeedStream.events.should.have.property('emit');
     });
 
     it('"on" deve receber as mensagens enviadas por "emit"', function(done) {
-      var repository = createMockRepository();
-      var newsFeedStream = createNewsFeedStream({ repository: repository });
+      let repository = createMockRepository();
+      let newsFeedStream = createNewsFeedStream({ repository: repository });
 
       newsFeedStream.events.on('onEmitTest', function onEmitTest(testArray) {
         testArray.should.be.a('array');
@@ -90,8 +90,8 @@ describe('[model] newsFeedStream', function () {
     });
 
     it('deve emitir "news:added" ao receber nova notícia do repositório', function(done) {
-      var repository = createMockRepository();
-      var newsFeedStream = createNewsFeedStream({ repository: repository });
+      let repository = createMockRepository();
+      let newsFeedStream = createNewsFeedStream({ repository: repository });
 
       newsFeedStream.events.on('news:added', function onNewsAdded(news) {
         news.should.be.a('object');
@@ -103,8 +103,8 @@ describe('[model] newsFeedStream', function () {
     });
 
     it('deve atualizar a lista de notícias no evento "news:added"', function() {
-      var repository = createMockRepository();
-      var newsFeedStream = createNewsFeedStream({ repository: repository });
+      let repository = createMockRepository();
+      let newsFeedStream = createNewsFeedStream({ repository: repository });
 
       chai.expect(newsFeedStream.getNewsList().length).to.be.equal(0);
 
@@ -115,7 +115,7 @@ describe('[model] newsFeedStream', function () {
 
     it('não deve duplicar notícia ao receber a mesma notícia do repositório', function() {
 
-      var newsObjectTemplate1Modified = {
+      let newsObjectTemplate1Modified = {
         "lastComment": "(modified) Exercitation aliquip deserunt aute proident est amet non.",
         "slug": "modified-exercitation-aliquip-deserunt-aute-proident-est-amet-non",
         "title": "(modified) Exercitation aliquip deserunt aute proident est amet non.",
@@ -123,8 +123,8 @@ describe('[model] newsFeedStream', function () {
         "xp": 200
       };
 
-      var repository = createMockRepository();
-      var newsFeedStream = createNewsFeedStream({ repository: repository });
+      let repository = createMockRepository();
+      let newsFeedStream = createNewsFeedStream({ repository: repository });
 
       chai.expect(newsFeedStream.getNewsList().length).to.be.equal(0);
 
@@ -132,13 +132,13 @@ describe('[model] newsFeedStream', function () {
       repository.events.emit('news:added', newsObjectTemplate1Modified);
 
       chai.expect(newsFeedStream.getNewsList().length).to.be.equal(1);
-      var modifiedNewsXp = newsFeedStream.getNewsList()[0].xp;
+      let modifiedNewsXp = newsFeedStream.getNewsList()[0].xp;
       chai.expect(modifiedNewsXp).to.be.equal(200);
     });
 
     it('deve emitir "newsList:updated" ao receber nova notícia do repositório', function(done) {
-      var repository = createMockRepository();
-      var newsFeedStream = createNewsFeedStream({ repository: repository });
+      let repository = createMockRepository();
+      let newsFeedStream = createNewsFeedStream({ repository: repository });
 
       newsFeedStream.events.on('newsList:updated', function onNewsAdded(newsList) {
         newsList.should.be.a('array');
@@ -149,11 +149,11 @@ describe('[model] newsFeedStream', function () {
     });
 
     it('deve atualizar notícia na newsList ao receber "news:updated" do repositório', function(done) {
-      var repository = createMockRepository();
-      var newsFeedStream = createNewsFeedStream({ repository: repository });
+      let repository = createMockRepository();
+      let newsFeedStream = createNewsFeedStream({ repository: repository });
 
 
-      var newsObjectTemplate2 = {
+      let newsObjectTemplate2 = {
         "lastComment": "Dolor anim eu velit fugiat irure sit.",
         "slug": "dolor-anim-eu-velit-fugiat-irure-sit",
         "title": "Dolor anim eu velit fugiat irure sit.",
@@ -172,8 +172,8 @@ describe('[model] newsFeedStream', function () {
       newsFeedStream.events.on('newsList:updated', function newsListUpdated(newsList) {
         chai.expect(newsList.length).to.be.equal(2);
 
-        var firstNews = newsFeedStream.find( { uuid: newsObjectTemplate1.uuid } );
-        var modifiedNews = newsFeedStream.find( { uuid: newsObjectTemplate2.uuid } );
+        let firstNews = newsFeedStream.find( { uuid: newsObjectTemplate1.uuid } );
+        let modifiedNews = newsFeedStream.find( { uuid: newsObjectTemplate2.uuid } );
 
         chai.expect(firstNews.xp).to.be.equal(100);
         chai.expect(modifiedNews.xp).to.be.equal(150);
@@ -181,7 +181,7 @@ describe('[model] newsFeedStream', function () {
 
       });
 
-      var newsObjectTemplate2Modified = {
+      let newsObjectTemplate2Modified = {
         "lastComment": "Dolor anim eu velit fugiat irure sit.",
         "slug": "dolor-anim-eu-velit-fugiat-irure-sit",
         "title": "Dolor anim eu velit fugiat irure sit.",
@@ -194,8 +194,8 @@ describe('[model] newsFeedStream', function () {
     });
 
     it('deve emitir "news:removed" ao remover uma notícia da newsList', function(done) {
-      var repository = createMockRepository();
-      var newsFeedStream = createNewsFeedStream({ repository: repository });
+      let repository = createMockRepository();
+      let newsFeedStream = createNewsFeedStream({ repository: repository });
 
       chai.expect(newsFeedStream.getNewsList().length).to.be.equal(0);
 
@@ -221,8 +221,8 @@ describe('[model] newsFeedStream', function () {
   describe('#start', function() {
 
     it('quando executado e repositório iniciar, deve emitir o evento "started"', function(done) {
-      var repository = createMockRepository();
-      var newsFeedStream = createNewsFeedStream({ repository: repository });
+      let repository = createMockRepository();
+      let newsFeedStream = createNewsFeedStream({ repository: repository });
 
       newsFeedStream.events.on('started', function onStart() {
         done();
@@ -239,8 +239,8 @@ describe('[model] newsFeedStream', function () {
   describe('#stop', function() {
 
     it('quando executado e repositório parar, deve emitir o evento "stopped"', function(done) {
-      var repository = createMockRepository();
-      var newsFeedStream = createNewsFeedStream({ repository: repository });
+      let repository = createMockRepository();
+      let newsFeedStream = createNewsFeedStream({ repository: repository });
 
       newsFeedStream.events.on('stopped', function onStart() {
         done();

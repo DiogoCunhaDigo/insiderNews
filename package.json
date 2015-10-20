@@ -4,6 +4,7 @@
   "description": "Realtime news engine ( +gamification )",
   "main": "index.js",
   "dependencies": {
+    "bluebird": "^2.10.2",
     "compression": "1.6.0",
     "cozy-slug": "0.2.2",
     "express": "4.13.3",

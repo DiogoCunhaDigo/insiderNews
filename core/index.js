@@ -1,52 +1,42 @@
 'use strict';
 
+Promise = require('bluebird');
 let _ = require('lodash');
 let configurations = require('./configurations/index.js');
 let defaultWebServer = require(configurations.paths.server + '/web-server/index.js');
 let userConfigurations = require('../content/configurations.js');
 let database = require(configurations.paths.server + '/database/index.js');
 
+class Core {
+	constructor(spec) {
+		this.spec = _.merge({}, spec, userConfigurations);
+		this.webServer = this.spec.webServer || defaultWebServer(spec);
+	}
 
-function createCore(spec) {
+	start() {
+		return new Promise((resolve, reject) => {
 
-  spec = _.merge({}, spec, userConfigurations);
-  let webServer = spec.webServer || defaultWebServer(spec);
+			database
+			.start()
+			.bind(this)
+			.then(startWebServer)
+			.then(finish)
+			.catch(reject);
 
+			function startWebServer() {
+				return this.webServer.start();
+			}
 
-  function start() {
-    return new Promise(function startPromise(resolve, reject) {
+			function finish(webServerHostAndPort) {
+				resolve(webServerHostAndPort);
+			}
 
-      database
-        .start()
-        .then(startWebServer)
-        .then(finish)
-        .catch(reject);
+		});
+	}
 
-      function startWebServer() {
-        return webServer.start();
-      }
-
-      function finish(webServerHostAndPort) {
-        resolve(webServerHostAndPort);
-      }
-
-    });
-
-  }
-
-
-  function stop() {
-      return webServer.stop();
-  }
-
-
-  // Quando o construtor do "core" for executado, será retornado
-  // um novo objeto com a interface pública abaixo.
-  return {
-      start: start,
-      stop: stop
-  };
+	stop() {
+		return this.webServer.stop();
+	}
 }
 
-
-module.exports = createCore;
+module.exports = Core;

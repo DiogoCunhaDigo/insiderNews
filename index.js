@@ -1,8 +1,8 @@
 'use strict';
 
 require('native-promise-only');
-var createCore = require('./core/index.js');
-var core = createCore();
+var Core = require('./core/index.js');
+var core = new Core();
 
 core
   .start()
@@ -17,4 +17,5 @@ function serverStartSuccess(server) {
 function serverStartFail(err) {
   console.log('Erro ao iniciar servidor:');
   console.log(err);
+  console.log(err.stack);
 }

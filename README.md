@@ -12,7 +12,7 @@ Coletar moedas de ouro e aumentar os pontos de experiência ao conversar com out
  - [ ] Possuem moedas de ouro e pontos de experiência.
  - [ ] Ganham 2 moedas de ouro para cada nova mensagem publicada.
  - [ ] Ganham 50 moedas de outro para cada notícia compartilhada no Facebook.
- - [ ] Podem trocar moedas de ouro com outros usuários ao clicar nas mensagens deled.
+ - [ ] Podem trocar moedas de ouro com outros usuários ao clicar nas mensagens dele.
  
 #### Notícias
  - [ ] Possuem pontos de experiência.
@@ -34,6 +34,8 @@ Enviar mensagens em negrito  | 2.000
 Enviar mensagens com imagens | 10.000
 Publicar avisos globais      | 50.000
 
+*Todos estes pontos poderão ser configurados*
+
 
 ## Recursos do sistema
  - [ ] Atualização em tempo-real
@@ -47,10 +49,10 @@ Camada                       | Solução
 :--------------------------- | :------------------
 Web server                   | **Express**
 Realtime transport           | **Socket.io**
-Client side framework        | **AngularJS**
-Client side router           | **ui-router**
+Client side framework        | **AngularJS 2**
+Client side router           | **AngularJS 2**
 Server side template engine  | **Swig**
-Model client-side            | **Plain objects**
+Model client-side            | **ES6 Classes**
 Model server-side            | **Sequelize Model**
 ORM                          | **Sequelize**
 Default database             | **SQLite**

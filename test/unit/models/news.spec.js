@@ -270,7 +270,12 @@ describe('[model] news', function() {
     });
 
     it('quando executada deve retornar uma Promise', function() {
-      let news = createNews({ repository: createMockRepository() });
+      let news = createNews({
+		  repository: createMockRepository(),
+		  data: {
+			  uuid: 'temp'
+		  }
+	  });
 
       let updatePromise = news.update();
       updatePromise.should.have.property('then');
